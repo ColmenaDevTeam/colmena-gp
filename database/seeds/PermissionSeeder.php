@@ -281,49 +281,49 @@ class PermissionSeeder extends Seeder
             * Recurrent activities
             */
 	        array(
-                'category' => 'ActividadesRecurrentes',
+                'category' => 'Actividades_Recurrentes',
                 'action' => 'Registrar',
                 'slug' =>'recurring_activities.create',
                 'navigation' => true,
                 'level' => 2,
             ),
 	        array(
-                'category' => 'ActividadesRecurrentes',
+                'category' => 'Actividades_Recurrentes',
                 'action' => 'Modificar',
                 'slug' =>'recurring_activities.update',
                 'navigation' => false,
                 'level' => 2,
             ),
 	        array(
-                'category' => 'ActividadesRecurrentes',
+                'category' => 'Actividades_Recurrentes',
                 'action' => 'Listar',
                 'slug' =>'recurring_activities.list',
                 'navigation' => true,
                 'level' => 2,
             ),
 	        array(
-                'category' => 'ActividadesRecurrentes',
+                'category' => 'Actividades_Recurrentes',
                 'action' => 'Eliminar',
                 'slug' =>'recurring_activities.delete',
                 'navigation' => false,
                 'level' => 2,
             ),
             array(
-                'category' => 'ActividadesRecurrentes',
+                'category' => 'Actividades_Recurrentes',
                 'action' => 'Ver',
                 'slug' =>'recurring_activities.view',
                 'navigation' => false,
                 'level' => 2,
             ),
             array(
-                'category' => 'ActividadesRecurrentes',
+                'category' => 'Actividades_Recurrentes',
                 'action' => 'Activar',
                 'slug' =>'recurring_activities.enable',
                 'navigation' => false,
                 'level' => 2,
             ),
             array(
-                'category' => 'ActividadesRecurrentes',
+                'category' => 'Actividades_Recurrentes',
                 'action' => 'Ver Todas',
                 'slug' =>'recurring_activities.list_all',
                 'navigation' => true,
@@ -335,28 +335,28 @@ class PermissionSeeder extends Seeder
             */
 			array(
 				'category' => 'Reportes',
-				'action' => 'Reportes Generales',
+				'action' => 'Reportes_Generales',
 				'slug' =>'reports.macro_report',
 				'navigation' => true,
 				'level' => 0,
 			),
             array(
                 'category' => 'Reportes',
-                'action' => 'Reportes de Departamento',
+                'action' => 'Reportes_de_Departamento',
                 'slug' =>'reports.department_report',
                 'navigation' => true,
                 'level' => 1,
             ),
             array(
                 'category' => 'Reportes',
-                'action' => 'Reportes de Comisión',
+                'action' => 'Reportes_de_Comisión',
                 'slug' =>'reports.commission_report',
                 'navigation' => true,
                 'level' => 1,
             ),
             array(
                 'category' => 'Reportes',
-                'action' => 'Reportes Individuales',
+                'action' => 'Reportes_Individuales',
                 'slug' =>'reports.individual_report',
                 'navigation' => true,
                 'level' => 2,
@@ -388,8 +388,19 @@ class PermissionSeeder extends Seeder
             ),
             array(
                 'category' => 'Parametros',
-                'action' => 'Parametrizar Sistema',
+                'action' => 'Parametrizar_Sistema',
                 'slug' =>'parameters.parameters',
+                'navigation' => true,
+                'level' => 0,
+            ),
+
+            /*
+             * Data Minning
+            */
+            array(
+                'category' => 'Segmentacion_de_Datos',
+                'action' => 'Explorar',
+                'slug' => 'minning.minning',
                 'navigation' => true,
                 'level' => 0,
             ),

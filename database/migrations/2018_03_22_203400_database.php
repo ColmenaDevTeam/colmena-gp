@@ -51,7 +51,7 @@ class Database extends Migration
             $table->integer('complexity');
             $table->integer('creator_id')->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
-            $table->enum('type',['Academico-Docente','Administrativas','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion']);
+            $table->enum('type',['Academico-Docente','Administrativas','Creacion-Intelectual','Integracion-Social','Administrativo-Docente','Produccion']);
             $table->timestamps();
         });
         Schema::create('roles', function (Blueprint $table) {
@@ -102,7 +102,7 @@ class Database extends Migration
             $table->text('details');
             $table->integer('priority');
             $table->integer('complexity');
-            $table->enum('task_type',['Academico-Docente','Administrativas','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion']);
+            $table->enum('task_type',['Academico-Docente','Administrativas','Creacion-Intelectual','Integracion-Social','Administrativo-Docente','Produccion']);
             $table->date('start_date');
             $table->date('last_launch')->nullable();
             $table->boolean('active')->default(true);
@@ -181,6 +181,26 @@ class Database extends Migration
             $table->json('details')->nullable();
             $table->timestamps();
         });
+        Schema::create('data_minning_variables', function (Blueprint $table){
+          $table->increments('id');
+          $table->string('name');
+          $table->string('sql_name');
+          $table->string('sql_table');
+          $table->string('sql_query')->nullable();
+        });
+
+        Schema::create('data_minning_values', function (Blueprint $table){
+          $table->increments('id');
+          $table->json('task_estimated_date')->nullable();
+          $table->json('task_deliver_date')->nullable();
+          $table->json('task_status')->nullable();
+          $table->json('task_type')->nullable();
+          $table->json('task_priority')->nullable();
+          $table->json('task_complexity')->nullable();
+          $table->json('department_id')->nullable();
+          $table->json('absence_type')->nullable();
+          $table->json('user_type')->nullable();
+        });
     }
 
     /**
@@ -209,6 +229,10 @@ class Database extends Migration
         if(Schema::hasTable('calendar')) Schema::drop('calendar');
         if(Schema::hasTable('meetings')) Schema::drop('meetings');
         if(Schema::hasTable('parameters')) Schema::drop('parameters');
+
+        
+        if(Schema::hasTable('data_minning_variables')) Schema::drop('data_minning_variables');
+        if(Schema::hasTable('data_minning_values')) Schema::drop('data_minning_values');
 
     }
 }

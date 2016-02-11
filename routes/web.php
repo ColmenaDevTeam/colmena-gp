@@ -160,6 +160,16 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 	 });
 
 	/**
+	*Minning Routes
+	*/
+	 Route::group(['prefix' => '/segmentacion_de_datos'], function(){
+		Route::get('/explorar', 'MinningController@index')->name('minning.minning');
+		Route::post('/explorar', 'MinningController@process')->name('minning.minning');
+		Route::get('/contador-de-registros', 'MinningController@counter')->name('minning.minning');
+	 });
+
+
+	/**
 	*Steganography Routes
 	*/
 
