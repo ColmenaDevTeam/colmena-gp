@@ -35,7 +35,7 @@ class Minning {
 	public static function generateModel($data){
 		$model_id = DB::table(self::MODELS_TABLE)->insertGetId([
 			'name' => $data['name'],
-			'description' => $data['description'],
+			#'description' => $data['description'],
 			'clusters' => $data['clusters'],
 			'min_selected' => $data['range_min'],
 			'max_selected' => $data['range_max'],
@@ -47,6 +47,10 @@ class Minning {
 
 	public static function getModels(){
 		return DB::table(self::MODELS_TABLE)->get();
+	}
+
+	public static function getModel($model_id){
+		return DB::table(self::MODELS_TABLE)->where('id', $model_id)->first();
 	}
 
 	public static function deleteModel($id){

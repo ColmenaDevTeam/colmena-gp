@@ -36,9 +36,8 @@ class MinningController extends Controller
 
 		$arrayToSave = Minning::normalize($arrProccess, $attributes);
 
-		Minning::saveValues($arrayToSave);		
-		
-		return redirect("/segmentacion-de-datos/modelos");
+		Minning::saveValues($arrayToSave);
+		return redirect("/segmentacion-de-datos/preprocesado/".$model_id);
 	}
 
 	public function algorithm(){
@@ -52,14 +51,14 @@ class MinningController extends Controller
 		return json_encode(['count' => $count]);
 	}
 
-	public function showModels(){
-		return view('modules.minning.model-list')->with('models', Minning::getModels());
+	public function showModel($id){
+		return view('modules.minning.model-view')->with('model', Minning::getModel($id));
 	}
 
 	public function deleteModel($id){
 
 		Minning::deleteModel($id);
-		return redirect("/segmentacion-de-datos/modelos");	
+		return redirect("/segmentacion-de-datos/explorar");	
 		
 	}
 }

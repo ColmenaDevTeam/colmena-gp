@@ -17,8 +17,8 @@
 						<div class="row">
 							<div class="col-xs-12" >
 								<h2>Datos del Modelo</h2>
-								Nombre del modelo: <input type="text" name="name" min="2" max="30" required>
-								Descripción: <input type="text" name="description" min="2" max="30" required>
+								Nombre del modelo: <input type="text" name="name" min="2" max="30" required>{{--
+								Descripción: <input type="text" name="description" min="2" max="30" required>--}}
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 						
 							<div class="col-xs-12" id="check-combo">
@@ -52,7 +52,7 @@
 								<p>Te recordamos, que debido a la complejidad del proceso, este puede tardar en ejecutarse.</p>
 							</div>
 							<div class="col-xs-12 text-center">
-								<button type="submit" name="button" class="btn btn-success">Continuar</button>
+								<button type="submit" name="button" class="btn btn-success">Preprocesar</button>
 								<hr>
 							</div>
 					</form>

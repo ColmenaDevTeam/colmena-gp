@@ -165,7 +165,7 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 	 Route::group(['prefix' => '/segmentacion-de-datos'], function(){
 		Route::get('/explorar', 'MinningController@index')->name('minning.minning');
 		Route::get('/borrar/{id}', 'MinningController@deleteModel')->name('minning.minning');
-		Route::get('/modelos', 'MinningController@showModels')->name('minning.minning');
+		Route::get('/preprocesado/{id}', 'MinningController@showModel')->name('minning.minning');
 		Route::post('/explorar', 'MinningController@process')->name('minning.minning');
 		Route::get('/contador-de-registros', 'MinningController@counter')->name('minning.minning');
 	 });
