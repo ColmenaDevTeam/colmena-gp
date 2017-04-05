@@ -1,8 +1,8 @@
 <!--
 @author: QSoto
 -->
-@extends('layouts.main_layout')
-@section('customcss')
+@extends('layouts.main')
+@section('css')
 	<link rel="stylesheet" href="/css/dataTables.bootstrap.min.css">
 @endsection
 @section('content')
@@ -76,6 +76,6 @@
 		</div>
 	</section>
 @endsection
-@section('customjs')
+@section('js')
 	@include('components.datatables.datatable')
 @endsection

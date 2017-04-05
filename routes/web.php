@@ -25,7 +25,7 @@ Route::group(['middleware' => ['auth']],function(){
     /**
      * Tasks routes
      */
-     Route::get('/tareas/usuario');
+    Route::get('/tareas/usuario');
 	/**
 	*Department Routes
 	*/

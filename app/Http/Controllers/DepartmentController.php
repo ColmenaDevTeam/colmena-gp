@@ -7,8 +7,7 @@ use App\Department;
 use Carbon\Carbon;
 use Validator;
 
-class DepartmentController extends Controller
-{
+class DepartmentController extends Controller{
 	public function index(){
 		return view('modules.departments.list')->with('departments', Department::all());
 	}
