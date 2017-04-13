@@ -37,8 +37,9 @@ class User extends Authenticatable
         'password', 'remember_token', 'active'
     ];
     public function getFullnameAttribute(){
-        return $this->firstname.' '.$this->lastName;
+        return $this->firstname.' '.$this->lastname;
     }
+
 	public function department(){
 		return $this->belongsTo('App\Department', 'department_id');
 	}
@@ -72,9 +73,5 @@ class User extends Authenticatable
 			return true;
 		else
 			return false;
-	}
-
-	public function getFullName(){
-		return $this->firstname.' '.$this->lastname;
 	}
 }

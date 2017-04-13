@@ -10,14 +10,47 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+/**
+ * Template routes
+ */
+Route::get('/charts', function(){
+	return view('tmp.charts');
+});
+Route::get('/forms', function(){
+	return view('tmp.forms');
+});
+Route::get('/icons', function(){
+	return view('tmp.icons');
+});
+Route::get('/panels', function(){
+	return view('tmp.panels');
+});
+Route::get('/tables', function(){
+	return view('tmp.tables');
+});
+Route::get('/widgets', function(){
+	return view('tmp.widgets');
+});
 
+ /**
+  * Home routes
+  */
 Route::get('/', function () {
     return redirect('/cartelera');
 });
 Route::get('/home', function () {
     return redirect('/cartelera');
 });
+
+ /**
+  * Auth routes
+  */
 Auth::routes();
+Route::get('/logout', function () {
+    Auth::logout(); #Esto no deberia existir, corregir.
+	return redirect('/');
+});
+
 Route::group(['middleware' => ['auth']],function(){
 	Route::get('/cartelera', 'HomeController@index');
 

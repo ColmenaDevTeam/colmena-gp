@@ -1,27 +1,19 @@
-@extends('layouts.main_layout')
-@section('customcss')
+@extends('layouts.main')
+@section('css')
 
 @endsection
 
 @section('content')
-	<section id="inner-headline">
-		<div class="container">
-			<div class="row">
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<div class="col-lg-12">
 				<div class="col-lg-12">
 					<h2 class="pageTitle">{{isset($user) ? 'Edición' : 'Registro'}} de usuarios</h2>
 				</div>
 			</div>
 		</div>
-	</section>
-	<section id="content">
-		<div class="container">
 			<div class="row">
-				@if (Session::pull('success') == true)
-					<div class="alert alert-success" id="userDataSuccess">
-						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-						<strong>¡Muy bien!</strong> Su petición se procesó con exito.
-					</div>
-				@endif
+				@include('components.notification.notification')
 				@if ($errors->has('cedula'))
 					<div class="alert alert-warning help-block">
 						<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -141,17 +133,16 @@
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-								<input type="submit" value="{{isset($user) ? 'Editar' : 'Registrar'}} usuario" class="btn btn-default">
+								<input type="submit" value="{{isset($user) ? 'Editar' : 'Registrar'}} usuario" class="btn btn-info">
 							</div> <!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12-->
 						</div><!-- -/.row-->
 					</form>
 				</div><!-- /.contact-form -->
 			</div><!-- /.row -->
-		</div><!-- /.container-->
-	</section>
+		</div>
 @endsection
 
-@section('customjs')
+@section('js')
 	<script type="text/javascript" src="/js/jquery.inputmask.bundle.min.js"></script>
 	<script type="text/javascript">
 		$(":input").inputmask();
