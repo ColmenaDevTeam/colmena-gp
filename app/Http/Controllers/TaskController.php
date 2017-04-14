@@ -9,18 +9,22 @@ use App\User;
 use App\Calendar;
 use App\Absence;
 use Validator;
+use App\TaskLog;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TaskController extends Controller{
 	public function index(){
+		//verificacion de usuario/rol
 		return view('modules.tasks.list')->with('tasks', Task::all());
 	}
 
 	public function showDataForm(){
+		//verificacion de usuario/rol
 		return view('modules.tasks.forms.data-form')->with(['users' => User::all(), 'types' => Task::getEnumValues('type')]);
 	}
 
 	public function register(Request $request){
-
+		//verificacion de usuario/rol
 		Validator::make($request->input(), [
 			'title' => 'required',
 			'priority' => 'required',
@@ -61,12 +65,14 @@ class TaskController extends Controller{
 	public function showUpdateForm(Request $request){
 		$task = Task::find($request->id);
 		if (!$task) return view('errors.404');
+		//verificacion de usuario/rol
 		return view('modules.tasks.forms.data-form')->with(['task' => $task, 'users' => User::getUsersByOcupation(), 'types' => Task::getEnumValues('type')]);
 	}
 
 	public function update(Request $request){
 		$task = Task::find($request->id);
 		if (!$task) return view('errors.404');
+		//verificacion de usuario/rol
 		Validator::make($request->input(), [
 			'title' => 'required',
 			'priority' => 'required',
@@ -94,42 +100,32 @@ class TaskController extends Controller{
 
     }
     public function view(Request $request){
-
+		$task = Task::find($request->id);
+		if (!$task) return view('errors.404');
+		//verificacion de usuario/rol
+		$task->taskLogs()->paginate(5);
+		$log = $task->taskLogs()->lastest()->first();
+		return view('modules.tasks.view')->with(['task' => $task, 'statuses' => Task::getEnumValues('status'), 'log' => $log]);
     }
+
+	public function transact(Request $request){
+		//verificacion de usuario/rol
+		$task = Task::find($request->task_id);
+		if (!$task) return view('errors.404');
+
+		Validator::make($request->input(), [
+			'status' => 'required',
+			'details' => 'min:10|max:255'
+		])->validate();
+
+		$log = new TaskLog;
+	}
 
 
 }
 /*
-public function getListar($idUsu = false){
-	//Si no se está pasando ningun usuario
-	if($idUsu === false){
-		//por defecto se listan las tareas propias
-		$tareas = Ctarea::where('idUsu', Auth::user()->idUsu)->get();
-		if((Auth::user()->tieneAccion('tareas.listar')))
-			//Y si tiene la accion de listar tareas, se listan todas
-			$tareas=Ctarea::all();
-	}
-	//Si SÍ se está pasando un usuario
-	else{
-		//Si son sus propias tareas
-		if($idUsu == Auth::user()->idUsu){
-			$tareas = Ctarea::where('idUsu', Auth::user()->idUsu)->get();
-		}
-		//si NO son sus propias tareas
-		else{
-			//Si no puede listar, se redirecciona
-			if(!(Auth::user()->tieneAccion('tareas.listar')))
-				return redirect('errores/acceso-negado');
-			//si SÍ puede listar, se listan las tareas de el usuario requerido
-			$Ousuario = Cusuario::find($idUsu);
-			if($Ousuario)
-				$tareas = Ctarea::where('idUsu', $idUsu)->get();
-			else
-				return view('tareas.listar')->with('estado', 'error')->with('tareas', null);
-		}
-	}
-	return view("tareas.listar")->with('tareas',$tareas);
-}
+
+
 public function getVer(Request $request, $idTar){
 	$Otarea = Ctarea::find($idTar);
 	if(!Auth::user()->tieneAccion('tareas.listar') && $Otarea->idUsu != Auth::user()->idUsu)

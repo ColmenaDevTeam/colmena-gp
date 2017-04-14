@@ -12,12 +12,16 @@ class Task extends Model{
 	protected $dates = ['estimated_date', 'deliver_date'];
 
 	protected $fillable = [
-        'id','title','estimated_date','deliver_date','details','priority',
+        'title','estimated_date','deliver_date','details','priority',
         'complexity', 'type', 'seen', 'status'
 	];
 
     public function responsible(){
         return $this->belongsTo('App\User', 'user_id');
     }
+
+	public function taskLogs(){
+		return $this->hasMany('App\TaskLog', 'task_id');
+	}
 
 }

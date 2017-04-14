@@ -68,7 +68,8 @@ Route::group(['middleware' => ['auth']],function(){
 	 Route::post('/tareas/registrar', 'TaskController@register');
 	 Route::get('/tareas/listar', 'TaskController@index');
 	 Route::get('/tareas', function(){ return redirect('/tareas/listar');});
-	 Route::get('/departamentos/{id}/ver', 'DepartmentController@view');
+	 Route::get('/tareas/{id}/ver', 'TaskController@view');
+	 Route::post('/tareas/tramitar', 'TaskController@transact');
 
 	/**
 	*Department Routes
