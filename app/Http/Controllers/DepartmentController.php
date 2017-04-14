@@ -19,7 +19,6 @@ class DepartmentController extends Controller{
 	public function register(Request $request){
 		Validator::make($request->input(), [
 			'name' => 'required|min:3|max:45|string',
-			'slug' => 'required|min:3|max:45',
 			'description' => 'min:10|max:255'
 		])->validate();
 
@@ -43,7 +42,6 @@ class DepartmentController extends Controller{
 		if (!$department) return view('errors.404');
 		Validator::make($request->input(), [
 			'name' => 'required|min:3|max:45|string',
-			'slug' => 'required|min:3|max:45',
 			'description' => 'min:10|max:255'
 		])->validate();
 
@@ -53,6 +51,13 @@ class DepartmentController extends Controller{
 		$department->save();
 		$departments = Department::all();
 		\Session::push('success', true);
-		return redirect("departamentos/listar")->with('departments', $departments);
+		return redirect("departamentos/listar")->with(['departments' => $departments]);
+	}
+
+	public function indexUsers(Request $request){
+		$department = Department::find($request->id);
+		if (!$department) return view('errors.404');
+
+		return view('modules.users.list')->with(['users' => $department->users, 'title' => 'Listado del '.$department->name]);
 	}
 }

@@ -16,14 +16,12 @@ class DepartmentSeeder extends Seeder
 		$faker = Faker::create();
 		DB::table('departments') -> insert([
         'name'=>'Departamento del Programa Nacional de formacion en Informatica',
-		'slug'=>'pnfi',
-        'description'=>'Colmena rules',
+        'description'=>$faker->text,
     	]);
 
 		for ($i=0; $i < 30; $i++) {
 			DB::table('departments') -> insert([
 			'name'=>$faker->name,
-			'slug'=>'pnf'.$i,
 			'description'=> $faker->text,
 			]);
 		}

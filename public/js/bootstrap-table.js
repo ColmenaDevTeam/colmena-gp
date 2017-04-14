@@ -157,16 +157,16 @@
             return 'Cargando, por favor espere…';
         },
         formatRecordsPerPage: function (pageNumber) {
-            return sprintf('%s filas por pagina', pageNumber);
+            return sprintf('%s registros por pagina', pageNumber);
         },
         formatShowingRows: function (pageFrom, pageTo, totalRows) {
-            return sprintf('Mostrando desde %s hasta %s de %s filas', pageFrom, pageTo, totalRows);
+            return sprintf('Mostrando del %s al %s de %s registros', pageFrom, pageTo, totalRows);
         },
         formatSearch: function () {
             return 'Buscar';
         },
         formatNoMatches: function () {
-            return 'No se encontraron filas';
+            return 'No se encontraron registros';
         },
         formatRefresh: function () {
             return 'Refrescar';

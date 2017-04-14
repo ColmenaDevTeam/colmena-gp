@@ -1,19 +1,15 @@
-@extends('layouts.main_layout')
-@section('customcss')
+@extends('layouts.main')
+@section('css')
 
 @endsection
 @section('content')
-	<section id="inner-headline">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<div class="col-lg-12">
 					<h2 class="pageTitle">Actualizacion de Calendario {{date('Y')}}</h2>
 				</div>
-			</div>
-		</div>
-	</section>
-	<section id="content">
-		<div class="container">
+			</div><!--/.row-->
+			@include('components.notification.notification')
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="alert alert-info alert-dismissable">
@@ -42,8 +38,7 @@
 				</div>
 			</div><!-- /.row -->
 		</div>
-	</section>
 @endsection
-@section('customcss')
+@section('css')
 
 @endsection

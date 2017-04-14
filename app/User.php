@@ -16,7 +16,7 @@ class User extends Authenticatable
      *
      */
 	const PASSWORD_LENGHT = 12;
-
+	const MIN_USER_AGE = 18;
 	protected $dates = ['birthdate'];
     /**
      * The attributes that are mass assignable.

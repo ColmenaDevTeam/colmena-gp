@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::post('/departamentos/registrar', 'DepartmentController@register');
 	Route::get('/departamentos/listar', 'DepartmentController@index');
 	Route::get('/departamentos', function(){ return redirect('/departamentos/listar');});
+	Route::get('/departamentos/{id}/listado', 'DepartmentController@indexUsers');
 
 	/**
 	*User Routes
@@ -89,5 +90,17 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::post('/calendario/actualizar', 'CalendarController@update');
 	Route::get('/calendario/ver', 'CalendarController@show');
 	Route::get('/calendario', function(){ return redirect('/calendario/ver');});
+
+	/**
+	*Absences Routes
+	*/
+	Route::get('/ausencias/registrar', 'AbsenceController@showDataForm');
+	Route::get('/ausencias/editar/{id}', 'AbsenceController@showUpdateForm');
+	Route::post('/ausencias/editar/{id}', 'AbsenceController@update');
+	Route::post('/ausencias/registrar', 'AbsenceController@register');
+	Route::get('/ausencias/listar', 'AbsenceController@index');
+	Route::get('/ausencias', function(){ return redirect('/ausencias/listar');});
+	Route::get('/ausencias/{id}/listado', 'AbsenceController@indexUsers');
+
 });
 Route::get('/about-us', 'HomeController@about');
