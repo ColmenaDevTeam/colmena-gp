@@ -28,9 +28,9 @@
 					<table data-toggle="table" data-show-refres41758498h="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 						<thead>
 								<tr>
-									<th>Nombre</th>
-									<th>Descripción</th>
-									<th>Usuarios Asignados</th>
+									<th data-sortable="true" data-field="name">Nombre</th>
+									<th data-sortable="true" data-field="description">Descripción</th>
+									<th data-sortable="true" data-field="users">Usuarios Asignados</th>
 									<th>Modificar</th>
 								</tr>
 							</thead>

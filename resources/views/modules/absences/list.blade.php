@@ -28,10 +28,10 @@
 					<table data-toggle="table" data-show-refres41758498h="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 						<thead>
 								<tr>
-									<th>Usuario</th>
-									<th>Fecha Inicio</th>
-									<th>Fecha Fin</th>
-									<th>Descripción</th>
+									<th data-sortable="true" data-field="user">Usuario</th>
+									<th data-sortable="true" data-field="start_date">Fecha Inicio</th>
+									<th data-sortable="true" data-field="end_date">Fecha Fin</th>
+									<th data-sortable="true" data-field="details">Descripción</th>
 									<th>Ver</th>
 									<th>Modificar</th>
 								</tr>

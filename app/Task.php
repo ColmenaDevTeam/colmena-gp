@@ -5,9 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model{
-    protected $fillable = [
+
+	protected $dates = ['estimated_date', 'deliver_date'];
+
+	protected $fillable = [
         'id','title','estimated_date','deliver_date','details','priority',
-        'complexity','task_status', 'task_type', 'seen', 'created_at', 'updated_at'
+        'complexity', 'type', 'seen', 'status'
 	];
 
     public function responsible(){

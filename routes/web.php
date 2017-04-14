@@ -58,7 +58,14 @@ Route::group(['middleware' => ['auth']],function(){
     /**
      * Tasks routes
      */
-    Route::get('/tareas/usuario');
+	 Route::get('/tareas/registrar', 'TaskController@showDataForm');
+	 Route::get('/tareas/editar/{id}', 'TaskController@showUpdateForm');
+	 Route::post('/tareas/editar/{id}', 'TaskController@update');
+	 Route::post('/tareas/registrar', 'TaskController@register');
+	 Route::get('/tareas/listar', 'TaskController@index');
+	 Route::get('/tareas', function(){ return redirect('/tareas/listar');});
+	 Route::get('/departamentos/{id}/ver', 'DepartmentController@view');
+
 	/**
 	*Department Routes
 	*/
@@ -100,7 +107,6 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::post('/ausencias/registrar', 'AbsenceController@register');
 	Route::get('/ausencias/listar', 'AbsenceController@index');
 	Route::get('/ausencias', function(){ return redirect('/ausencias/listar');});
-	Route::get('/ausencias/{id}/listado', 'AbsenceController@indexUsers');
 
 });
 Route::get('/about-us', 'HomeController@about');
