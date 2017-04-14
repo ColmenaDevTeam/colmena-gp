@@ -32,6 +32,10 @@ Route::get('/widgets', function(){
 	return view('tmp.widgets');
 });
 
+Route::get('/test', function(){
+	dd(App\Task::getEnumValues('type'));
+});
+
  /**
   * Home routes
   */

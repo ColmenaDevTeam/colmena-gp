@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\User;
 use App\Calendar;
 use App\Absence;
+use Validator;
 
 class TaskController extends Controller{
 	public function index(){
@@ -15,7 +16,7 @@ class TaskController extends Controller{
 	}
 
 	public function showDataForm(){
-		return view('modules.tasks.forms.data-form')->with(['users' => User::all()]);
+		return view('modules.tasks.forms.data-form')->with(['users' => User::all(), 'types' => Task::getEnumValues('type')]);
 	}
 
 	public function register(Request $request){
@@ -25,17 +26,23 @@ class TaskController extends Controller{
 			'priority' => 'required',
 			'complexity' => 'required',
 			'type' => 'required',
-			'estimated_date' => 'required|date_format:d/m/Y|after:today',
+			'estimated_date' => 'required|date_format:d/m/Y|after:yesterday',#Aqui verificacion de calendario
 			'users' => 'required',
 			'details' => 'min:10|max:255'
 		])->validate();
-		$task = new task();
-		$task->start_date = Carbon::createFromFormat('d/m/Y',$request->start_date);
-		$task->end_date = Carbon::createFromFormat('d/m/Y',$request->end_date);
-		$task->details = $request->details;
-		$task->user_id = $request->user_id;
-		$task->type = $request->type;
-		$task->save();
+
+		foreach ($request->users as $user) {
+			$task = new task();
+			$task->title = $request->title;
+			$task->priority = $request->priority;
+			$task->complexity = $request->complexity;
+			$task->type = $request->type;
+			$task->estimated_date = Carbon::createFromFormat('d/m/Y',$request->estimated_date);
+			$task->details = $request->details;
+			$task->user_id = $user;
+			$task->save();
+		}
+
 		#Aqui Posponer Tareas
 		/*
 		$tareasPorFecha = $usuario->getTareasPorFecha($Opermrepo->fecIni, $Opermrepo->fecFin);
@@ -48,45 +55,39 @@ class TaskController extends Controller{
 		*/
 		$tasks = Task::all();
 		\Session::push('success', true);
-		return redirect("ausencias/listar")->with(['tasks' => $tasks]);
+		return redirect("tareas/listar")->with(['tasks' => $tasks]);
 	}
 
 	public function showUpdateForm(Request $request){
 		$task = Task::find($request->id);
 		if (!$task) return view('errors.404');
-		return view('modules.tasks.forms.data-form')->with(['task' => $task, 'users' => User::all()]);
+		return view('modules.tasks.forms.data-form')->with(['task' => $task, 'users' => User::getUsersByOcupation(), 'types' => Task::getEnumValues('type')]);
 	}
 
 	public function update(Request $request){
 		$task = Task::find($request->id);
 		if (!$task) return view('errors.404');
-		$minDate = Carbon::now()->subDays(task::MAX_PASSED_DAYS)->format('d/m/Y');
 		Validator::make($request->input(), [
-			'start_date' => 'required|date_format:d/m/Y|after:'.$minDate,
-			'end_date' => 'required|date_format:d/m/Y|after:start_date',
-			'user_id' => 'required',
+			'title' => 'required',
+			'priority' => 'required',
+			'complexity' => 'required',
 			'type' => 'required',
+			'estimated_date' => 'required|date_format:d/m/Y|after:yesterday', #Aqui verificacion de calendario
 			'details' => 'min:10|max:255'
 		])->validate();
 
-		$task->start_date = Carbon::createFromFormat('d/m/Y',$request->start_date);
-		$task->end_date = Carbon::createFromFormat('d/m/Y',$request->end_date);
+		$task->title = $request->title;
+		$task->priority = $request->priority;
+		$task->complexity = $request->complexity;
+		$task->type = $request->type;
+		$task->estimated_date = Carbon::createFromFormat('d/m/Y',$request->estimated_date);
 		$task->details = $request->details;
-		$task->user_id = $request->user_id;
+		$task->status = Task::DEFAULT_STATUS;
 		$task->save();
-		#Aqui Posponer Tareas
-		/*
-		$tareasPorFecha = $usuario->getTareasPorFecha($Opermrepo->fecIni, $Opermrepo->fecFin);
-		if (!is_null($tareasPorFecha)) {
-			foreach ($tareasPorFecha as $tarea) {
-				$tarea->fecEst = Ccalendario::getProxima($Opermrepo->fecFin);
-				$tarea->save();
-			}
-		}
-		*/
+
 		$tasks = Task::all();
 		\Session::push('success', true);
-		return redirect("ausencias/listar")->with(['tasks' => $tasks]);
+		return redirect("tareas/listar")->with(['tasks' => $tasks]);
 	}
 
     public function personalList(Request $request){
@@ -172,46 +173,8 @@ public function postBitacora(Request $request){
 	$arrEstados = ['Asignada','Revision','Cumplida','Cancelada','Diferida','Retrasada'];
 	return redirect('tareas/listar')->with('estado', 'incidencia');
 }
-public function getRegistrar(){
-	if(!(\Auth::user()->tieneAccion('tareas.registrar')))
-		return redirect('errores/acceso-negado');
-	$usuarios = Cusuario::where('username', '!=', env('APP_DEV_USERNAME'))->get();
-	return view("tareas.registrar")->with('usuarios',$usuarios);
-}
 
-public function postRegistrar(Request $request){
-	if(!(\Auth::user()->tieneAccion('tareas.registrar')))
-		return redirect('errores/acceso-negado');
-	$idsUsuarios = $request->input('usuarios');
 
-	foreach ($idsUsuarios as $idUsuario) {
-		$Otarea = New Ctarea;
-		$Otarea->titulo = $request->input("title");
-		$Otarea->fecEst = $request->input("deliverdate");
-		$Otarea->detalle = $request->input("details");
-		$Otarea->prioridad = $request->input("priority");
-		$Otarea->complejidad = $request->input("complexity");
-		$Otarea->estTar = 'Asignada';
-		$Otarea->tipTar = $request->input("tipoTarea");
-		$Otarea->idUsu = $idUsuario;
-		$Otarea->save();
-		CTarea::enviarEmailTareaAsignada($Otarea);
-	}
-	$usuarios = Cusuario::getUsuariosPorGrado();
-	return redirect("tareas/registrar")->with(['usuarios'=>$usuarios, 'estado' => 'realizado']);
-}
-public function getModificar(Request $request, $idTarea = -1){
-	if(!(\Auth::user()->tieneAccion('tareas.modificar')))
-		return redirect('errores/acceso-negado');
-	if($idTarea != -1){
-		$Otarea=Ctarea::find($idTarea);
-		if($Otarea){
-			$Ousuarios = Cusuario::all();
-			return view("tareas.modificar")->with('Otarea', $Otarea)->with('Ousuarios', $Ousuarios);
-		}
-	}
-	return redirect('/tareas/listar')->with('estado', 'no-seleccionado');
-}
 public function postModificar(Request $request){
 	//dd($request);
 	$Otarea=Ctarea::findOrFail($request->get('idTar'));

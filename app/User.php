@@ -5,11 +5,12 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\UserRegistration;
+use App\Task;
 
 class User extends Authenticatable
 {
     use Notifiable;
-
+	use EnumHelper;
 	/**
      * The class constants.
      *
@@ -39,13 +40,35 @@ class User extends Authenticatable
     public function getFullnameAttribute(){
         return $this->firstname.' '.$this->lastname;
     }
-
+	public function getOcupationAttribute(){
+		$ocupation=0;
+		if ($this->tasks) {
+			foreach ($this->tasks as $task) {
+				if ($task->status!='Cumplida' or $task->status!='Cancelada')
+					$ocupation+=($task->complexity)+($task->priority);
+			}
+		return $ocupation;
+		}
+	}
+	public static function getUsersByOcupation(){
+		$users = self::where('cedula', '!=', env('APP_DEV_USERNAME'))->get();
+		for($i=0; $i < count($users); $i++){
+		   for ( $j=$i+1;$j<count($users);$j++){
+			  if ($users[$i]->ocupation > $users[$j]->ocupation) {
+				  $aux = $users[$i];
+				  $users[$i] = $users[$j];
+				  $users[$j] = $aux;
+				}
+			  }
+		  }
+		return $users;
+	}
 	public function department(){
 		return $this->belongsTo('App\Department', 'department_id');
 	}
 
 	public function tasks(){
-		return $this->hasMany('App\Task', [ 'user_id', 'id']);
+		return $this->hasMany('App\Task', 'user_id');
 	}
 
 	public function roles(){

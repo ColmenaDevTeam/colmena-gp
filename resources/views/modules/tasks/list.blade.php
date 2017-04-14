@@ -32,6 +32,7 @@
 									<th data-sortable="true" data-field="responsible">Responsable</th>
 									<th data-sortable="true" data-field="type">Tipo de tarea</th>
 									<th data-sortable="true" data-field="status">Estado</th>
+									<th data-sortable="true" data-field="details">Detalles</th>
 									<th data-sortable="true" data-field="estimated_date">Fecha tope</th>
 									<th data-sortable="true" data-field="deliver_date">Fecha de entrega</th>
 									<th>Ver</th>
@@ -45,6 +46,7 @@
 										<td>{{$task->responsible->fullname}}</td>
 										<td>{{$task->type}}</td>
 										<td>{{$task->status}}</td>
+										<td>{{$task->details}}</td>
 										<td>{{$task->estimated_date}}</td>
 										<td>{{$task->deliver_date}}</td>
 										<td>

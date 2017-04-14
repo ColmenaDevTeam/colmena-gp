@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model{
+	use EnumHelper;
+
+	const DEFAULT_STATUS = 'Asignada';
 
 	protected $dates = ['estimated_date', 'deliver_date'];
 
@@ -14,6 +17,7 @@ class Task extends Model{
 	];
 
     public function responsible(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User', 'user_id');
     }
+
 }
