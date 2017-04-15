@@ -24,4 +24,7 @@ class Task extends Model{
 		return $this->hasMany('App\TaskLog', 'task_id');
 	}
 
+	public function lastLog(){
+		return $this->taskLogs()->orderBy('created_at', 'desc')->take(1)->first();
+	}
 }

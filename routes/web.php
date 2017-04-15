@@ -33,7 +33,7 @@ Route::get('/widgets', function(){
 });
 
 Route::get('/test', function(){
-	dd(App\Task::getEnumValues('type'));
+	dd(App\Calendar::checkYear());
 });
 
  /**
@@ -70,6 +70,7 @@ Route::group(['middleware' => ['auth']],function(){
 	 Route::get('/tareas', function(){ return redirect('/tareas/listar');});
 	 Route::get('/tareas/{id}/ver', 'TaskController@view');
 	 Route::post('/tareas/tramitar', 'TaskController@transact');
+	 Route::post('/tareas/eliminar', 'TaskController@delete');
 
 	/**
 	*Department Routes

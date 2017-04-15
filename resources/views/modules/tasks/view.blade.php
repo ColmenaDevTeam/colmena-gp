@@ -47,8 +47,14 @@
 									<label for="" style="margin-left: 10pt;">Tipo de tarea: </label>
 									<span class="label label-default">{{$task->type}}</span>
 
-									<label for="" style="margin-left: 10pt;">Fecha de entrega: </label>
+									<label for="" style="margin-left: 10pt;">Fecha de tope: </label>
 									<span class="label label-default">{{$task->estimated_date}}</span>
+
+									<label for="" style="margin-left: 10pt;">Fecha de entrega: </label>
+									<span class="label label-default">{{$task->deeliver_date}}</span>
+
+									<label for="" style="margin-left: 10pt;">Estado: </label>
+									<span class="label label-default">{{$task->status}}</span>
 								</p>
 								<hr>
 							</a><!-- ./list-group-item -->
@@ -58,21 +64,19 @@
 							<hr>
 						</div><!-- ./col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<button type="button" class="btn btn-warning pull-left" style="margin-left: 3pt;" onclick="window.location='/tareas/modificar/{{$task->idTar}}'">
-								Modificar <i class="fa fa-pencil"></i>
-							</button>
-							<form id="borrarTarea" class="form" name="borrarTarea" method="post" action="/tareas/eliminar">
-								{{ csrf_field() }}
-								<input type="hidden" name="id" value="{{$task->id}}" name="id">
-								<button id="borrarTar" class="btn btn-danger pull-left" style="margin-left: 3pt;" onClick="confirmarEliminar('borrarTar');">
+							<div class="text-center">
+								<a class="btn btn-warning" id="update" href="/tareas/editar/{{$task->id}}">
+									<i class="fa fa-pencil"></i>Modificar
+								</a>
+								<a class="btn btn-danger" href="#" onclick="$('#delete-form-modal').modal().show();">
 									Eliminar <i class="fa fa-times" value="Eliminar"></i>
-								</button>
-							</form>
+								</a>
+							</div>
 						</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<hr>
 							<a href="" class="list-group-item active text-center" onClick="return false;">
-								<h3 style="color: white;">Tramites
+								<h3 style="color: white;">Seguimiento
 								</h3>
 							</a>
 								<div class="table-responsive">
@@ -80,26 +84,30 @@
 					 					<p class="text-center">
 						 					<hr>
 											@foreach ($task->taskLogs as $log)
-												<span class="label label-default">{{$log->created_at}}</span> Por: <span class="label label-default">{{$log->user}}</span> Estado: <span class="label label-default">{{$log->status}}</span> <br>{{$log->details}}
+												<div class="text-center">
+													<span class="label label-default">{{$log->created_at}}</span> Por: <span class="label label-default">{{$log->user}}</span> Estado: <span class="label label-default">{{$log->status}}</span> <br>{{$log->details}}
+												</div>
+												<div class="text-justify">
+													<p>{{ $log->detail }}</p>
+												</div>
 												<hr>
 											@endforeach
 										</p>
 									</a>
 								</div> <!-- /.table-responsive-->
 								{{--<div class="pagination"> {{ $task->taskLogs->links() }} </div>--}}
-								<div class="text-center" style="padding-top: 20px">
+								<div class="text-center" style="padding: 20px">
 									<a href="#"  onclick="$('#transact-form-modal').modal().show(); return false;" class="btn btn-success">Tramitar Tarea</a>
 								</div>
-
 							</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 						</div><!-- -/.row-->
 					</div><!-- -/.row-->
 				</div><!-- -/.list-group-->
 			</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 		</div><!-- -/.row-->
-
 	</div>
 	@include('modules.tasks.forms.transact-form-modal')
+	@include('modules.tasks.forms.delete-form-modal')
 @endsection
 @section('js')
 

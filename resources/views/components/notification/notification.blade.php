@@ -1,5 +1,5 @@
 @if(session()->has('success'))
-	@if (session('success') == true)
+	@if (session()->pull('success', false) == true)
 		<div class="alert alert-success alert-dismissable">
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong>¡Muy bien!</strong> La accion se ha realizado con exito.
