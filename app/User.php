@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\UserRegistration;
 use App\Task;
+use App\Calendar;
 
 class User extends Authenticatable
 {
@@ -44,11 +45,11 @@ class User extends Authenticatable
 		$ocupation=0;
 		if ($this->tasks) {
 			foreach ($this->tasks as $task) {
-				if ($task->status!='Cumplida' or $task->status!='Cancelada')
+				if ($task->status!='Cumplida' or $task->status!='Cancelada' or $task->status!='Retrasada')
 					$ocupation+=($task->complexity)+($task->priority);
 			}
-		return $ocupation;
 		}
+		return $ocupation;
 	}
 	public static function getUsersByOcupation(){
 		$users = self::where('cedula', '!=', env('APP_DEV_USERNAME'))->get();
@@ -91,10 +92,30 @@ class User extends Authenticatable
 		}
 	}
 
+	public function getTasksPerRange($start, $end){
+        $tasks = $this->tasks()->whereBetween('estimated_date',[$start,$end])->get();
+        return $tasks;
+	}
+	public function delayTasks($start, $end){
+		$tasks = $this->getTasksPerRange($start, $end);
+		if (count($tasks) > 0) {
+			$nextDate = Calendar::getNextWorkableDate($end);
+			foreach ($tasks as $task) {
+				$task->estimated_date = $nextDate;
+				$task->status = 'Diferida';
+				$task->save();
+			}
+		}
+	}
+
 	public function isDev(){
 		if ($this->cedula == env('APP_DEV_USERNAME'))
 			return true;
 		else
 			return false;
+	}
+
+	public function getUrl(){
+		return "/usuarios/perfil/".$this->id;
 	}
 }

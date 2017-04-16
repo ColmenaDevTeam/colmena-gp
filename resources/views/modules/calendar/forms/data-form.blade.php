@@ -18,14 +18,18 @@
 		@include('components.notification.notification')
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<div class="alert alert-info alert-dismissable">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<div class="alert alert-info">
+
 					<font color="#6198fd" size="5"><strong>¡Atención!</strong></font>
 					<ul>
 						<li>
 							Al actualizar el calendario, seleccionará un conjunto de
 							fechas que representarán los días que seran tomados
-							como <font color="#6198fd" size="5">LABORABLES</font>.
+							cómo <font color="#6198fd" size="5">DISPONIBLES</font>
+							para asignar tareas.
+						</li>
+						<li>
+							Los sabados y domingos son días no
 						</li>
 						<li>
 							Si deselecciona un dia laborable <font color="#6198fd" size="5">TODAS</font>
@@ -33,12 +37,12 @@
 							para dicha fecha seran reasignadas a la siguiente fecha laborable.
 						</li>
 						<li>
-							Tome en cuenta que el sistema solo permitira la modificacion de las
-							fechas que se encuentren en un rango de <font color="#6198fd" size="5">DOS(2)</font> semana antes de la fecha
-							actual.
+							Tome en cuenta que el sistema <font color="#6198fd" size="5">BlOQUEARA</font>
+							ciertas funcionalidades si no se tienen datos de calendario cargados.
 						</li>
 						<li>
-							Al seleccionar una fecha, esta es marcada en color <font color="#6198fd" size="5">AZUL</font>.
+							Al seleccionar una fecha, esta es marcada en color <font color="#6198fd" size="5">AZUL</font>,
+							indicando que es una fecha laborable.
 						</li>
 					</ul>
 				</div>
@@ -58,13 +62,13 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
-                                    <td>Lunes</td>
-                                    <td>Martes</td>
-                                    <td>Miércoles</td>
-                                    <td>Jueves</td>
-                                    <td>Viernes</td>
-                                    <td><font color="#7C0101">Sábado</font>
-                                    <td><font color="#7C0101">Domingo</font></td>
+									<td class="text-center">Lunes</td>
+									<td class="text-center">Martes</td>
+									<td class="text-center">Miércoles</td>
+									<td class="text-center">Jueves</td>
+									<td class="text-center">Viernes</td>
+									<td class="text-center"><font color="#7C0101">Sábado</font>
+									<td class="text-center"><font color="#7C0101">Domingo</font></td>
                                 </tr>
 
                                 @foreach ($weeks as $days)

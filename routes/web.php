@@ -95,6 +95,7 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::post('/usuarios/desactivar', 'UserController@desactivate');
 	Route::post('/usuarios/eliminar', 'UserController@delete');
 	Route::post('/usuarios/reactivar', 'UserController@reactivate');
+	Route::get('/usuarios/perfil/{id}', 'UserController@showProfile');
 
 	/**
 	*Calendar Routes
@@ -102,6 +103,7 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('/calendario/actualizar', 'CalendarController@showDataForm');
 	Route::post('/calendario/actualizar', 'CalendarController@update');
 	Route::get('/calendario/ver', 'CalendarController@show');
+	Route::get('/calendario/sin-datos', 'CalendarController@showNoDataInfo');
 	Route::get('/calendario', function(){ return redirect('/calendario/ver');});
 
 	/**

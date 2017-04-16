@@ -22,6 +22,7 @@ class PermissionCategories extends Migration
      * @return void
      */
     public function down(){
-        Schema::dropIfExists('permision_categories');
+		if(Schema::hasTable('permision_categories'))
+			Schema::drop('permision_categories');
     }
 }

@@ -16,10 +16,16 @@ class AbsenceController extends Controller
 	}
 
 	public function showDataForm(){
+		if (!Calendar::checkAvailability()) {
+			return redirect('/calendario/sin-datos');
+		}
 		return view('modules.absences.forms.data-form')->with(['users' => User::all()]);
 	}
 
 	public function register(Request $request){
+		$user = User::find($request->user_id);
+		if (is_null($user))
+			return redirect('/404');
 		$minDate = Carbon::now()->subDays(Absence::MAX_PASSED_DAYS)->format('d/m/Y');
 		Validator::make($request->input(), [
 			'start_date' => 'required|date_format:d/m/Y|after:'.$minDate,
@@ -32,19 +38,12 @@ class AbsenceController extends Controller
 		$absence->start_date = Carbon::createFromFormat('d/m/Y',$request->start_date);
 		$absence->end_date = Carbon::createFromFormat('d/m/Y',$request->end_date);
 		$absence->details = $request->details;
-		$absence->user_id = $request->user_id;
+		$absence->user_id = $user->id;
 		$absence->type = $request->type;
 		$absence->save();
-		#Aqui Posponer Tareas
-		/*
-		$tareasPorFecha = $usuario->getTareasPorFecha($Opermrepo->fecIni, $Opermrepo->fecFin);
-		if (!is_null($tareasPorFecha)) {
-			foreach ($tareasPorFecha as $tarea) {
-				$tarea->fecEst = Ccalendario::getProxima($Opermrepo->fecFin);
-				$tarea->save();
-			}
-		}
-		*/
+
+		$user->delayTasks($absence->start_date, $absence->end_date);
+
 		$absences = Absence::all();
 		\Session::push('success', true);
 		return redirect("ausencias/listar")->with(['absences' => $absences]);
@@ -58,7 +57,8 @@ class AbsenceController extends Controller
 
 	public function update(Request $request){
 		$absence = Absence::find($request->id);
-		if (!$absence) return view('errors.404');
+		$user = User::find($request->user_id);
+		if (!$absence || !$user) return view('errors.404');
 		$minDate = Carbon::now()->subDays(Absence::MAX_PASSED_DAYS)->format('d/m/Y');
 		Validator::make($request->input(), [
 			'start_date' => 'required|date_format:d/m/Y|after:'.$minDate,
@@ -71,18 +71,10 @@ class AbsenceController extends Controller
 		$absence->start_date = Carbon::createFromFormat('d/m/Y',$request->start_date);
 		$absence->end_date = Carbon::createFromFormat('d/m/Y',$request->end_date);
 		$absence->details = $request->details;
-		$absence->user_id = $request->user_id;
+		$absence->user_id = $user->id;
 		$absence->save();
-		#Aqui Posponer Tareas
-		/*
-		$tareasPorFecha = $usuario->getTareasPorFecha($Opermrepo->fecIni, $Opermrepo->fecFin);
-		if (!is_null($tareasPorFecha)) {
-			foreach ($tareasPorFecha as $tarea) {
-				$tarea->fecEst = Ccalendario::getProxima($Opermrepo->fecFin);
-				$tarea->save();
-			}
-		}
-		*/
+		
+		$user->delayTasks($absence->start_date, $absence->end_date);
 		$absences = Absence::all();
 		\Session::push('success', true);
 		return redirect("ausencias/listar")->with(['absences' => $absences]);

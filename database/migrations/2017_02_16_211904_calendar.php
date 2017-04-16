@@ -14,8 +14,8 @@ class Calendar extends Migration
     public function up()
     {
 		Schema::create('calendar', function (Blueprint $table) {
+			$table->increments('id');
             $table->date('workable_date')->unique();
-            $table->primary('workable_date');  //Add a primary key.
         });
     }
 

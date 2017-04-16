@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Calendar;
 
 class Task extends Model{
 	use EnumHelper;
@@ -27,11 +28,30 @@ class Task extends Model{
 	public function lastLog(){
 		return $this->taskLogs()->orderBy('created_at', 'desc')->take(1)->first();
 	}
-	public static function getTasksPerDay(){
-
+	public static function getTasksPerDate($date){
+		return self::where('estimated_date', $date)->get();
 	}
-	
-	public static function delayTasks(){
 
+	public static function getTasksPerRange($start, $end){
+        $tasks = self::whereBetween('estimated_date',[$start,$end])->get();
+        return $tasks;
 	}
+
+	public static function delayTasks($date){
+		$tasks = self::getTasksPerDate($date);
+		if (count($tasks) > 0) {
+			$nextDate = Calendar::getNextWorkableDate($date);
+			foreach ($tasks as $task) {
+				$task->estimated_date = $nextDate;
+				$task->save();
+			}
+		}
+	}
+	/*
+}
+public static function buscarFechaEst($fecha){
+	$tareas = Ctarea::where('fecEst', '=', $fecha )->get();
+	return $tareas;
+}
+	*/
 }

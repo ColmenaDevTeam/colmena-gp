@@ -111,4 +111,8 @@ class UserController extends Controller{
 	public function delete(){
 		return redirect("usuarios/listar")->with('users', User::all());
 	}
+
+	public function showProfile(){
+		
+	}
 }

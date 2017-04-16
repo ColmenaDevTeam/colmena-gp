@@ -104,8 +104,14 @@
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 								<div class="form-group has-feedback">
 									<label for="estimated_date">Fecha entrega</label>
+									<select name="estimated_date" id="estimated_date" class="form-control">
+										@foreach ($dates as $date)
+											<option value="{{ $date }}">{{ $date }}</option>
+										@endforeach
+									</select>{{--
+									<label for="estimated_date">Fecha entrega</label>
 									<input type="text" class="form-control" id="estimated_date" name="estimated_date" placeholder="20/01/2017" value="{{ isset($task) ? $task->estimated_date->format('d/m/Y') : ''}}" data-inputmask="'mask' : '99/99/9999'">
-								</div>
+								--}}</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								<div class="form-group has-feedback">

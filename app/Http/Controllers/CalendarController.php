@@ -23,47 +23,53 @@ class CalendarController extends Controller
 
 		$calendar = Calendar::all();
 		if (count($calendar) > 0) {
+			$dates = $request->dates;
 			foreach ($calendar as $savedDate) {
 				$n = -1;
-				$dateAux = '';
+				#dd($dates);
 				#var_dump($request->dates);
-				for ($i=0; $i < count($request->dates); $i++) {
-
-					if ($savedDate->workable_date->toDateString() == $request->dates[$i]) {
+				for ($i=0; $i < count($dates); $i++) {
+					if ($savedDate->workable_date->toDateString() == $dates[$i]) {
 						$n = $i;
-						break;
-					}else{
-						$dateAux = $request->dates[$i];
+						$dates[$i] = null;
 					}
 				}
 				if($n == -1){
-				  //Aqui lo de las tareas
-				  /*
-				  $tareasMover=Ctarea::buscarFechaEst($fecha->getOriginal('fecLab'));
-				  if (!is_null($tareasMover)) {
-					foreach ($tareasMover as $tarea) {
-					  $tarea->fecEst = Ccalendario::getProxima($fecha->getOriginal('fecLab'));
-					  $tarea->save();
-					}
-				}*/
+				  Task::delayTasks($savedDate->workable_date);
 				  $savedDate->delete();
 				}
 			}
-			foreach ($request->dates as $day) {
-				$date = Calendar::firstOrCreate(['workable_date' => Carbon::createFromFormat('Y-m-d h:m:s', $day)]);
-				$date->save();
+			#dd($dates);
+			for ($i=0; $i < count($dates); $i++){
+				if ($dates[$i] != null) {
+					$date = new Calendar;
+					$date->workable_date = Carbon::createFromFormat('Y-m-d', $dates[$i]);
+					$date->save();
+				}
 			}
 		}else {
-			foreach ($request->dates as $day) {
+			foreach ($dates as $day) {
 				$date = new Calendar;
 				$date->workable_date = Carbon::createFromFormat('Y-m-d', $day);
 				$date->save();
 			}
 		}
-		dd('la vista del ver, luego del cargado automatico');
+		\Session::push('success', true);
+		return view('modules.calendar.forms.data-form')->with(['calendar' => Calendar::getDateArray(),
+																'months' => Calendar::MONTHS,
+																'dates' => Calendar::generateDates()]);;
 	}
 
 	public function show(){
-		;
+		return view('modules.calendar.view')->with(['calendar' => Calendar::getDateArray(),
+																'months' => Calendar::MONTHS,
+																'dates' => Calendar::generateDates()]);;
+	}
+
+	public function showNoDataInfo(){
+		if (Calendar::checkAvailability()) {
+			return view('errors.404');
+		}
+		return view('modules.calendar.no-data');
 	}
 }

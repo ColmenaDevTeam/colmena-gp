@@ -47,7 +47,7 @@
 										<td>{{$task->type}}</td>
 										<td>{{$task->status}}</td>
 										<td>{{$task->details}}</td>
-										<td>{{$task->estimated_date}}</td>
+										<td>{{$task->estimated_date->toDateString()}}</td>
 										<td>{{$task->deliver_date}}</td>
 										<td>
 											<a href="/tareas/{{$task->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>

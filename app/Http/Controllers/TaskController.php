@@ -17,12 +17,19 @@ use Session;
 class TaskController extends Controller{
 	public function index(){
 		//verificacion de usuario/rol
-		return view('modules.tasks.list')->with('tasks', Task::all());
+
+		return view('modules.tasks.list')->with(['tasks' => Task::all()]);
 	}
 
 	public function showDataForm(){
 		//verificacion de usuario/rol
-		return view('modules.tasks.forms.data-form')->with(['users' => User::all(), 'types' => Task::getEnumValues('type')]);
+		
+		if (!Calendar::checkAvailability()) {
+			return redirect('/calendario/sin-datos');
+		}
+		return view('modules.tasks.forms.data-form')->with(['users' => User::getUsersByOcupation(),
+															'types' => Task::getEnumValues('type'),
+															'dates' => Calendar::getAbleWorkableDates()]);
 	}
 
 	public function register(Request $request){
@@ -48,31 +55,27 @@ class TaskController extends Controller{
 			$task->user_id = $user;
 			$task->save();
 		}
-
-		#Aqui Posponer Tareas
-		/*
-		$tareasPorFecha = $usuario->getTareasPorFecha($Opermrepo->fecIni, $Opermrepo->fecFin);
-		if (!is_null($tareasPorFecha)) {
-			foreach ($tareasPorFecha as $tarea) {
-				$tarea->fecEst = Ccalendario::getProxima($Opermrepo->fecFin);
-				$tarea->save();
-			}
-		}
-		*/
 		Session::push('success', true);
 		return redirect("tareas/listar")->with(['tasks' => Task::all()]);
 	}
 
 	public function showUpdateForm(Request $request){
+
 		$task = Task::find($request->id);
-		if (!$task) return view('errors.404');
+		if (!$task) return redirect('/404');
 		//verificacion de usuario/rol
-		return view('modules.tasks.forms.data-form')->with(['task' => $task, 'users' => User::getUsersByOcupation(), 'types' => Task::getEnumValues('type')]);
+		$dates = Calendar::getAbleWorkableDates($task->estimated_date->toDateString());
+		if (is_null($dates)) {
+			return redirect('calendario/sin-datos');
+		}
+		return view('modules.tasks.forms.data-form')->with(['task' => $task, 'users' => User::getUsersByOcupation(),
+															'types' => Task::getEnumValues('type'),
+															'dates' => $dates]);
 	}
 
 	public function update(Request $request){
 		$task = Task::find($request->id);
-		if (!$task) return view('errors.404');
+		if (!$task) return redirect('/404');
 		//verificacion de usuario/rol
 		Validator::make($request->input(), [
 			'title' => 'required',
@@ -102,7 +105,7 @@ class TaskController extends Controller{
     }
     public function view(Request $request){
 		$task = Task::find($request->id);
-		if (!$task) return view('errors.404');
+		if (!$task) return redirect('/404');
 		//verificacion de usuario/rol
 		$task->taskLogs()->paginate(5);
 		return view('modules.tasks.view')->with(['task' => $task, 'statuses' => Task::getEnumValues('status'), 'log' => $task->lastLog()]);
@@ -111,7 +114,7 @@ class TaskController extends Controller{
 	public function transact(Request $request){
 		//verificacion de usuario/rol
 		$task = Task::find($request->task_id);
-		if (!$task) return view('errors.404');
+		if (!$task) return redirect('/404');
 
 		Validator::make($request->input(), [
 			'status' => 'required',
@@ -131,7 +134,7 @@ class TaskController extends Controller{
 	public function delete(Request $request){
 		//verificacion de usuario/rol
 		$task = Task::find($request->task_id);
-		if (!$task) return view('errors.404');
+		if (!$task) return redirect('/404');
 
 		$task->delete();
 		Session::push('success', true);

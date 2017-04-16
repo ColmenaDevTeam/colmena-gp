@@ -20,7 +20,6 @@ class Calendar extends Model
 	protected $dates = ['workable_date'];
 	public $timestamps = false;
     protected $table = 'calendar';
-	protected $primaryKey = 'workable_date';
 	public $incrementing = false;
 
 	public static function generateDates(){
@@ -60,16 +59,22 @@ class Calendar extends Model
 	}
 
 	public static function getNextWorkableDate($now){#now must be a string in datestring format (Y/m/d)
-		$next = self::where('workable_date', '>',$now.' 0:0:0'/*timestamp formating*/)->get()->first();
+		$next = self::where('workable_date', '>',$now)->get()->first();
 		return is_null($next) ? null : $next->workable_date->toDateString();#output will be a string in datestring format (Y/m/d)
 	}
 
-	public function getAbleWorkableDates(){
-		$dates = self::where('workable_date', '>=', date('Y/m/d').' 0:0:0'/*timestamp formating*/)->get();
+	public static function getAbleWorkableDates($date = null){
+		if (!is_null($date)) {
+			$dates = self::where('workable_date', '>=', $date)->get();
+		}else {
+			$dates = self::where('workable_date', '>=', date('Y-m-d'))->get();
+		}
+
 		return count($dates) ? self::getDateArray($dates) : null;
 	}
 
 	public static function checkAvailability(){
-		return count(self::where('workable_date', '>=', date('Y/m/d').' 0:0:0')->count()) > 0 ? true : false;
+		#dd(self::where('workable_date', '>=', date('Y-m-d'))->count());
+		return self::where('workable_date', '>=', date('Y-m-d'))->count() > 0 ? true : false;
 	}
 }
