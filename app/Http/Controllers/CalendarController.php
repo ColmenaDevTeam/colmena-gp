@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Calendar;
+use App\Task;
 use Validator;
 use Carbon\Carbon;
 

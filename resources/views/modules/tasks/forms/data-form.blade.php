@@ -114,33 +114,31 @@
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-										@if (isset($task))
-											<div class="col-xs-1 col-sm-4 col-md-4 col-lg-3">
-												<div class="form-group has-feedback">
-													<label for="user_id">Responsable: {{ $task->responsible->fullname }}</label>
-												</div>
-											</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
-										@else
+								@if (isset($task))
+									<div class="col-xs-1 col-sm-4 col-md-4 col-lg-3">
+										<div class="form-group has-feedback">
+											<label for="user_id">Responsable: {{ $task->responsible->fullname }}</label>
+										</div>
+									</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
+								@else
+									<div class="list-group">
+										<label for="details">Listado de usuarios</label>
+										<div class="row">
 											@foreach ($users as $user)
-												<div class="list-group">
-													<label for="details">Listado de usuarios</label>
-													<div class="row">
-														<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-															<p estimated_date class="list-group-item">
-																<input type="checkbox" style=""id="{{$user->id}}" name="users[]" value="{{$user->id}}">
-																	{{$user->fullname}}
-																	<span class="label label-info pull-right" title="Grádo de ocupación de {{$user->fullname}}">
-																		{{ $user->ocupation }}
-																	</span>
-																</input>
-															</p>
-														</div><!-- /.col-xs-12 col-sm-6 col-md-4 col-lg-4-->
-													</div><!-- /.row-->
-												</div><!-- /.list-group-->
+												<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+													<p class="list-group-item">
+														<input type="checkbox" style=""id="{{$user->id}}" name="users[]" value="{{$user->id}}" class="pull-left">
+															{{$user->fullname}}
+														</input>
+														<span class="label label-info pull-right" title="Grádo de ocupación de {{$user->fullname}}">
+															{{ $user->ocupation }}
+														</span>
+													</p>
+												</div><!-- /.col-xs-12 col-sm-6 col-md-4 col-lg-4-->
 											@endforeach
-										@endif
-
-
+										</div><!-- /.row-->
+									</div><!-- /.list-group-->
+								@endif
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 								<input type="submit" value="{{isset($task) ? 'Editar' : 'Registrar'}} tarea" class="btn btn-info">

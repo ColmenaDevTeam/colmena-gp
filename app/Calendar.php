@@ -17,13 +17,12 @@ class Calendar extends Model
 	protected $fillable = [
 		'workable_date'
 	];
-
 	protected $dates = ['workable_date'];
 	public $timestamps = false;
     protected $table = 'calendar';
 	protected $primaryKey = 'workable_date';
 	public $incrementing = false;
-	
+
 	public static function generateDates(){
 		for ($j=1; $j <=12 ; $j++) {
 			$month = strtotime(date('Y').'-'.$j);
@@ -33,19 +32,23 @@ class Calendar extends Model
 				$weekDay = date('N', strtotime(date('Y').'-'.$j.'-'.$i));
 				//dd($day_week);
 				$months[$j][$week][$weekDay] = $i;
-				if ($weekDay == 7) { $week++; };
+				if ($weekDay == 7) {
+					$week++;
+				};
 			}
 		}
 		return $months;
 	}
-	public static function getDateArray(){
-		$dates = self::all();
+	public static function getDateArray($customDates = []){
+		if (count($customDates) > 0) {
+			$dates = $customDates;
+		}else {
+			$dates = self::all();
+		}
 		$array = [];
-
 		foreach ($dates as $date) {
 			$array[] = $date->workable_date->toDateString();
 		}
-
 		return $array;
 	}
 
@@ -55,33 +58,18 @@ class Calendar extends Model
 		if (!is_null($date) && $actual > $date->workable_date->year )
 			self::truncate();
 	}
-	/*
-	public static function comparaAno(){
 
-        $Ocalendario = Ccalendario::all()->first();
-        $ultima= $Ocalendario->getOriginal('fecLab');
-        $actual = date("Y-m-d");
+	public static function getNextWorkableDate($now){#now must be a string in datestring format (Y/m/d)
+		$next = self::where('workable_date', '>',$now.' 0:0:0'/*timestamp formating*/)->get()->first();
+		return is_null($next) ? null : $next->workable_date->toDateString();#output will be a string in datestring format (Y/m/d)
+	}
 
-        $aActual=explode("-", $actual);
-        $aUltima=explode("-", $ultima);
+	public function getAbleWorkableDates(){
+		$dates = self::where('workable_date', '>=', date('Y/m/d').' 0:0:0'/*timestamp formating*/)->get();
+		return count($dates) ? self::getDateArray($dates) : null;
+	}
 
-        if ($aActual[0]>$aUltima[0])
-            return true;
-        else return false;
-    }
-
-    public static function getProxima($actual){
-        $proximaFecha = Ccalendario::where('fecLab', '>',$actual)->get()->first();
-        if (is_null($proximaFecha)) {
-          return NULL;
-        }
-        return $proximaFecha->getOriginal('fecLab');
-
-    }
-
-	    public static function getFechasDisponibles(){
-	        return $fechasDisponibles = Ccalendario::all();
-	    }
-
-	*/
+	public static function checkAvailability(){
+		return count(self::where('workable_date', '>=', date('Y/m/d').' 0:0:0')->count()) > 0 ? true : false;
+	}
 }

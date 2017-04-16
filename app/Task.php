@@ -27,4 +27,11 @@ class Task extends Model{
 	public function lastLog(){
 		return $this->taskLogs()->orderBy('created_at', 'desc')->take(1)->first();
 	}
+	public static function getTasksPerDay(){
+
+	}
+	
+	public static function delayTasks(){
+
+	}
 }
