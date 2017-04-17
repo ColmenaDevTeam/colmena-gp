@@ -3,20 +3,21 @@
 	<link href="/css/datepicker3.css" rel="stylesheet">
 @endsection
 @section('content')
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main"><!--
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
 				<li class="active">Icons</li>
 			</ol>
-		</div><!--/.row-->
-		
+		</div>
+
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">Dashboard</h1>
 			</div>
-		</div><!--/.row-->
-		
+		</div>
+
 		<div class="row">
 			<div class="col-xs-12 col-md-6 col-lg-3">
 				<div class="panel panel-blue panel-widget ">
@@ -70,8 +71,8 @@
 					</div>
 				</div>
 			</div>
-		</div><!--/.row-->
-		
+		</div>
+
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
@@ -83,8 +84,8 @@
 					</div>
 				</div>
 			</div>
-		</div><!--/.row-->
-		
+		</div>
+
 		<div class="row">
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">
@@ -122,11 +123,11 @@
 					</div>
 				</div>
 			</div>
-		</div><!--/.row-->
-								
+		</div>
+
 		<div class="row">
 			<div class="col-md-8">
-			
+
 				<div class="panel panel-default chat">
 					<div class="panel-heading" id="accordion"><svg class="glyph stroked two-messages"><use xlink:href="#stroked-two-messages"></use></svg> Chat</div>
 					<div class="panel-body">
@@ -140,7 +141,7 @@
 										<strong class="primary-font">John Doe</strong> <small class="text-muted">32 mins ago</small>
 									</div>
 									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc. Vivamus luctus convallis mauris, eu gravida tortor aliquam ultricies. 
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc. Vivamus luctus convallis mauris, eu gravida tortor aliquam ultricies.
 									</p>
 								</div>
 							</li>
@@ -166,13 +167,13 @@
 										<strong class="primary-font">John Doe</strong> <small class="text-muted">32 mins ago</small>
 									</div>
 									<p>
-										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc. Vivamus luctus convallis mauris, eu gravida tortor aliquam ultricies. 
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc. Vivamus luctus convallis mauris, eu gravida tortor aliquam ultricies.
 									</p>
 								</div>
 							</li>
 						</ul>
 					</div>
-					
+
 					<div class="panel-footer">
 						<div class="input-group">
 							<input id="btn-input" type="text" class="form-control input-md" placeholder="Type your message here..." />
@@ -182,11 +183,11 @@
 						</div>
 					</div>
 				</div>
-				
-			</div><!--/.col-->
-			
+
+			</div>
+
 			<div class="col-md-4">
-			
+
 				<div class="panel panel-blue">
 					<div class="panel-heading dark-overlay"><svg class="glyph stroked clipboard-with-paper"><use xlink:href="#stroked-clipboard-with-paper"></use></svg>To-do List</div>
 					<div class="panel-body">
@@ -268,9 +269,9 @@
 						</div>
 					</div>
 				</div>
-								
-			</div><!--/.col-->
-		</div><!--/.row-->
+
+			</div>
+		</div>-->
 	</div>	<!--/.main-->
 @endsection
 @section('js')
@@ -283,5 +284,5 @@
 	<script>
 		$('#calendar').datepicker({
 		});
-	</script>	
+	</script>
 @endsection
