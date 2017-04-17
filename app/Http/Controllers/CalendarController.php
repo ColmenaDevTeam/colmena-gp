@@ -48,6 +48,7 @@ class CalendarController extends Controller
 				}
 			}
 		}else {
+			$dates = $request->dates;
 			foreach ($dates as $day) {
 				$date = new Calendar;
 				$date->workable_date = Carbon::createFromFormat('Y-m-d', $day);

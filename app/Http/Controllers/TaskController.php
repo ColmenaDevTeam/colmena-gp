@@ -39,7 +39,7 @@ class TaskController extends Controller{
 			'priority' => 'required',
 			'complexity' => 'required',
 			'type' => 'required',
-			'estimated_date' => 'required|date_format:d/m/Y|after:yesterday',#Aqui verificacion de calendario
+			'estimated_date' => 'required|date_format:Y-m-d|after:yesterday',#Aqui verificacion de calendario
 			'users' => 'required',
 			'details' => 'min:10|max:255'
 		])->validate();
@@ -50,7 +50,7 @@ class TaskController extends Controller{
 			$task->priority = $request->priority;
 			$task->complexity = $request->complexity;
 			$task->type = $request->type;
-			$task->estimated_date = Carbon::createFromFormat('d/m/Y',$request->estimated_date);
+			$task->estimated_date = Carbon::createFromFormat('Y-m-d',$request->estimated_date);
 			$task->details = $request->details;
 			$task->user_id = $user;
 			$task->save();
@@ -82,7 +82,7 @@ class TaskController extends Controller{
 			'priority' => 'required',
 			'complexity' => 'required',
 			'type' => 'required',
-			'estimated_date' => 'required|date_format:d/m/Y|after:yesterday', #Aqui verificacion de calendario
+			'estimated_date' => 'required|date_format:Y-m-d|after:yesterday', #Aqui verificacion de calendario
 			'details' => 'min:10|max:255'
 		])->validate();
 
@@ -90,7 +90,7 @@ class TaskController extends Controller{
 		$task->priority = $request->priority;
 		$task->complexity = $request->complexity;
 		$task->type = $request->type;
-		$task->estimated_date = Carbon::createFromFormat('d/m/Y',$request->estimated_date);
+		$task->estimated_date = Carbon::createFromFormat('Y-m-d',$request->estimated_date);
 		$task->details = $request->details;
 		$task->status = Task::DEFAULT_STATUS;
 		$task->save();
