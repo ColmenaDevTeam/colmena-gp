@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\UserRegistration;
 use App\Task;
 use App\Calendar;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -120,5 +121,13 @@ class User extends Authenticatable
 
 	public function getUrlAttribute(){
 		return "/usuarios/perfil/".$this->id;
+	}
+	public static function birthdates(){
+		return self::where('birthdate', '=', Carbon::now()->subDays(3))
+					->where('birthdate', '=', Carbon::now()->addDays(3))->count();
+	}
+
+	public static function usersCount(){
+		return self::count();
 	}
 }

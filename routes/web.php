@@ -118,4 +118,4 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('/ausencias', function(){ return redirect('/ausencias/listar');});
 
 });
-Route::get('/about-us', 'HomeController@about');
+Route::get('/acerca-de', 'HomeController@about');

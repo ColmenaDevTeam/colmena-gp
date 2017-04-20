@@ -21,4 +21,9 @@ class Absence extends Model
 	public function user(){
 		return $this->belongsTo('App\User', 'user_id');
 	}
+
+	public static function countActiveAbsences(){
+		return self::where('start_date', '<=', date('Y-m-d'))
+					->where('end_date', '>=', date('Y-m-d'))->count();
+	}
 }

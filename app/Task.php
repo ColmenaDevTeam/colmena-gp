@@ -47,6 +47,11 @@ class Task extends Model{
 			}
 		}
 	}
+
+	public static function countTasks(){
+		return self::where('status', '<>', 'Completada')->where('status', '<>', 'Cancelada')
+					->count();
+	}
 	/*
 }
 public static function buscarFechaEst($fecha){

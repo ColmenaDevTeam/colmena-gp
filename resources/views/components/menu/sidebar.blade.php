@@ -1,6 +1,6 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 	<ul class="nav menu">
-		<li class="active"><a href="/"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
+		<li class="active"><a href="/"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Cartelera</a></li>
 <!--
 		<li><a href="/widgets"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg> Widgets</a></li>
 		<li><a href="/charts"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Charts</a></li>
@@ -126,7 +126,7 @@
 		<li role="presentation" class="divider"></li>
 	</ul>
 	<div class="text-center text-muted">
-		<a href="https://github.com/colmenadevteam/colmena-gp" parent="_blank">Colmena GP Edition</a>
+		<a href="/acerca-de" parent="_blank">Colmena GP Edition</a>
 		<br>
 	</div>
 </div><!--/.sidebar-->

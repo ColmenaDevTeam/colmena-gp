@@ -149,8 +149,8 @@ $style = [
                                                 <tr>
                                                     <td style="{{ $fontFamily }}">
                                                         <p style="{{ $style['paragraph-sub'] }}">
-                                                            If you’re having trouble clicking the "{{ $actionText }}" button,
-                                                            copy and paste the URL below into your web browser:
+                                                            Si tienes problemas con el boton "{{ $actionText }}",
+                                                            Copia y pega en el navegador el siguiente enlace:
                                                         </p>
 
                                                         <p style="{{ $style['paragraph-sub'] }}">
@@ -174,6 +174,9 @@ $style = [
                             <table style="{{ $style['email-footer'] }}" align="center" width="570" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
+										<p style="{{ $style['paragraph-sub'] }}">
+											 <strong>Recuerda a los enlaces dentro de la intranet donde esta instalado {{ config('app.name') }}</strong>
+										</p>
                                         <p style="{{ $style['paragraph-sub'] }}">
                                             &copy; {{ date('Y') }}
                                             <a style="{{ $style['anchor'] }}" href="{{ env('REPOSITORY_URL') }}" target="_blank">{{ config('app.name') }}</a>.

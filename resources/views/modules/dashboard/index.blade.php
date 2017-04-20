@@ -4,7 +4,17 @@
 @endsection
 @section('content')
 
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main"><!--
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Cartelera</h1>
+			</div>
+		</div><!--/.row-->
+		@include('modules.dashboard.stats', ['tasksCount' => $tasksCount,
+											'absencesCount' => $absencesCount,
+											'birthdates' => $birthdates,])
+		@include('modules.dashboard.charts')
+		<!--
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="#"><svg class="glyph stroked home"><use xlink:href="#stroked-home"></use></svg></a></li>
@@ -284,5 +294,31 @@
 	<script>
 		$('#calendar').datepicker({
 		});
+	</script>
+	<script type="text/javascript">
+
+		window.onload = function () {
+			var chart = new CanvasJS.Chart("pie-chart", {
+				theme: "theme2",//theme1
+				title:{
+					text: "Basic Column Chart - CanvasJS"
+				},
+				animationEnabled: false,   // change to true
+				data: [
+				{
+					// Change type to "bar", "area", "spline", "pie",etc.
+					type: "pie",
+					dataPoints: [
+						{ label: "apple",  y: 10  },
+						{ label: "orange", y: 15  },
+						{ label: "banana", y: 25  },
+						{ label: "mango",  y: 30  },
+						{ label: "grape",  y: 28  }
+					]
+				}
+				]
+			});
+			chart.render();
+		}
 	</script>
 @endsection
