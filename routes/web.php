@@ -96,7 +96,8 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::post('/usuarios/eliminar', 'UserController@delete');
 	Route::post('/usuarios/reactivar', 'UserController@reactivate');
 	Route::get('/usuarios/perfil/{id}', 'UserController@showProfile');
-
+	Route::post('/usuarios/actualizar-perfil', 'UserController@updateData');
+	Route::post('/usuarios/actualizar-clave', 'UserController@updatePassword');
 	/**
 	*Calendar Routes
 	*/

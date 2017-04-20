@@ -4,8 +4,8 @@
 		<meta charset="utf-8">
 		<title>Colmena - Sistema de Gestión de Talento Humano</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="" />
-		<meta name="author" content="" />
+		<meta name="description" content="colmena geek-pro edition" />
+		<meta name="author" content="Qsoto" />
 
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/datepicker3.css" rel="stylesheet">

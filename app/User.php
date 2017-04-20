@@ -51,6 +51,9 @@ class User extends Authenticatable
 		}
 		return $ocupation;
 	}
+	public function getGenderStringAttribute(){
+		return $this->gender == true ? 'Masculino' : 'Femenino';
+	}
 	public static function getUsersByOcupation(){
 		$users = self::where('cedula', '!=', env('APP_DEV_USERNAME'))->get();
 		for($i=0; $i < count($users); $i++){
@@ -115,7 +118,7 @@ class User extends Authenticatable
 			return false;
 	}
 
-	public function getUrl(){
+	public function getUrlAttribute(){
 		return "/usuarios/perfil/".$this->id;
 	}
 }

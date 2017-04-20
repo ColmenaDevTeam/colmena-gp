@@ -112,7 +112,51 @@ class UserController extends Controller{
 		return redirect("usuarios/listar")->with('users', User::all());
 	}
 
-	public function showProfile(){
-		
+	public function showProfile(Request $request){
+		if (isset($request->id)) {
+			$user = User::find($request->id);
+			if($user == null){
+				return view('erros.404');
+			}
+			return view('modules.users.profile')->with(['user' => $user]);
+		}else {
+			return view('modules.users.profile')->with(['user' => \Auth::user()]);
+		}
+	}
+
+	public function updateData(Request $request){
+		$user = User::find($request->user_id);
+		if ($user == null) {
+			return redirect('/404');
+		}
+		Validator::make($request->input(), [
+			'email' => 'email|required',
+			'phone' => 'numeric|required'
+		])->validate();
+
+		$user->email == $request->email ?  : $user->email = $request->email;
+		$user->phone == $request->phone ?  : $user->phone = $request->phone ;
+		$user->save();
+
+		\Session::push('success', true);
+		return redirect('/usuarios/perfil/'.$user->id);
+	}
+
+	public function updatePassword(Request $request){
+		$user = User::find($request->user_id);
+		if ($user == null) {
+			return redirect('/404');
+		}
+		Validator::make($request->input(), [
+			'password' => 'min:6|max:15|confirmed'
+		])->validate();
+		if (\Hash::check($request->oldpassword, $user->password)){
+			$user->password = \Hash::make($request->password);
+			$user->save();
+			\Session::push('success', true);
+			return redirect('/usuarios/perfil/'.$user->id);
+		}else {
+			return redirect('/404');
+		}
 	}
 }

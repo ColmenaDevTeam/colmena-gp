@@ -28,8 +28,8 @@
 						<table data-toggle="table" data-show-refres41758498h="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 							<thead>
 								<tr>
-									<th data-sortable="true" data-field="cedula">Cedula</th>
 									<th data-sortable="true" data-field="firstname">Nombre</th>
+									<th data-sortable="true" data-field="cedula">Cedula</th>
 									<th data-sortable="true" data-field="birthdate">Fecha de Nacimiento</th>
 									<th data-sortable="true" data-field="gender">Sexo</th>
 									<th data-sortable="true" data-field="user_type">Tipo de Usuario</th>
@@ -43,10 +43,10 @@
 							<tbody>
 								@foreach($users as $user)
 									<tr>
+										<td ><a href="{{ $user->url }}">{{$user->fullname}}</td></a>
 										<td >{{$user->cedula}}</td>
-										<td >{{$user->fullname}}</td>
 										<td >{{$user->birthdate->format('d/m/Y')}}</td>
-										<td >{{$user->gender ? 'Masculino' : 'Femenino'}}</td>
+										<td >{{$user->genderString}}</td>
 										<td >{{$user->user_type}}</td>
 										<td >{{$user->email}}</td>
 										<td >{{$user->phone}}</td>

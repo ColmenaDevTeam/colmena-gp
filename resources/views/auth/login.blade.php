@@ -4,15 +4,14 @@
         <meta charset="utf-8">
         <title>Colmena - Sistema de Gestión de Talento Humano</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-
+		<meta name="description" content="colmena geek pro edition" />
+		<meta name="author" content="Qsoto" />
         <!-- css -->
         <link href="/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/css/styles.css" rel="stylesheet">
         <link href="/css/super.css" rel="stylesheet" />
         @yield('css')
-        
+
     </head>
     <body>
         <div class="container">
@@ -54,16 +53,16 @@
                         </div>
                     </div>
                 </div><!-- /.col-->
-            </div><!-- /.row -->    
+            </div><!-- /.row -->
         </div>
         <script src="js/jquery-1.11.1.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/main.js"></script>
         <script type="text/javascript">
             !function ($) {
-            $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
-                $(this).find('em:first').toggleClass("glyphicon-minus");      
-            }); 
+            $(document).on("click","ul.nav li.parent > a > span.icon", function(){
+                $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
             $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
             }(window.jQuery);
 
