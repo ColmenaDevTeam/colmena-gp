@@ -13,7 +13,7 @@
    height="297mm"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="logo-rectangle.svg"
    inkscape:export-filename="/home/elias/git/colmena-sgth/public/img/logo/logo-rectangle.png"
    inkscape:export-xdpi="11.009621"
@@ -28,13 +28,13 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.49497475"
-     inkscape:cx="370.59062"
+     inkscape:cx="460.44734"
      inkscape:cy="583.59608"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="848"
+     inkscape:window-width="1366"
+     inkscape:window-height="717"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1" />
@@ -55,14 +55,14 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#222222;fill-opacity:1;stroke:#ffffff;stroke-width:28.45290756;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       style="fill:#222222;fill-opacity:1;stroke:#ffffff;stroke-width:36.80742645;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect2991"
-       width="1242.2637"
-       height="423.49048"
-       x="2.987828"
-       y="176.11874"
-       inkscape:export-xdpi="8.8754606"
-       inkscape:export-ydpi="8.8754606" />
+       width="1660.1935"
+       height="530.29333"
+       x="-49.403458"
+       y="127.76807"
+       inkscape:export-xdpi="53.03474"
+       inkscape:export-ydpi="53.03474" />
     <path
        sodipodi:type="star"
        style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.98164982;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
