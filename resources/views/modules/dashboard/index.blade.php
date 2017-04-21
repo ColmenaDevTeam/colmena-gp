@@ -13,7 +13,7 @@
 		@include('modules.dashboard.stats', ['tasksCount' => $tasksCount,
 											'absencesCount' => $absencesCount,
 											'birthdates' => $birthdates,])
-		@include('modules.dashboard.charts')
+		{{--@include('modules.dashboard.charts')--}}
 		<!--
 		<div class="row">
 			<ol class="breadcrumb">
@@ -290,35 +290,4 @@
 	<script src="/js/chart-data.js"></script>
 	<script src="/js/easypiechart.js"></script>
 	<script src="/js/easypiechart-data.js"></script>
-	<script src="/js/bootstrap-datepicker.js"></script>
-	<script>
-		$('#calendar').datepicker({
-		});
-	</script>
-	<script type="text/javascript">
-
-		window.onload = function () {
-			var chart = new CanvasJS.Chart("pie-chart", {
-				theme: "theme2",//theme1
-				title:{
-					text: "Basic Column Chart - CanvasJS"
-				},
-				animationEnabled: false,   // change to true
-				data: [
-				{
-					// Change type to "bar", "area", "spline", "pie",etc.
-					type: "pie",
-					dataPoints: [
-						{ label: "apple",  y: 10  },
-						{ label: "orange", y: 15  },
-						{ label: "banana", y: 25  },
-						{ label: "mango",  y: 30  },
-						{ label: "grape",  y: 28  }
-					]
-				}
-				]
-			});
-			chart.render();
-		}
-	</script>
 @endsection

@@ -6,8 +6,10 @@
 					<svg class="glyph stroked clipboard with paper"><use xlink:href="#stroked-clipboard-with-paper"/></svg>
 				</div>
 				<div class="col-sm-9 col-lg-7 widget-right">
-					<div class="large">{{ $tasksCount }}</div>
-					<div class="text-muted">Tareas Pendientes</div>
+					<a href="/tareas/listar">
+						<div class="large">{{ $tasksCount }}</div>
+						<div class="text-muted">Tareas Pendientes</div>
+					</a>
 				</div>
 			</div>
 		</div>

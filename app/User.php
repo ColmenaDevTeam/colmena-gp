@@ -77,7 +77,7 @@ class User extends Authenticatable
 	}
 
 	public function roles(){
-		return $this->belongsToMany('App\Rol', 'users_has_roles', 'user_id', 'rol_id');
+		return $this->belongsToMany('App\Role', 'users_has_roles', 'user_id', 'rol_id');
 	}
 
 	public function recurringActivities(){

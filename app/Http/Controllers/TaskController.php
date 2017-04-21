@@ -18,12 +18,12 @@ class TaskController extends Controller{
 	public function index(){
 		//verificacion de usuario/rol
 
-		return view('modules.tasks.list')->with(['tasks' => Task::all()]);
+		return view('modules.tasks.list')->with(['tasks' => Task::getActiveTask()]);
 	}
 
 	public function showDataForm(){
 		//verificacion de usuario/rol
-		
+
 		if (!Calendar::checkAvailability()) {
 			return redirect('/calendario/sin-datos');
 		}
@@ -56,7 +56,7 @@ class TaskController extends Controller{
 			$task->save();
 		}
 		Session::push('success', true);
-		return redirect("tareas/listar")->with(['tasks' => Task::all()]);
+		return redirect("tareas/listar")->with(['tasks' => Task::getActiveTask()]);
 	}
 
 	public function showUpdateForm(Request $request){
@@ -95,7 +95,7 @@ class TaskController extends Controller{
 		$task->status = Task::DEFAULT_STATUS;
 		$task->save();
 
-		$tasks = Task::all();
+		$tasks = Task::getActiveTask();
 		Session::push('success', true);
 		return redirect("tareas/listar")->with(['tasks' => $tasks]);
 	}
@@ -138,6 +138,10 @@ class TaskController extends Controller{
 
 		$task->delete();
 		Session::push('success', true);
-		return redirect("tareas/listar")->with(['tasks' => Task::all()]);
+		return redirect("tareas/listar")->with(['tasks' => Task::getActiveTask()]);
+	}
+
+	public function indexAll(){
+		return view("modules.tasks.list")->with(['tasks' => Task::all()]);
 	}
 }
