@@ -9,11 +9,15 @@ use App\Task;
 use Carbon\Carbon;
 use Validator;
 use App\Calendar;
+use Auth;
 
 class AbsenceController extends Controller
 {
 	public function index(){
-		return view('modules.absences.list')->with('absences', Absence::all());
+		return view('modules.absences.list')->with('absences', Absence::getActiveAbsences());
+	}
+	public function indexAll(){
+		return view("modules.absences.list")->with(['absences' => Absence::all()]);
 	}
 
 	public function showDataForm(){
@@ -45,7 +49,7 @@ class AbsenceController extends Controller
 
 		$user->delayTasks($absence->start_date, $absence->end_date);
 
-		$absences = Absence::all();
+		$absences = Absence::getActiveAbsences();
 		\Session::push('success', true);
 		return redirect("ausencias/listar")->with(['absences' => $absences]);
 	}
@@ -74,10 +78,26 @@ class AbsenceController extends Controller
 		$absence->details = $request->details;
 		$absence->user_id = $user->id;
 		$absence->save();
-		
+
 		$user->delayTasks($absence->start_date, $absence->end_date);
-		$absences = Absence::all();
+		$absences = Absence::getActiveAbsences();
 		\Session::push('success', true);
 		return redirect("ausencias/listar")->with(['absences' => $absences]);
+	}
+
+	public function view(Request $request){
+		$absence = Absence::find($request->id);
+		if (!$absence) return redirect('/404');
+		return view('modules.absences.view')->with(['absence' => $absence]);
+	}
+
+	public function delete(Request $request){
+		//verificacion de usuario/rol
+		$absence = Absence::find($request->absence_id);
+		if (!$absence) return redirect('/404');
+
+		$absence->delete();
+		\Session::push('success', true);
+		return redirect("ausencias/listar")->with(['absences' => Absence::getActiveAbsences()]);
 	}
 }

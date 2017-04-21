@@ -26,4 +26,13 @@ class Absence extends Model
 		return self::where('start_date', '<=', date('Y-m-d'))
 					->where('end_date', '>=', date('Y-m-d'))->count();
 	}
+
+	public function getTypeString(){
+		return $this->type ? 'Permiso' : 'Reposo';
+	}
+
+	public static function getActiveAbsences(){
+		return self::where('start_date', '<=', date('Y-m-d'))
+					->where('end_date', '>=', date('Y-m-d'))->get();
+	}
 }

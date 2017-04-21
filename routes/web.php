@@ -76,10 +76,23 @@ Route::group(['middleware' => ['auth']],function(){
 	 Route::post('/tareas/editar/{id}', 'TaskController@update');
 	 Route::post('/tareas/registrar', 'TaskController@register');
 	 Route::get('/tareas/listar', 'TaskController@index');
+	 Route::get('/tareas/todas', 'TaskController@indexAll');
 	 Route::get('/tareas', function(){ return redirect('/tareas/listar');});
 	 Route::get('/tareas/{id}/ver', 'TaskController@view');
 	 Route::post('/tareas/tramitar', 'TaskController@transact');
 	 Route::post('/tareas/eliminar', 'TaskController@delete');
+
+	 /**
+	  * Recurring Activities routes
+	  */
+	 Route::get('/actividades-recurrentes/registrar', 'RecurringActivityController@showDataForm');
+	 Route::get('/actividades-recurrentes/editar/{id}', 'RecurringActivityController@showUpdateForm');
+	 Route::post('/actividades-recurrentes/editar/{id}', 'RecurringActivityController@update');
+	 Route::post('/actividades-recurrentes/registrar', 'RecurringActivityController@register');
+	 Route::get('/actividades-recurrentes/listar', 'RecurringActivityController@index');
+	 Route::get('/actividades-recurrentes', function(){ return redirect('/tareas/listar');});
+	 Route::get('/actividades-recurrentes/{id}/ver', 'RecurringActivityController@view');
+	 Route::post('/actividades-recurrentes/eliminar', 'RecurringActivityController@delete');
 
 	/**
 	*Department Routes
@@ -122,8 +135,11 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('/ausencias/registrar', 'AbsenceController@showDataForm');
 	Route::get('/ausencias/editar/{id}', 'AbsenceController@showUpdateForm');
 	Route::post('/ausencias/editar/{id}', 'AbsenceController@update');
+	Route::post('/ausencias/eliminar', 'AbsenceController@delete');
+	Route::get('/ausencias/{id}/ver', 'AbsenceController@view');
 	Route::post('/ausencias/registrar', 'AbsenceController@register');
 	Route::get('/ausencias/listar', 'AbsenceController@index');
+	Route::get('/ausencias/todas', 'AbsenceController@indexAll');
 	Route::get('/ausencias', function(){ return redirect('/ausencias/listar');});
 
 });

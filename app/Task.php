@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Calendar;
+use App\TaskLog;
 
 class Task extends Model{
 	use EnumHelper;
@@ -43,18 +44,20 @@ class Task extends Model{
 			$nextDate = Calendar::getNextWorkableDate($date);
 			foreach ($tasks as $task) {
 				$task->estimated_date = $nextDate;
+				$task->status = "Diferida";
 				$task->save();
+				TaskLog::generateAutoLog($task->id, false, $task->estimated_date);
 			}
 		}
 	}
 
 	public static function countTasks(){
-		return self::where('status', '<>', 'Completada')->where('status', '<>', 'Cancelada')
+		return self::where('status', '<>', 'Cumplida')->where('status', '<>', 'Cancelada')
 					->count();
 	}
 
 	public static function getActiveTask(){
-		return self::where('status', '<>', 'Completada')->where('status', '<>', 'Cancelada')->get();
+		return self::where('status', '<>', 'Cumplida')->where('status', '<>', 'Cancelada')->get();
 	}
 	/*
 }

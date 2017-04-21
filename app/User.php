@@ -10,6 +10,8 @@ use App\Task;
 use App\Calendar;
 use App\Permission;
 use App\Role;
+use App\TaskLog;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -97,7 +99,7 @@ class User extends Authenticatable
 		}
 	}
     public function hasPermission($permission){
-        
+
     }
 
 	public function getTasksPerRange($start, $end){
@@ -112,6 +114,7 @@ class User extends Authenticatable
 				$task->estimated_date = $nextDate;
 				$task->status = 'Diferida';
 				$task->save();
+				TaskLog::generateAutoLog($task->id, true, $task->estimated_date);
 			}
 		}
 	}

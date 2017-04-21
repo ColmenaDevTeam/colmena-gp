@@ -12,7 +12,6 @@ use Validator;
 use App\TaskLog;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Auth;
-use Session;
 
 class TaskController extends Controller{
 	public function index(){
@@ -55,7 +54,7 @@ class TaskController extends Controller{
 			$task->user_id = $user;
 			$task->save();
 		}
-		Session::push('success', true);
+		\Session::push('success', true);
 		return redirect("tareas/listar")->with(['tasks' => Task::getActiveTask()]);
 	}
 
@@ -96,7 +95,7 @@ class TaskController extends Controller{
 		$task->save();
 
 		$tasks = Task::getActiveTask();
-		Session::push('success', true);
+		\Session::push('success', true);
 		return redirect("tareas/listar")->with(['tasks' => $tasks]);
 	}
 
@@ -120,14 +119,15 @@ class TaskController extends Controller{
 			'status' => 'required',
 			'detail' => 'min:10|max:255'
 		])->validate();
-
+		$task->status = $request->status;
+		$task->save();
 		$log = new TaskLog;
 		$log->status = $request->status;
 		$log->detail = $request->detail;
 		$log->user = Auth::user()->fullname;
 		$log->task_id = $task->id;
 		$log->save();
-		Session::push('success', true);
+		\Session::push('success', true);
 		return \Redirect::back()->with(['task' => $task, 'statuses' => Task::getEnumValues('status'), 'log' => $task->lastLog()]);
 	}
 
@@ -137,7 +137,7 @@ class TaskController extends Controller{
 		if (!$task) return redirect('/404');
 
 		$task->delete();
-		Session::push('success', true);
+		\Session::push('success', true);
 		return redirect("tareas/listar")->with(['tasks' => Task::getActiveTask()]);
 	}
 

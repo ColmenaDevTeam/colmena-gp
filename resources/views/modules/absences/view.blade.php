@@ -13,32 +13,28 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="list-group">
-					<a href="" class="list-group-item active text-center" onClick="return false;">
-						<h3 style="color: white;">{{$absence->user->fullname}}
-						</h3>
+					<a href="/usuarios/perfil/{{ $absence->user->id }}" class="list-group-item active text-center" >
+						<small style="color: white;">ausencia de: </small><h3 style="color: white;">{{$absence->user->fullname}}</h3>
 					</a>
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<a href="" class="list-group-item" onClick="return false;">
+								<p class="text-center">
+									<label for="" style="margin-left: 10pt;">Tipo de ausencia: </label>
+									<span class="label label-default">{{$absence->getTypeString()}}</span>
+									<label for="" style="">Fecha Inicio: </label>
+									<span class="label label-default">{{$absence->start_date->toDateString()}}</span>
+
+									<label for="" style="margin-left: 10pt;">Fecha Fin: </label>
+									<span class="label label-default">{{$absence->end_date->toDateString()}}</span>
+								</p>
+								<hr>
 								<p class="text-justify">
+									<h4>Detalles <small>:</small></h4>
 									{{$absence->details}}
 								</p>
 								<hr>
-								<p class="text-center">
-									<label for="" style="margin-left: 10pt;">Tipo de ausencia: </label>
-									<span class="label label-default">{{$absence->type}}</span>
-									<label for="" style="">Fecha Inicio: </label>
-									<span class="label label-default">{{$P_BMA[$absence->priority-1]}}</span>
-
-									<label for="" style="margin-left: 10pt;">Fecha Fin: </label>
-									<span class="label label-default">{{$P_BMA[$absence->complexity-1]}}</span>
-								</p>
-								<hr>
 							</a><!-- ./list-group-item -->
-							<a href="#{{--$absence->responsible->getURL()--}}" class="list-group-item active text-center">
-								<span class="label label-default">Responsable:</span><h4 style="color: white;">{{$absence->responsible->fullname}}</h4>
-							</a>
-							<hr>
 						</div><!-- ./col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div class="text-center">
@@ -56,7 +52,6 @@
 			</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 		</div><!-- -/.row-->
 	</div>
-	@include('modules.tasks.forms.transact-form-modal')
 	@include('modules.absences.forms.delete-form-modal')
 @endsection
 @section('js')
