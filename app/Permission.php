@@ -16,4 +16,9 @@ class Permission extends Model{
 	public function roles(){
 		return $this->belongsToMany('App\Role', 'roles_has_permissions', 'role_id', 'permission_id');
 	}
+
+	public static function whereSlug($slug){
+		$permission = self::where('slug', $slug)->first();
+		return $permission;
+	}
 }

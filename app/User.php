@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\UserRegistration;
+use Carbon\Carbon;
 use App\Task;
 use App\Calendar;
-use Carbon\Carbon;
-
+use App\Permission;
+use App\Role;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -77,7 +78,7 @@ class User extends Authenticatable
 	}
 
 	public function roles(){
-		return $this->belongsToMany('App\Role', 'users_has_roles', 'user_id', 'rol_id');
+		return $this->belongsToMany('App\Role', 'users_has_roles', 'user_id', 'role_id');
 	}
 
 	public function recurringActivities(){
@@ -95,6 +96,9 @@ class User extends Authenticatable
 
 		}
 	}
+    public function hasPermission($permission){
+        
+    }
 
 	public function getTasksPerRange($start, $end){
         $tasks = $this->tasks()->whereBetween('estimated_date',[$start,$end])->get();
