@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth']],function(){
 	 Route::post('/actividades-recurrentes/editar/{id}', 'RecurringActivityController@update');
 	 Route::post('/actividades-recurrentes/registrar', 'RecurringActivityController@register');
 	 Route::get('/actividades-recurrentes/listar', 'RecurringActivityController@index');
-	 Route::get('/actividades-recurrentes', function(){ return redirect('/tareas/listar');});
+	 Route::get('/actividades-recurrentes', function(){ return redirect('/actividades-recurrentes/listar');});
 	 Route::get('/actividades-recurrentes/{id}/ver', 'RecurringActivityController@view');
 	 Route::post('/actividades-recurrentes/eliminar', 'RecurringActivityController@delete');
 
