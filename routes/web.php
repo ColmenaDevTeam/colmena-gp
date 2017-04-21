@@ -58,6 +58,15 @@ Route::get('/logout', function () {
 Route::group(['middleware' => ['auth']],function(){
 	Route::get('/cartelera', 'HomeController@index');
 
+	/**
+ 	 * Role system Routes
+	 **/
+	Route::get('/roles/registrar', 'RoleController@showDataForm');
+	Route::get('/roles/editar/{id}', 'RoleController@showUpdateForm');
+	Route::post('/roles/editar/{id}', 'RoleController@update');
+	Route::post('/roles/registrar', 'RoleController@register');
+	Route::get('/roles/listar', 'RoleController@index');
+	Route::get('/roles', function(){ return redirect('/roles/listar');});
 
     /**
      * Tasks routes

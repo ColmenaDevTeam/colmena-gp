@@ -13,11 +13,10 @@ class Roles extends Migration{
     public function up(){
 		Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',20)->unique();
-            
+            $table->string('name',45)->unique();
 			$table->string('slug',45)->unique();
-            $table->integer('level');
-			$table->timestamps();
+            $table->integer('level')->default(2);
+			$table->nullableTimestamps();
         });
     }
     /**

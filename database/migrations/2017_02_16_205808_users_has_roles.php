@@ -1,4 +1,4 @@
-<?php
+e<?php
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,8 +15,8 @@ class UsersHasRoles extends Migration
     {
 		Schema::create('users_has_roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('rol_id')->unsigned();
-            $table->foreign('rol_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->integer('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

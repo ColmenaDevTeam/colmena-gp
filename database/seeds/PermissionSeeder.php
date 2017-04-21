@@ -9,97 +9,198 @@ class PermissionSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(){
 		$action = array(
-			array('name' => 'Registrar Departamentos',
+			array(
+                'category' => 'Departamentos',
+                'action' => 'Registrar',
 				'navigation' => true,
-				'slug' => 'departamentos.registrar',
-				'level' => 3
+				'slug' => 'departaments.create',
+				'level' => 0,
 			),
 
-			array('name' => 'Modificar Departamentos',
+			array(
+                'category' => 'Departamentos',
+                'action' => 'Modificar',
 				'navigation' => false,
-				'slug' => 'departamentos.modificar',
-				'level' => 3
+				'slug' => 'departaments.update',
+				'level' => 0,
 			),
-			array('name' => 'Listar Departamentos',
+			array(
+                'category' => 'Departamentos',
+                'action' => 'Listar',
 				'navigation' => true,
-				'slug' => 'departamentos.listar',
-				'level' => 3
+				'slug' => 'departaments.list',
+				'level' => 0,
 			),
-			array('name' => 'Eliminar Departamentos',
+			array(
+                'category' => 'Departamentos',
+                'action' => 'Eliminar',
 				'navigation' => false,
-				'slug' => 'departamentos.listar',
-				'level' => 3
+				'slug' => 'departaments.delete',
+				'level' => 0,
 			),
-			array('name' => 'Registrar Roles',
+			array(
+                'category' => 'Roles',
+                'action' => 'Registrar',
 				'navigation' => true,
-				'slug' => 'roles.registrar',
-				'level' => 3
+				'slug' => 'roles.create',
+				'level' => 0,
 			),
 
-			array('name' => 'Modificar Roles',
+			array(
+                'category' => 'Roles',
+                'action' => 'Modificar',
 				'navigation' => false,
-				'slug' => 'roles.modificar',
-				'level' => 3
+				'slug' => 'roles.update',
+				'level' => 0,
 			),
-			array('name' => 'Listar Roles',
+			array(
+                'category' => 'Roles',
+                'action' => 'Listar',
 				'navigation' => true,
-				'slug' => 'roles.listar',
-				'level' => 3
+				'slug' => 'roles.list',
+				'level' => 0,
 			),
-			array('name' => 'Eliminar Roles',
+			array(
+                'category' => 'Roles',
+                'action' => 'Eliminar',
 				'navigation' => false,
-				'slug' => 'roles.listar',
-				'level' => 3
+				'slug' => 'roles.delete',
+				'level' => 0,
 			),
-			array('name' => 'Registrar Usuarios',
+			array(
+                'category' => 'Usuarios',
+                'action' => 'Registrar',
 				'navigation' => true,
-				'slug' => 'usuarios.registrar',
-				'level' => 2
+				'slug' => 'users.create',
+				'level' => 1,
 			),
-			array('name' => 'Registrar Usuarios',
-				'navigation' => true,
-				'slug' => 'usuarios.registrar',
-				'level' => 2
-			),
-			array('name' => 'Modificar Usuarios',
+			array(
+                'category' => 'Usuarios',
+                'action' => 'Modificar',
 				'navigation' => false,
-				'slug' => 'usuarios.modificar',
-				'level' => 2
+				'slug' => 'users.update',
+				'level' => 1,
 			),
-			array('name' => 'Eliminar Usuarios',
+			array(
+                'category' => 'Usuarios',
+                'action' => 'Eliminar',
 				'navigation' => false,
-				'slug' => 'usuarios.eliminar',
-				'level' => 2
+				'slug' => 'usuarios.delete',
+				'level' => 1,
 			),
-			array('name' => 'Listar Usuarios',
+			array(
+                'category' => 'Usuarios',
+                'action' => 'Listar',
 				'navigation' => true,
-				'slug' => 'usuarios.listar',
-				'level' => 2
+				'slug' => 'users.list',
+				'level' => 1,
 			),
 
-	        array('name' => 'tasks.register', 'navigation' => true),
-	        array('name' => 'tasks.update', 'navigation' => false),
-	        array('name' => 'tasks.list', 'navigation' => true),
-	        array('name' => 'tasks.delete', 'navigation' => false),
-
-
-	        array('name' => 'absences.delete', 'navigation' => false),
-	        array('name' => 'absences.register', 'navigation' => true),
-	        array('name' => 'absences.update', 'navigation' => false),
-	        array('name' => 'absences.list', 'navigation' => true),
+	        array(
+                'category' => 'Tareas',
+                'action' => 'Registrar',
+                'slug' => 'tasks.create',
+                'navigation' => true,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Tareas',
+                'action' => 'Modificar',
+                'slug' => 'tasks.update',
+                'navigation' => false,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Tareas',
+                'action' => 'Listar',
+                'slug' => 'tasks.list',
+                'navigation' => true,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Tareas',
+                'action' => 'Borrar',
+                'slug' => 'tasks.delete',
+                'navigation' => false,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Ausencias',
+                'action' => 'Eliminar',
+                'slug' =>'absences.delete',
+                'navigation' => false,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Ausencias',
+                'action' => 'Registrar',
+                'slug' =>'absences.create',
+                'navigation' => true,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Ausencias',
+                'action' => 'Modificar',
+                'slug' =>'absences.update',
+                'navigation' => false,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Ausencias',
+                'action' => 'Listar',
+                'slug' =>'absences.list',
+                'navigation' => true,
+                'level' => 1,
+            ),
 
 	        //Desde la version 0.5.0A
-	        array('name' => 'calendar.update', 'navigation' => true),
+	        array(
+                'category' => 'Calendario',
+                'action' => 'Editar',
+                'slug' =>'calendar.update',
+                'navigation' => true,
+                'level' => 0
+            ),
+            array(
+                'category' => 'Calendario',
+                'action' => 'Ver',
+                'slug' =>'calendar.see',
+                'navigation' => true,
+                'level' => 2,
+            ),
 
 	        //Desde la version 0.6.0A
-	        array('name' => 'recurring_activities.register', 'navigation' => true),
-	        array('name' => 'recurring_activities.update', 'navigation' => false),
-	        array('name' => 'recurring_activities.list', 'navigation' => true),
-	        array('name' => 'recurring_activities.delete', 'navigation' => false),
-	        );
+	        array(
+                'category' => 'Actividades Recurrentes',
+                'action' => 'Registrar',
+                'slug' =>'recurring_activities.create',
+                'navigation' => true,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Actividades Recurrentes',
+                'action' => 'Modificar',
+                'slug' =>'recurring_activities.update',
+                'navigation' => false,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Actividades Recurrentes',
+                'action' => 'Listar',
+                'slug' =>'recurring_activities.list',
+                'navigation' => true,
+                'level' => 1,
+            ),
+	        array(
+                'category' => 'Actividades Recurrentes',
+                'action' => 'Eliminar',
+                'slug' =>'recurring_activities.delete',
+                'navigation' => false,
+                'level' => 1,
+            )
+	    );
 	    DB::table('permissions')->insert($action);
     }
 }

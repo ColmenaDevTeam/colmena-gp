@@ -13,7 +13,8 @@ class Permissions extends Migration{
     public function up(){
         Schema::create('permissions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('accion',45)->unique();
+            $table->string('category', 45);
+            $table->string('action',45);
 			$table->string('slug',45)->unique();
             $table->boolean('navigation')->default(false);
 			$table->integer('level');
