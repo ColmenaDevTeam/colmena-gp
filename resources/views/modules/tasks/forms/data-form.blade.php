@@ -85,9 +85,9 @@
 								<div class="form-group has-feedback">
 									<label for="priority">Prioridad</label>
 									<select name="priority" id="priority" class="form-control">
-										<option value="1">Baja</option>
-						   				<option value="2">Media</option>
-						   				<option value="3">Alta</option>
+										<option value="1" {{ isset($task) && $task->priority == 1 ? 'selected' : '' }}>Baja</option>
+						   				<option value="2" {{ isset($task) && $task->priority == 2 ? 'selected' : '' }}>Media</option>
+						   				<option value="3" {{ isset($task) && $task->priority == 3 ? 'selected' : '' }}>Alta</option>
 									</select>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
@@ -95,9 +95,9 @@
 								<div class="form-group has-feedback">
 									<label for="complexity">Complejidad</label>
 									<select name="complexity" id="complexity" class="form-control">
-										<option value="1">Baja</option>
-						   				<option value="2">Media</option>
-						   				<option value="3">Alta</option>
+										<option value="1" {{ isset($task) && $task->complexity == 1 ? 'selected' : '' }}>Baja</option>
+						   				<option value="2" {{ isset($task) && $task->complexity == 2 ? 'selected' : '' }}>Media</option>
+						   				<option value="3" {{ isset($task) && $task->complexity == 3 ? 'selected' : '' }}>Alta</option>
 									</select>
 								</div>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
@@ -106,7 +106,7 @@
 									<label for="estimated_date">Fecha entrega</label>
 									<select name="estimated_date" id="estimated_date" class="form-control">
 										@foreach ($dates as $date)
-											<option value="{{ $date }}">{{ $date }}</option>
+											<option value="{{ $date }}" {{ isset($task) && $task->estimated_date == $date ? 'selected' : '' }}>{{ $date }}</option>
 										@endforeach
 									</select>{{--
 									<label for="estimated_date">Fecha entrega</label>

@@ -36,7 +36,6 @@
 									<th data-sortable="true" data-field="type">Tipo de tarea</th>
 									<th data-sortable="true" data-field="status">Estado</th>
 									<th data-sortable="true" data-field="details">Detalles</th>
-									<th data-sortable="true" data-field="dificulty">Dificultad</th>
 									<th data-sortable="true" data-field="estimated_date">Fecha tope</th>
 									<th data-sortable="true" data-field="deliver_date">Fecha de entrega</th>
 									<th>Ver</th>
@@ -44,21 +43,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($tasks as $task)
+								@foreach($activities as $activity)
 									<tr>
-										<td>{{$task->title}}</td>
-										<td>{{$task->responsible->fullname}}</td>
-										<td>{{$task->type}}</td>
-										<td>{{$task->status}}</td>
-										<td>{{$task->details}}</td>
-										<td>{{ $task->dificulty }}</td>
-										<td>{{$task->estimated_date->toDateString()}}</td>
-										<td>{{$task->deliver_date}}</td>
+										<td>{{$activity->title}}</td>
+										<td>{{$activity->responsible->fullname}}</td>
+										<td>{{$activity->type}}</td>
+										<td>{{$activity->status}}</td>
+										<td>{{$activity->details}}</td>
+										<td>{{$activity->estimated_date->toDateString()}}</td>
+										<td>{{$activity->deliver_date}}</td>
 										<td>
-											<a href="/tareas/{{$task->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
+											<a href="/tareas/{{$activity->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
 										</td>
 										<td>
-											<a class="btn btn-warning" id="update" href="/tareas/editar/{{$task->id}}">
+											<a class="btn btn-warning" id="update" href="/tareas/editar/{{$activity->id}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>

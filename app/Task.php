@@ -43,10 +43,10 @@ class Task extends Model{
 		if (count($tasks) > 0) {
 			$nextDate = Calendar::getNextWorkableDate($date);
 			foreach ($tasks as $task) {
+				TaskLog::generateAutoLog($task->id, false, $task->estimated_date, $nextDate);
 				$task->estimated_date = $nextDate;
 				$task->status = "Diferida";
 				$task->save();
-				TaskLog::generateAutoLog($task->id, false, $task->estimated_date);
 			}
 		}
 	}
@@ -58,6 +58,10 @@ class Task extends Model{
 
 	public static function getActiveTask(){
 		return self::where('status', '<>', 'Cumplida')->where('status', '<>', 'Cancelada')->get();
+	}
+
+	public function getDificultyAttribute(){
+		return $this->priority + $this->complexity;
 	}
 	/*
 }

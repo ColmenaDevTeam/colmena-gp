@@ -111,10 +111,10 @@ class User extends Authenticatable
 		if (count($tasks) > 0) {
 			$nextDate = Calendar::getNextWorkableDate($end);
 			foreach ($tasks as $task) {
+				TaskLog::generateAutoLog($task->id, true, $task->estimated_date, $nextDate);
 				$task->estimated_date = $nextDate;
 				$task->status = 'Diferida';
 				$task->save();
-				TaskLog::generateAutoLog($task->id, true, $task->estimated_date);
 			}
 		}
 	}
