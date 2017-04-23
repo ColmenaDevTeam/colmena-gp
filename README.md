@@ -1,10 +1,10 @@
-# Colmena - Sistema de Gestión de Talento Humano (SGTH) v2
+# Colmena - Sistema de Gestión de Talento Humano (SGTH) GP
 
 
 ## Descripción:
 
 Sistema Automatizado para la Gestión de Talento Humano del Departamento del Programa Nacional
-de Formación en Informática en la Universidad Politécnica Territorial Andrés Eloy Blanco Basado en Colmena -SGTH v1
+de Formación en Informática en la Universidad Politécnica Territorial Andrés Elóy Blanco Basado en Colmena -SGTH v1
 
 
 ## Documentación:

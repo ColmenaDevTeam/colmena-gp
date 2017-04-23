@@ -35,7 +35,7 @@
 				</div>
 				<div class="col-sm-9 col-lg-7 widget-right">
 					<div class="large">{{ $birthdates }}</div>
-					<div class="text-muted">Cumpleañeros/Semana</div>
+					<div class="text-muted">Cumpleañeros (Semana)</div>
 				</div>
 			</div>
 		</div>
