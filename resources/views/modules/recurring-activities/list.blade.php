@@ -15,7 +15,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Gestion de Tareas</h1>
+			<h1 class="page-header">Gestion de Actividades Recurrentes</h1>
 		</div>
 	</div><!--/.row-->
 		@include('components.notification.notification')
@@ -25,19 +25,18 @@
 				<div class="panel-heading">Listado </div>
 				<div class="panel-body">
 					<p class="text-left">
-						<a href="/tareas/registrar" class="btn btn-info">Registrar</a>
-						<a href="/tareas/todas" class="btn btn-info">Ver todas</a>
+						<a href="/actividades-recurrentes/registrar" class="btn btn-info">Registrar</a>
 					</p>
-					<table data-toggle="table" data-show-refres41758498h="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
+					<table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 						<thead>
 								<tr>
 									<th data-sortable="true" data-field="title">Titulo</th>
-									<th data-sortable="true" data-field="responsible">Responsable</th>
-									<th data-sortable="true" data-field="type">Tipo de tarea</th>
-									<th data-sortable="true" data-field="status">Estado</th>
-									<th data-sortable="true" data-field="details">Detalles</th>
-									<th data-sortable="true" data-field="estimated_date">Fecha tope</th>
-									<th data-sortable="true" data-field="deliver_date">Fecha de entrega</th>
+									<th data-sortable="true" data-field="start_date">Fecha de inicio</th>
+									<th data-sortable="true" data-field="last_launch">Ultimo lanzamiento</th>
+									<th data-sortable="true" data-field="type">Tiempo de entrega</th>
+									<th data-sortable="true" data-field="status">Detalles</th>
+									<th data-sortable="true" data-field="details">Dificultad</th>
+									<th data-sortable="true" data-field="details">Tipo</th>
 									<th>Ver</th>
 									<th>Modificar</th>
 								</tr>
@@ -46,17 +45,17 @@
 								@foreach($activities as $activity)
 									<tr>
 										<td>{{$activity->title}}</td>
-										<td>{{$activity->responsible->fullname}}</td>
-										<td>{{$activity->type}}</td>
-										<td>{{$activity->status}}</td>
+										<td>{{$activity->start_date}}</td>
+										<td>{{$activity->last_launch ? $activity->last_launch : "-" }}</td>
+										<td>{{$activity->deliverer_days.' días'}}</td>
 										<td>{{$activity->details}}</td>
-										<td>{{$activity->estimated_date->toDateString()}}</td>
-										<td>{{$activity->deliver_date}}</td>
+										<td>{{$activity->dificulty}}</td>
+										<td>{{$activity->task_type}}</td>
 										<td>
-											<a href="/tareas/{{$activity->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
+											<a href="/actividades-recurrentes/{{$activity->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
 										</td>
 										<td>
-											<a class="btn btn-warning" id="update" href="/tareas/editar/{{$activity->id}}">
+											<a class="btn btn-warning" id="update" href="/actividades-recurrentes/editar/{{$activity->id}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>

@@ -59,7 +59,7 @@
 			</div><!-- /..row-->
 			<div class="row">
 				<div class="task-data-form">
-					<form id="task-data-form" role="form" method="post" data-parsley-validate>
+					<form id="task-data-form" method="post" data-parsley-validate>
 						{{ csrf_field() }}
 						@if(isset($task))
 							<input type="hidden" name="id" value="{{ $task->id }}">

@@ -63,11 +63,4 @@ class Task extends Model{
 	public function getDificultyAttribute(){
 		return $this->priority + $this->complexity;
 	}
-	/*
-}
-public static function buscarFechaEst($fecha){
-	$tareas = Ctarea::where('fecEst', '=', $fecha )->get();
-	return $tareas;
-}
-	*/
 }

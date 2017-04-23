@@ -20,11 +20,11 @@ class RecurringActivities extends Migration
             $table->integer('deliverer_days');
             $table->text('details');
             $table->integer('priority');
-            $table->integer('compexity');
+            $table->integer('complexity');
             $table->enum('task_type',['Academico-Docente','Administrativas','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion']);
             $table->date('start_date');
             $table->date('last_launch')->nullable();
-            $table->boolean('active')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

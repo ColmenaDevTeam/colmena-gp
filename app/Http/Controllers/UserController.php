@@ -48,13 +48,13 @@ class UserController extends Controller{
 
 	public function showUpdateForm(Request $request){
 		$user = User::find($request->id);
-		if (!$user || $user->isDev()) return view('errors.404');
+		if (!$user) return view('errors.404');
 		return view('modules.users.forms.data-form')->with('user', $user);
 	}
 
 	public function update(Request $request){
 		$user = User::find($request->id);
-		if (!$user || $user->isDev()) return view('errors/404');
+		if (!$user) return view('errors/404');
 
 		$minDate = Carbon::now()->subYear(User::MIN_USER_AGE)->format('Y/m/d');
 
@@ -88,7 +88,7 @@ class UserController extends Controller{
 	public function desactivate(Request $request){
 		#dd($request->all());
 		$user = User::find($request->user_id);
-		if (!$user || $user->isDev()) return view('errors/404');
+		if (!$user) return redirect('/404');
 
 		$user->active = false;
 		$user->save();
@@ -99,7 +99,7 @@ class UserController extends Controller{
 	public function reactivate(Request $request){
 		#dd($request->all());
 		$user = User::find($request->re_user_id);
-		if (!$user || $user->isDev()) return view('errors/404');
+		if (!$user) return redirect('/404');
 
 		$user->active = true;
 		$user->save();

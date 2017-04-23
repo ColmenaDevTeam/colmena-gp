@@ -59,8 +59,11 @@
 			</div><!-- /..row-->
 			<div class="row">
 				<div class="activity-data-form">
-					<form method="post" action="/actividades-recurrentes/registrar" name="register">
+					<form method="post" data-parsley-validate name="register">
 						{{ csrf_field() }}
+						@if (isset($activity))
+							<input type="hidden" name="id" value="{{ $activity->id }}">
+						@endif
 						<div class="row">
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 								<div class="form-group has-feedback">
@@ -114,7 +117,7 @@
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 								<div class="form-group has-feedback">
 									<label for="deliverer_days">* Tiempo de entrega</label>
-									<input type="number" min="1" max="365" class="form-control" id="deliverer_days" name="deliverer_days" placeholder="" required>
+									<input type="number" min="1" max="180" class="form-control" id="deliverer_days" name="deliverer_days" placeholder="" value="{{ isset($activity) ? $activity->deliverer_days : '' }}" required>
 
 									<span class="block-info">
 										Debe expresarse en días
