@@ -13,7 +13,7 @@
 			  <strong>{{ $absence->user->fullname }}</strong><br>
 			  del tipo:&nbsp
 			  <strong>{{ $absence->getTypeString() }}</strong><br>
-			  <p>Desde {{ $absence->start_date->toDateString() }} hasta {{ $absence->end_date->toDateString() }}</p><br>
+			  <p>Desde {{ $absence->start_date->format('d/m/Y') }} hasta {{ $absence->end_date->format('d/m/Y') }}</p><br>
 			  ¿Desea continuar?
 		  </div>
       </div>

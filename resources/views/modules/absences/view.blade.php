@@ -23,10 +23,10 @@
 									<label for="" style="margin-left: 10pt;">Tipo de ausencia: </label>
 									<span class="label label-default">{{$absence->getTypeString()}}</span>
 									<label for="" style="">Fecha Inicio: </label>
-									<span class="label label-default">{{$absence->start_date->toDateString()}}</span>
+									<span class="label label-default">{{$absence->start_date->format('d/m/Y')}}</span>
 
 									<label for="" style="margin-left: 10pt;">Fecha Fin: </label>
-									<span class="label label-default">{{$absence->end_date->toDateString()}}</span>
+									<span class="label label-default">{{$absence->end_date->format('d/m/Y')}}</span>
 								</p>
 								<hr>
 								<p class="text-justify">

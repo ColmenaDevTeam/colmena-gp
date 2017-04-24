@@ -48,10 +48,10 @@
 									<span class="label label-default">{{$task->type}}</span>
 
 									<label for="" style="margin-left: 10pt;">Fecha de tope: </label>
-									<span class="label label-default">{{$task->estimated_date}}</span>
+									<span class="label label-default">{{$task->estimated_date->format('d/m/Y')}}</span>
 
 									<label for="" style="margin-left: 10pt;">Fecha de entrega: </label>
-									<span class="label label-default">{{$task->deeliver_date}}</span>
+									<span class="label label-default">{{$task->deliver_date->format('d/m/Y')}}</span>
 
 									<label for="" style="margin-left: 10pt;">Estado: </label>
 									<span class="label label-default">{{$task->status}}</span>

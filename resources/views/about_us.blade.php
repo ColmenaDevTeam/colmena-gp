@@ -11,7 +11,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<h2 class="pageTitle">Acerca de <a href="/">Colmena GeekPro</a></h2>
+				<h2 class="pageTitle">Acerca de <a href="{{ env('REPOSITORY_URL') }}" target="_blank">Colmena GeekPro</a></h2>
 			</div>
 		</div>
 	</div>
@@ -127,27 +127,13 @@
 					<!-- Team Member -->
 					<div class="team-member">
 						<!-- Image -->
-						<img class="img-responsive img-rounded" src="/img/equipo/konh.jpg" alt="">
-						<!-- Name -->
-						<h4>Hidalgo Victor</h4>
-						<a target="_blank"href="https://www.facebook.com/Krunnt">
-							<i class="fa fa-facebook-square"></i>
-							@konh
-						</a><hr>
-						<span class="deg">Analista, Programador, Diseñador</span>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-4">
-					<!-- Team Member -->
-					<div class="team-member">
-						<!-- Image -->
 						<img class="img-responsive img-rounded" src="/img/equipo/tes1oner.jpg" alt="">
 						<!-- Name -->
 						<h4>Peraza Elias</h4>
-						<a target="_blank"href="https://twitter.com/tes1oner">
+						<a target="_blank"href="https://github.com/tes1oner">
 							<i class="fa fa-twitter"></i>
 							@tes1oner
-						</a><hr>
+						</a><br>
 						<span class="deg">Analista, Programador, Diseñador</span>
 					</div>
 				</div>
@@ -158,10 +144,10 @@
 						<img class="img-responsive img-rounded" src="/img/equipo/qsoto.jpg" alt="">
 						<!-- Name -->
 						<h4>Soto Quintin</h4>
-						<a target="_blank"href="https://twitter.com/BlueQasv">
+						<a target="_blank"href="https://github.com/qsoto">
 							<i class="fa fa-twitter"></i>
 							@qsoto
-						</a><hr>
+						</a><br>
 						<span class="deg">Analista, Programador, Diseñador</span>
 					</div>
 				</div>
@@ -172,10 +158,10 @@
 						<img class="img-responsive img-rounded" src="/img/equipo/csoto.jpg" alt="">
 						<!-- Name -->
 						<h4>Soto Carlos</h4>
-						<a href="#">
-							<i class="fa fa-user-times"></i>
-							N/D
-						</a><hr>
+						<a href="https://www.facebook.com/carlosisrael.sotoarrieche" target="_blank">
+							<i class="fa fa-facebook-square"></i>
+							@carlos.soto
+						</a><br>
 						<span class="deg">Tutor Comunitario</span>
 					</div>
 				</div>
@@ -183,13 +169,18 @@
 					<!-- Team Member -->
 					<div class="team-member">
 						<!-- Image -->
-						<!--<img class="img-responsive" src="img/team1.jpg" alt="">-->
+						<img class="img-responsive img-rounded" src="/img/equipo/konh.jpg" alt="">
 						<!-- Name -->
 						<h4>Rodríguez Noretsys</h4>
+						<a target="_blank" href="https://www.facebook.com/noretsys.rodriguez">
+							<i class="fa fa-facebook-square"></i>
+							@norerod
+						</a><br>
 						<span class="deg">Tutora Academica</span>
 					</div>
 				</div>
 			</div>
+			<hr>
 		</div>
 		<!-- Our team ends -->
 	</div><!-- /.about -->

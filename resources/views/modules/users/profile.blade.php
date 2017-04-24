@@ -59,7 +59,7 @@
 									<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 										<div class="form-group has-feedback">
 											<label for="birthdate">Fecha de Nacimiento</label>
-											<br>{{$user->birthdate->toDateString()}}
+											<br>{{$user->birthdate->format('d/m/Y')}}
 										</div>
 									</div>
 									<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">

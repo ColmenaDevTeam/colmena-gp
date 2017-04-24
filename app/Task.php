@@ -63,4 +63,40 @@ class Task extends Model{
 	public function getDificultyAttribute(){
 		return $this->priority + $this->complexity;
 	}
+
+	public static function checkTasks(){
+		$tasks = self::where('status', '<>', 'Cumplida')->where('status', '<>', 'Cancelada')
+						->where('status', '<>', 'Retardada')->where('estimated_date', '<', date('Y-m-d'))->get();
+		foreach ($tasks as $task) {
+			$task->status = 'Retardada';
+			$task->save();
+		}
+	}
+
+	public static function generateTasks($activity){
+		$date = Calendar::getNextWorkableDate(Carbon::now()->addDays($activity->deliverer_days)->toDateString());
+		if (is_null($date)) {
+			$activity->active = false;
+			$active->save();
+			return ;
+		}
+		else {
+			foreach ($activity->users as $user){
+				self::create([
+					'title' => $activity->title,
+					'estimated_date' => $date,
+					'details' => $activity->details,
+					'priority' => $activity->priority,
+					'complexity' => $activity->complexity,
+					'status' => 'Asignada',
+					'type' =>  $activity->task_type,
+					'user_id' => $user->id
+				]);
+				$activity->last_launch = date('Y-m-d');
+				$active->save();
+				#notifyUser
+			return ;
+			}
+		}
+	}
 }

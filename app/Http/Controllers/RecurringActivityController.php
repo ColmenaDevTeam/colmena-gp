@@ -119,7 +119,7 @@ class RecurringActivityController extends Controller
 		return view('modules.recurring-activities.view')->with('activity', $activity);
 	}
 
-	public function delete(){
+	public function delete(Request $request){
 		$activity = RecurringActivity::find($request->id);
 		if (!$activity) return redirect('/404');
 

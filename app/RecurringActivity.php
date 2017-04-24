@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Task;
 class RecurringActivity extends Model
 {
 	use EnumHelper;
@@ -15,5 +15,16 @@ class RecurringActivity extends Model
 	}
 	public function getDificultyAttribute(){
 		return $this->priority + $this->complexity;
+	}
+
+	public static function getActiveActivities(){
+		return self::where('active', true)->get();
+	}
+
+	public static function deployActivities(){
+		$activities = self::getActiveActivities();
+		foreach ($activities as $activity) {
+			Task::generateTasks($activity);
+		}
 	}
 }

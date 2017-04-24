@@ -14,6 +14,9 @@
     </head>
     <body>
 		<div class="container">
+			<div class="pull-right">
+				<a href="/">Volver al inicio</a>
+			</div>
 			@yield('content')
 		</div>
 		<script src="js/jquery-1.11.1.min.js"></script>

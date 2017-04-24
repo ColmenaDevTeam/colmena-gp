@@ -93,6 +93,8 @@ Route::group(['middleware' => ['auth']],function(){
 	 Route::get('/actividades-recurrentes', function(){ return redirect('/actividades-recurrentes/listar');});
 	 Route::get('/actividades-recurrentes/{id}/ver', 'RecurringActivityController@view');
 	 Route::post('/actividades-recurrentes/eliminar', 'RecurringActivityController@delete');
+	 Route::post('/actividades-recurrentes/reactivar', 'RecurringActivityController@reactivate');
+	 Route::post('/actividades-recurrentes/desactivar', 'RecurringActivityController@desactivate');
 
 	/**
 	*Department Routes
@@ -120,6 +122,7 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('/usuarios/perfil/{id}', 'UserController@showProfile');
 	Route::post('/usuarios/actualizar-perfil', 'UserController@updateData');
 	Route::post('/usuarios/actualizar-clave', 'UserController@updatePassword');
+
 	/**
 	*Calendar Routes
 	*/
@@ -141,6 +144,14 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('/ausencias/listar', 'AbsenceController@index');
 	Route::get('/ausencias/todas', 'AbsenceController@indexAll');
 	Route::get('/ausencias', function(){ return redirect('/ausencias/listar');});
+
+	/**
+	*Reports Routes
+	*/
+	Route::get('/reportes', 'ReportController@index');
+	Route::post('/reportes/generar', 'ReportController@generate');
+	Route::get('/reportes/cintillo-universitario', 'ReportController@showHeader');
+	Route::post('/reportes/cintillo-universitario', 'ReportController@loadHeader');
 
 });
 Route::get('/acerca-de', 'HomeController@about');

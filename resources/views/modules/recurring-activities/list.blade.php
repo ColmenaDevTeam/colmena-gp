@@ -37,6 +37,7 @@
 									<th data-sortable="true" data-field="status">Detalles</th>
 									<th data-sortable="true" data-field="details">Dificultad</th>
 									<th data-sortable="true" data-field="details">Tipo</th>
+									<th data-sortable="true" data-field="active">¿Activa?</th>
 									<th>Ver</th>
 									<th>Modificar</th>
 								</tr>
@@ -51,6 +52,7 @@
 										<td>{{$activity->details}}</td>
 										<td>{{$activity->dificulty}}</td>
 										<td>{{$activity->task_type}}</td>
+										<td>{{$activity->active ? 'Si' : 'No'}}</td>
 										<td>
 											<a href="/actividades-recurrentes/{{$activity->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
 										</td>

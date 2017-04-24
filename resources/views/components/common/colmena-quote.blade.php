@@ -1,8 +1,6 @@
+
 <div class='col-lg-6 col-md-6 col-sm-12 col-xs-12 '>
-	<img class="img img-responsive" src="/img/logo/logo-square500x500.png" alt="Colmena-GP">
-</div>
-<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12 '>
-	<blockquote class="blockquote-reverse">
+	<blockquote class="blockquote">
 		<p class="text-left"><i class="fa fa-quote-left"></i><br /></p>
 		<p class="text-center">
 			La primera ley de la expansión es "el orden".<br />
@@ -23,4 +21,7 @@
 			</h2>
 		</p>
 	</blockquote>
+</div>
+<div class='col-lg-6 col-md-6 col-sm-12 col-xs-12 '>
+	<img class="img img-responsive" src="/img/logo/logo-square500x500.png" alt="Colmena-GP">
 </div>

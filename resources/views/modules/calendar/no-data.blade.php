@@ -18,6 +18,11 @@
 						pongase en contacto con el administrador del sistema para
 						que se registren.
 					</p>
+					<p class="text-center">
+						El no tener los datos del calendario laboral en el sistema deshabilita
+						ciertas muchas de las funciones del sistema. Es muy importante mantener
+						actualizados los datos del calendario.
+					</p>
 				</div>
 			</div>
 			<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 '>

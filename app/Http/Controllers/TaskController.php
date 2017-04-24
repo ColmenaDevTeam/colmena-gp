@@ -120,6 +120,7 @@ class TaskController extends Controller{
 			'detail' => 'min:10|max:255'
 		])->validate();
 		$task->status = $request->status;
+		if($request->status == "Revision") $task->deliver_date = date('Y-m-d');
 		$task->save();
 		$log = new TaskLog;
 		$log->status = $request->status;
