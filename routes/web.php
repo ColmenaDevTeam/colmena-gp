@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth']],function(){
 	 **/
 	Route::get('/roles/registrar', 'RoleController@showDataForm');
 	Route::get('/roles/editar/{id}', 'RoleController@showUpdateForm');
+	Route::get('/roles/ver/{id}', 'RoleController@view');
 	Route::post('/roles/editar/{id}', 'RoleController@update');
 	Route::post('/roles/registrar', 'RoleController@register');
 	Route::get('/roles/listar', 'RoleController@index');

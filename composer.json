@@ -25,7 +25,9 @@
             "App\\": "app/"
         },
         "files":[
-        	"app/Helpers/Menu.php"
+        	"app/Helpers/Menu.php",
+            "app/Helpers/Math.php",
+            "app/Helpers/Str.php",
         ]
     },
     "autoload-dev": {

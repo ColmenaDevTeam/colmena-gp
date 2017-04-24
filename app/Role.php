@@ -17,6 +17,19 @@ class Role extends Model{
 		return $this->belongsToMany('App\Permission', 'roles_has_permissions', 'role_id', 'permission_id');
 	}
 	public function users(){
-
+		return $this->belongsToMany('App\Role', 'users_has_roles', 'role_id', 'user_id');
+	}
+	public function permissionsByCategory(){
+        $all = $this->permissions;
+        $permissions = array();
+        foreach ($all as $p){
+            if(array_key_exists($p->category, $permissions)){
+                $permissions[$p->category][] = $p;
+            }else{
+                $permissions[$p->category] = array();
+                $permissions[$p->category][] = $p;
+            }
+        }
+        return $permissions;
 	}
 }

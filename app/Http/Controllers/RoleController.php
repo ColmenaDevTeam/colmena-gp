@@ -10,7 +10,7 @@ use App\Permission;
 class RoleController extends Controller{
 
     public function index(Request $request){
-        return view('modules.roles.index');
+        return view('modules.roles.list')->with('roles', Role::all());
     }
     public function showDataForm(Request $request){
         dd(Auth::user()->roles->first()->permissions);
@@ -26,7 +26,11 @@ class RoleController extends Controller{
         return redirect('/roles/ver/'.$role->id);
     }
     public function view(Request $request){
-        return view('modules.roles.view');
+        $role = Role::find($request->id);
+        if($role == null){
+            return view('errors.404');
+        }
+        return view('modules.roles.view')->with('role', $role);
     }
 
 
