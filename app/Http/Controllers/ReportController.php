@@ -21,11 +21,16 @@ class ReportController extends Controller
 	}
 
 	public function showHeader(){
+	#	dd( ReportHeader::first()->fulluri);
 		return view('modules.reports.forms.header-form')->with('header', ReportHeader::first());
 	}
 
 	public function loadHeader(Request $request){
-		dd($request->file('header'));
+		Validator::make($request->input(),[
+			'header' => 'mime:jpg,png,bmp|
+						dimensions:min_width=700,min_height=30,
+						max_width=1200,max_height=200'
+			])->validate();
 		$name = 'header'.Carbon::now()->format('Ymdhms').'.jpg';
 
 		try{
@@ -34,11 +39,11 @@ class ReportController extends Controller
 				$header->delete();
 			}
 			# Carpeta de Fotos
-			if(!Storage::exists(ReportHeader::GLOBAL_URI))
-			Storage::makeDirectory(ReportHeader::GLOBAL_URI, 775);
-			$path = storage_path('app'.ReportHeader::GLOBAL_URI.$name);
+			if(!Storage::exists(ReportHeader::STORAGE_URI))
+			Storage::makeDirectory(ReportHeader::STORAGE_URI, 775);
+			$path = storage_path('app'.ReportHeader::STORAGE_URI.$name);
 			$image = Image::make($request->file('header')->getRealPath())->encode('jpg', 95);
-			$image->resize(Photo::DEFAULT_WIDTH, Photo::DEFAULT_HEIGHT);
+			$image->resize(ReportHeader::DEFAULT_WIDTH, ReportHeader::DEFAULT_HEIGHT);
 			$image->save($path);
 
 			$header = new ReportHeader;

@@ -30,7 +30,7 @@
 				@endif
 
 				<div class="header-data-form">
-					<form id="header-data-form" role="form" method="post" data-parsley-validate>
+					<form id="header-data-form" runat="server" method="post" data-parsley-validate enctype="multipart/form-data">
 						{{ csrf_field() }}
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
