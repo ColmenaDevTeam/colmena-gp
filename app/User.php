@@ -115,6 +115,7 @@ class User extends Authenticatable
 				$task->estimated_date = $nextDate;
 				$task->status = 'Diferida';
 				$task->save();
+				$task->generateAbsenceDelayNotification();
 			}
 		}
 	}

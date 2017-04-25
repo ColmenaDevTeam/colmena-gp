@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Calendar;
 use App\TaskLog;
+use App\Notifications\NewTaskAssignment;
+use App\Notifications\CalendarTasksDelay;
+use App\Notifications\AbsenceTasksDelay;
+use App\Notifications\DelayedTask;
 
 class Task extends Model{
 	use EnumHelper;
@@ -47,6 +51,7 @@ class Task extends Model{
 				$task->estimated_date = $nextDate;
 				$task->status = "Diferida";
 				$task->save();
+				$task->generateCalendarDelayNotification();
 			}
 		}
 	}
@@ -70,11 +75,12 @@ class Task extends Model{
 		foreach ($tasks as $task) {
 			$task->status = 'Retardada';
 			$task->save();
+			$task->generateDelayedTaskNotification();
 		}
 	}
 
 	public static function generateTasks($activity){
-		$date = Calendar::getNextWorkableDate(Carbon::now()->addDays($activity->deliverer_days)->toDateString());
+		$date = Calendar::getNextWorkableDate(Carbon::now()->addDays($activity->deliverer_days-1)->toDateString());
 		if (is_null($date)) {
 			$activity->active = false;
 			$active->save();
@@ -82,21 +88,53 @@ class Task extends Model{
 		}
 		else {
 			foreach ($activity->users as $user){
-				self::create([
-					'title' => $activity->title,
-					'estimated_date' => $date,
-					'details' => $activity->details,
-					'priority' => $activity->priority,
-					'complexity' => $activity->complexity,
-					'status' => 'Asignada',
-					'type' =>  $activity->task_type,
-					'user_id' => $user->id
-				]);
+				$task = new Task;
+				$task->title = $activity->title;
+				$task->estimated_date = $date;
+				$task->details  = $activity->details ;
+				$task->priority  = $activity->priority ;
+				$task->complexity  = $activity->complexity ;
+				$task->status  = 'Asignada' ;
+				$task->type  = $activity->task_type ;
+				$task->responsible()->associate($user);
+				$task->save();
+				$task->generateNotification();
 				$activity->last_launch = date('Y-m-d');
 				$active->save();
 				#notifyUser
 			return ;
 			}
+		}
+	}
+	public function generateNotification(){
+		try {
+			$this->responsible->notify(new NewTaskAssignment($this));
+		} catch (Exception $e) {
+
+		}
+	}
+
+	public function generateCalendarDelayNotification(){
+		try {
+			$this->responsible->notify(new CalendarTasksDelay($this));
+		} catch (Exception $e) {
+
+		}
+	}
+
+	public function generateAbsenceDelayNotification(){
+		try {
+			$this->responsible->notify(new AbsenceTasksDelay($this));
+		} catch (Exception $e) {
+
+		}
+	}
+
+	public function generateDelayedTaskNotification(){
+		try {
+			$this->responsible->notify(new DelayedTask($this));
+		} catch (Exception $e) {
+
 		}
 	}
 }

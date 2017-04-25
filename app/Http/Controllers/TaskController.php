@@ -51,8 +51,9 @@ class TaskController extends Controller{
 			$task->type = $request->type;
 			$task->estimated_date = Carbon::createFromFormat('Y-m-d',$request->estimated_date);
 			$task->details = $request->details;
-			$task->user_id = $user;
+			$task->responsible()->associate($user);
 			$task->save();
+			$task->generateNotification();
 		}
 		\Session::push('success', true);
 		return redirect("tareas/listar")->with(['tasks' => Task::getActiveTask()]);

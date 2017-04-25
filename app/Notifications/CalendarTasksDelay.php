@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\Task;
 
-class NewTaskAssignment extends Notification
+class CalendarTasksDelay extends Notification
 {
     use Queueable;
 
@@ -19,7 +19,7 @@ class NewTaskAssignment extends Notification
      */
     public function __construct(Task $task)
     {
-        $this->task = $task;
+    	$this->task = $task;
     }
 
     /**
@@ -43,9 +43,9 @@ class NewTaskAssignment extends Notification
     {
         return (new MailMessage)
 					->subject('Colmena Informa')
-                    ->line('Se te ha asignado una nueva tarea en sistema, accede para revisarla.')
-                    ->line('Tarea: '.$this->task->title)
-					->line('Fecha de entrega: '.$this->task->estimated_date->format('d/m/Y'));
+					->line('Te informamos por motivos de cambio en el calendario academico la fecha de entrega de tu tarea')
+                    ->line($this->task->title)
+                    ->line('Ha sido reprogramada para el '.$this->task->estimated_date->format('d/m/Y'));
     }
 
     /**

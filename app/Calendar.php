@@ -59,7 +59,8 @@ class Calendar extends Model
 	}
 
 	public static function getNextWorkableDate($now){#now must be a string in datestring format (Y/m/d)
-		$next = self::where('workable_date', '=>',$now)->get()->first();
+
+		$next = self::where('workable_date', '>',$now)->get()->first();
 		return is_null($next) ? null : $next->workable_date->toDateString();#output will be a string in datestring format (Y/m/d)
 	}
 

@@ -17,7 +17,7 @@ class UserController extends Controller{
 	}
 
 	public function register(Request $request){
-		$minDate = Carbon::now()->subYear(User::MIN_USER_AGE)->format('Y/m/d');
+		$minDate = Carbon::now()->subYear(User::MIN_USER_AGE)->format('d/m/Y');
 		Validator::make($request->input(), [
 			'cedula' => 'numeric|required|unique:users',
 			'firstname' => 'regex:/^[[:alpha:]]+( [[:alpha:]]+)?$/|required|min:3|max:45',
@@ -25,7 +25,7 @@ class UserController extends Controller{
 			'user_type' => 'required',
 			'email' => 'email|required',
 			'phone' => 'numeric|required',
-			'birthdate' => 'date|required|before:'.$minDate,
+			'birthdate' => 'date_format:d/m/Y|required|before:'.$minDate,
 			'gender' => 'boolean|required',
 		])->validate();
 
@@ -56,8 +56,8 @@ class UserController extends Controller{
 		$user = User::find($request->id);
 		if (!$user) return view('errors/404');
 
-		$minDate = Carbon::now()->subYear(User::MIN_USER_AGE)->format('Y/m/d');
-
+		$minDate = Carbon::now()->subYear(User::MIN_USER_AGE)->format('d/m/Y');
+		#dd($request->birthdate);
 		Validator::make($request->input(), [
 			'cedula' => $user->cedula!=$request->cedula ? 'numeric|required|unique:users' : '',
 			'firstname' => 'regex:/^[[:alpha:]]+( [[:alpha:]]+)?$/|required|min:3|max:45',
@@ -65,7 +65,7 @@ class UserController extends Controller{
 			'user_type' => 'required',
 			'email' => 'email|required',
 			'phone' => 'numeric|required',
-			'birthdate' => 'date|required|before:'.$minDate,
+			'birthdate' => 'date_format:d/m/Y|required|before:'.$minDate,
 			'gender' => 'boolean|required',
 		])->validate();
 

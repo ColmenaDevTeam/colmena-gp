@@ -27,7 +27,7 @@ class ReportController extends Controller
 
 	public function loadHeader(Request $request){
 		Validator::make($request->input(),[
-			'header' => 'mime:jpg,png,bmp|
+			'header' => 'mime:jpg,png,bmp,jpeg|
 						dimensions:min_width=700,min_height=30,
 						max_width=1200,max_height=200'
 			])->validate();

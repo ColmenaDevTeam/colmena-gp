@@ -29,7 +29,11 @@
 							para asignar tareas.
 						</li>
 						<li>
-							Los sabados y domingos son días no
+							Debe considerar que actualizar el calendario puede tomar cierto tiempo, pues las actividades seran reprogramadas y
+							el sistema debera notificar a los usuarios.
+						</li>
+						<li>
+							Los sabados y domingos son tomados como días no laborables para el sistema
 						</li>
 						<li>
 							Si deselecciona un dia laborable <font color="#6198fd" size="5">TODAS</font>

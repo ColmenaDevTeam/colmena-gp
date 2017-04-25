@@ -71,7 +71,7 @@ $style = [
                     <tr>
                         <td style="{{ $style['email-masthead'] }}">
                             <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                                {{ config('app.name') }}
+                                Notificaciones
                             </a>
                         </td>
                     </tr>
@@ -175,7 +175,7 @@ $style = [
                                 <tr>
                                     <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
 										<p style="{{ $style['paragraph-sub'] }}">
-											 <strong>Recuerda a los enlaces dentro de la intranet donde esta instalado {{ config('app.name') }}</strong>
+											 <strong>Recuerda abrir los enlaces dentro de la intranet donde esta instalado {{ config('app.name') }}</strong>
 										</p>
                                         <p style="{{ $style['paragraph-sub'] }}">
                                             &copy; {{ date('Y') }}
