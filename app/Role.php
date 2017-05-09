@@ -19,6 +19,10 @@ class Role extends Model{
 	public function users(){
 		return $this->belongsToMany('App\Role', 'users_has_roles', 'role_id', 'user_id');
 	}
+	public function scopeLevelFilter(){
+
+	}
+	
 	public function permissionsByCategory(){
         $all = $this->permissions;
         $permissions = array();

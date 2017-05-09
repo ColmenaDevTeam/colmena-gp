@@ -13,11 +13,15 @@ class RoleController extends Controller{
         return view('modules.roles.list')->with('roles', Role::all());
     }
     public function showDataForm(Request $request){
-        dd(Auth::user()->roles->first()->permissions);
-        return view('modules.roles.data-form');
+        #dd(Auth::user()->roles->first()->permissions);
+        return view('modules.roles.forms.data-form')->with(['permissions' => Permission::getByCategory()]);
     }
     public function showUpdateForm(Request $request){
-        return view('modules.roles.data-form');
+		$role = Role::find($request->id);
+		if($role == null){
+			return view('errors.404');
+		}
+        return view('modules.roles.forms.data-form')->with(['role' => $role,'permissions' => Permission::getByCategory()]);
     }
     public function update(Request $request){
         return redirect('/roles/ver/'.$role->id);
