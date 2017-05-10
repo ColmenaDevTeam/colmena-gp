@@ -58,7 +58,7 @@
 												<div class="collapse" id="l_{{strtolower(str_replace(' ', '_', $key ))}}">
 													@foreach ($perms as $permission)
 														<p class="list-group-item">
-															<input type="checkbox" style=""id="{{$permission->id}}" name="permissions[]" value="{{$permission->id}}" class="pull-left">
+															<input type="checkbox" {{isset($role) && $role->permissions->contains($permission) ? 'checked' : ''  }} id="{{$permission->id}}" name="permissions[]" value="{{$permission->id}}">
 																{{$permission->action}}
 															</input>
 														</p>

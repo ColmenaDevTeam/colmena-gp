@@ -10,13 +10,16 @@ use Carbon\Carbon;
 class UserController extends Controller{
 
 	public function index(){
+		if(!Auth::user()->canDo('users.list')) return redirect('/401');
 		return view('modules.users.list')->with('users', User::all()->where('cedula', '<>', env('APP_DEV_USERNAME')));
 	}
     public function showDataForm(){
+		if(!Auth::user()->canDo('users.create')) return redirect('/401');
 		return view('modules.users.forms.data-form');
 	}
 
 	public function register(Request $request){
+		if(!Auth::user()->canDo('users.create')) return redirect('/401');
 		$minDate = Carbon::now()->subYear(User::MIN_USER_AGE)->format('d/m/Y');
 		Validator::make($request->input(), [
 			'cedula' => 'numeric|required|unique:users',
@@ -47,12 +50,14 @@ class UserController extends Controller{
 	}
 
 	public function showUpdateForm(Request $request){
+		if(!Auth::user()->canDo('users.update')) return redirect('/401');
 		$user = User::find($request->id);
 		if (!$user) return view('errors.404');
 		return view('modules.users.forms.data-form')->with('user', $user);
 	}
 
 	public function update(Request $request){
+		if(!Auth::user()->canDo('users.update')) return redirect('/401');
 		$user = User::find($request->id);
 		if (!$user) return view('errors/404');
 
@@ -86,7 +91,7 @@ class UserController extends Controller{
 	}
 
 	public function desactivate(Request $request){
-		#dd($request->all());
+		if(!Auth::user()->canDo('users.delete')) return redirect('/401');
 		$user = User::find($request->user_id);
 		if (!$user) return redirect('/404');
 
@@ -97,7 +102,7 @@ class UserController extends Controller{
 		return redirect("usuarios/listar")->with('users', User::all());
 	}
 	public function reactivate(Request $request){
-		#dd($request->all());
+		if(!Auth::user()->canDo('users.create')) return redirect('/401');
 		$user = User::find($request->re_user_id);
 		if (!$user) return redirect('/404');
 
@@ -109,6 +114,7 @@ class UserController extends Controller{
 	}
 
 	public function delete(){
+		if(!Auth::user()->canDo('users.delete')) return redirect('/401');
 		return redirect("usuarios/listar")->with('users', User::all());
 	}
 
@@ -129,6 +135,7 @@ class UserController extends Controller{
 		if ($user == null) {
 			return redirect('/404');
 		}
+		if(!Auth::user()->id =! $user->id) return redirect('/401');
 		Validator::make($request->input(), [
 			'email' => 'email|required',
 			'phone' => 'numeric|required'
@@ -147,6 +154,7 @@ class UserController extends Controller{
 		if ($user == null) {
 			return redirect('/404');
 		}
+		if(!Auth::user()->id =! $user->id) return redirect('/401');
 		Validator::make($request->input(), [
 			'password' => 'min:6|max:15|confirmed'
 		])->validate();

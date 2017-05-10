@@ -35,7 +35,12 @@ Route::get('/widgets', function(){
 Route::get('/test', function(){
 	dd(App\Calendar::checkYear());
 });
-
+/**
+ * Error routes
+ */
+	 Route::get('/401', function () {
+	     return view('errors.401');
+	 });
  /**
   * Home routes
   */
@@ -62,9 +67,9 @@ Route::group(['middleware' => ['auth']],function(){
  	 * Role system Routes
 	 **/
 	Route::get('/roles/registrar', 'RoleController@showDataForm');
-	Route::get('/roles/editar/{id}', 'RoleController@showUpdateForm');
+	Route::get('/roles/modificar/{id}', 'RoleController@showUpdateForm');
 	Route::get('/roles/ver/{id}', 'RoleController@view');
-	Route::post('/roles/editar/{id}', 'RoleController@update');
+	Route::post('/roles/modificar/{id}', 'RoleController@update');
 	Route::post('/roles/registrar', 'RoleController@register');
 	Route::get('/roles/listar', 'RoleController@index');
 	Route::get('/roles', function(){ return redirect('/roles/listar');});
@@ -73,8 +78,8 @@ Route::group(['middleware' => ['auth']],function(){
      * Tasks routes
      */
 	 Route::get('/tareas/registrar', 'TaskController@showDataForm');
-	 Route::get('/tareas/editar/{id}', 'TaskController@showUpdateForm');
-	 Route::post('/tareas/editar/{id}', 'TaskController@update');
+	 Route::get('/tareas/modificar/{id}', 'TaskController@showUpdateForm');
+	 Route::post('/tareas/modificar/{id}', 'TaskController@update');
 	 Route::post('/tareas/registrar', 'TaskController@register');
 	 Route::get('/tareas/listar', 'TaskController@index');
 	 Route::get('/tareas/todas', 'TaskController@indexAll');
@@ -87,8 +92,8 @@ Route::group(['middleware' => ['auth']],function(){
 	  * Recurring Activities routes
 	  */
 	 Route::get('/actividades-recurrentes/registrar', 'RecurringActivityController@showDataForm');
-	 Route::get('/actividades-recurrentes/editar/{id}', 'RecurringActivityController@showUpdateForm');
-	 Route::post('/actividades-recurrentes/editar/{id}', 'RecurringActivityController@update');
+	 Route::get('/actividades-recurrentes/modificar/{id}', 'RecurringActivityController@showUpdateForm');
+	 Route::post('/actividades-recurrentes/modificar/{id}', 'RecurringActivityController@update');
 	 Route::post('/actividades-recurrentes/registrar', 'RecurringActivityController@register');
 	 Route::get('/actividades-recurrentes/listar', 'RecurringActivityController@index');
 	 Route::get('/actividades-recurrentes', function(){ return redirect('/actividades-recurrentes/listar');});
@@ -101,8 +106,8 @@ Route::group(['middleware' => ['auth']],function(){
 	*Department Routes
 	*/
 	Route::get('/departamentos/registrar', 'DepartmentController@showDataForm');
-	Route::get('/departamentos/editar/{id}', 'DepartmentController@showUpdateForm');
-	Route::post('/departamentos/editar/{id}', 'DepartmentController@update');
+	Route::get('/departamentos/modificar/{id}', 'DepartmentController@showUpdateForm');
+	Route::post('/departamentos/modificar/{id}', 'DepartmentController@update');
 	Route::post('/departamentos/registrar', 'DepartmentController@register');
 	Route::get('/departamentos/listar', 'DepartmentController@index');
 	Route::get('/departamentos', function(){ return redirect('/departamentos/listar');});
@@ -112,8 +117,8 @@ Route::group(['middleware' => ['auth']],function(){
 	*User Routes
 	*/
 	Route::get('/usuarios/registrar', 'UserController@showDataForm');
-	Route::get('/usuarios/editar/{id}', 'UserController@showUpdateForm');
-	Route::post('/usuarios/editar/{id}', 'UserController@update');
+	Route::get('/usuarios/modificar/{id}', 'UserController@showUpdateForm');
+	Route::post('/usuarios/modificar/{id}', 'UserController@update');
 	Route::post('/usuarios/registrar', 'UserController@register');
 	Route::get('/usuarios/listar', 'UserController@index');
 	Route::get('/usuarios', function(){ return redirect('/usuarios/listar');});
@@ -137,8 +142,8 @@ Route::group(['middleware' => ['auth']],function(){
 	*Absences Routes
 	*/
 	Route::get('/ausencias/registrar', 'AbsenceController@showDataForm');
-	Route::get('/ausencias/editar/{id}', 'AbsenceController@showUpdateForm');
-	Route::post('/ausencias/editar/{id}', 'AbsenceController@update');
+	Route::get('/ausencias/modificar/{id}', 'AbsenceController@showUpdateForm');
+	Route::post('/ausencias/modificar/{id}', 'AbsenceController@update');
 	Route::post('/ausencias/eliminar', 'AbsenceController@delete');
 	Route::get('/ausencias/{id}/ver', 'AbsenceController@view');
 	Route::post('/ausencias/registrar', 'AbsenceController@register');

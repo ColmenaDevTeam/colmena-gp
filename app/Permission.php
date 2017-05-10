@@ -22,12 +22,12 @@ class Permission extends Model{
 		return $permission;
 	}
 
-	public function scopeLevelFilter(){
-		
+	public function scopeLevelFilter($query){
+		return $query->where('level','>=' ,\Auth::user()->getAccessLevel());
 	}
 
 	public static function getByCategory(){
-		$all = self::all();
+		$all = self::select()->levelFilter()->get();
 		$permissions = array();
 		foreach ($all as $p){
 			if(array_key_exists($p->category, $permissions)){

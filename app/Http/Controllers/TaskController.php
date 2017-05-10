@@ -15,13 +15,12 @@ use Auth;
 
 class TaskController extends Controller{
 	public function index(){
-		//verificacion de usuario/rol
-
+		if(!Auth::user()->canDo('tasks.list')) return redirect('/401');
 		return view('modules.tasks.list')->with(['tasks' => Task::getActiveTask()]);
 	}
 
 	public function showDataForm(){
-		//verificacion de usuario/rol
+		if(!Auth::user()->canDo('tasks.create')) return redirect('/401');
 
 		if (!Calendar::checkAvailability()) {
 			return redirect('/calendario/sin-datos');
@@ -32,7 +31,7 @@ class TaskController extends Controller{
 	}
 
 	public function register(Request $request){
-		//verificacion de usuario/rol
+		if(!Auth::user()->canDo('tasks.create')) return redirect('/401');
 		Validator::make($request->input(), [
 			'title' => 'required',
 			'priority' => 'required',
@@ -60,7 +59,7 @@ class TaskController extends Controller{
 	}
 
 	public function showUpdateForm(Request $request){
-
+		if(!Auth::user()->canDo('tasks.update')) return redirect('/401');
 		$task = Task::find($request->id);
 		if (!$task) return redirect('/404');
 		//verificacion de usuario/rol
@@ -74,6 +73,7 @@ class TaskController extends Controller{
 	}
 
 	public function update(Request $request){
+		if(!Auth::user()->canDo('tasks.update')) return redirect('/401');
 		$task = Task::find($request->id);
 		if (!$task) return redirect('/404');
 		//verificacion de usuario/rol
@@ -101,11 +101,12 @@ class TaskController extends Controller{
 	}
 
     public function personalList(Request $request){
-
+		#hacer el beta de las person
     }
     public function view(Request $request){
 		$task = Task::find($request->id);
 		if (!$task) return redirect('/404');
+		if(!Auth::user()->canDo('tasks.create') && Auth::user()->id != $task->responsible->id) return redirect('/401');
 		//verificacion de usuario/rol
 		$task->taskLogs()->paginate(5);
 		return view('modules.tasks.view')->with(['task' => $task, 'statuses' => Task::getEnumValues('status'), 'log' => $task->lastLog()]);
@@ -114,6 +115,7 @@ class TaskController extends Controller{
 	public function transact(Request $request){
 		//verificacion de usuario/rol
 		$task = Task::find($request->task_id);
+		if(!Auth::user()->canDo('tasks.create') && Auth::user()->id != $task->responsible->id) return redirect('/401');
 		if (!$task) return redirect('/404');
 
 		Validator::make($request->input(), [
@@ -134,7 +136,7 @@ class TaskController extends Controller{
 	}
 
 	public function delete(Request $request){
-		//verificacion de usuario/rol
+		if(!Auth::user()->canDo('tasks.delete')) return redirect('/401');
 		$task = Task::find($request->task_id);
 		if (!$task) return redirect('/404');
 

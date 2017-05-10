@@ -19,10 +19,10 @@ class Role extends Model{
 	public function users(){
 		return $this->belongsToMany('App\Role', 'users_has_roles', 'role_id', 'user_id');
 	}
-	public function scopeLevelFilter(){
-
+	public function scopeLevelFilter($query){
+		return $query->where('level','>=' ,\Auth::user()->getAccessLevel());
 	}
-	
+
 	public function permissionsByCategory(){
         $all = $this->permissions;
         $permissions = array();
@@ -35,5 +35,9 @@ class Role extends Model{
             }
         }
         return $permissions;
+	}
+
+	public static function getRolesByLevel(){
+		return self::select()->levelFilter()->get();
 	}
 }

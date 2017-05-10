@@ -11,12 +11,14 @@ use Carbon\Carbon;
 class CalendarController extends Controller
 {
 	public function showDataForm(){
+		if(!Auth::user()->canDo('calendar.update')) return redirect('/401');
 		Calendar::checkYear();
 		return view('modules.calendar.forms.data-form')->with(['calendar' => Calendar::getDateArray(),
 																'months' => Calendar::MONTHS,
 																'dates' => Calendar::generateDates()]);
 	}
     public function update(Request $request){
+		if(!Auth::user()->canDo('calendar.update')) return redirect('/401');
 		Validator::make($request->input(), [
 			'dates' => 'required'
 		])->validate();
@@ -62,6 +64,9 @@ class CalendarController extends Controller
 	}
 
 	public function show(){
+		if (!Calendar::checkAvailability()) {
+			return redirect('/calendario/sin-datos');
+		}
 		return view('modules.calendar.view')->with(['calendar' => Calendar::getDateArray(),
 																'months' => Calendar::MONTHS,
 																'dates' => Calendar::generateDates()]);;

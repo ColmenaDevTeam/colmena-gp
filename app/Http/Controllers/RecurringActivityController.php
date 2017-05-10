@@ -11,10 +11,12 @@ use Validator;
 class RecurringActivityController extends Controller
 {
     public function index(){
+		if(!Auth::user()->canDo('recurring_activities.list')) return redirect('/401');
 		return view('modules.recurring-activities.list')->with(['activities' => RecurringActivity::all()]);
 	}
 
 	public function showDataForm(){
+		if(!Auth::user()->canDo('recurring_activities.create')) return redirect('/401');
 		if (!Calendar::checkAvailability()) {
 			return redirect('/calendario/sin-datos');
 		}
@@ -26,6 +28,7 @@ class RecurringActivityController extends Controller
 	}
 
 	public function register(Request $request){
+		if(!Auth::user()->canDo('recurring_activities.create')) return redirect('/401');
 		Validator::make($request->input(), [
 			'title' => 'required',
 			'priority' => 'required',
@@ -61,6 +64,7 @@ class RecurringActivityController extends Controller
 	}
 
 	public function showUpdateForm(Request $request){
+		if(!Auth::user()->canDo('recurring_activities.update')) return redirect('/401');
 		$activity = RecurringActivity::find($request->id);
 		if (is_null($activity)) {
 			return view("errors/404");
@@ -74,6 +78,7 @@ class RecurringActivityController extends Controller
 	}
 
 	public function update(Request $request){
+		if(!Auth::user()->canDo('recurring_activities.update')) return redirect('/401');
 		$activity = RecurringActivity::find($request->id);
 		if (is_null($activity)) {
 			return redirect("/404");
@@ -112,6 +117,7 @@ class RecurringActivityController extends Controller
 	}
 
 	public function view(Request $request){
+		if(!Auth::user()->canDo('recurring_activities.create')) return redirect('/401');
 		$activity = RecurringActivity::find($request->id);
 		if (is_null($activity)) {
 			return view("errors/404");
@@ -120,6 +126,7 @@ class RecurringActivityController extends Controller
 	}
 
 	public function delete(Request $request){
+		if(!Auth::user()->canDo('recurring_activities.delete')) return redirect('/401');
 		$activity = RecurringActivity::find($request->id);
 		if (!$activity) return redirect('/404');
 
@@ -139,6 +146,7 @@ class RecurringActivityController extends Controller
 		return redirect("actividades-recurrentes/".$activity->id."/ver")->with('activity', $activity);
 	}
 	public function reactivate(Request $request){
+		if(!Auth::user()->canDo('recurring_activities.create')) return redirect('/401');
 		$activity = RecurringActivity::find($request->id);
 		if (!$activity) return redirect('/404');
 

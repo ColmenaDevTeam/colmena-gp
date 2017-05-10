@@ -9,14 +9,17 @@ use Validator;
 
 class DepartmentController extends Controller{
 	public function index(){
+		if(!Auth::user()->canDo('department.list')) return redirect('/401');
 		return view('modules.departments.list')->with('departments', Department::all());
 	}
 
     public function showDataForm(){
+		if(!Auth::user()->canDo('department.create')) return redirect('/401');
 		return view('modules.departments.forms.data-form');
 	}
 
 	public function register(Request $request){
+		if(!Auth::user()->canDo('department.create')) return redirect('/401');
 		Validator::make($request->input(), [
 			'name' => 'required|min:3|max:45|string',
 			'description' => 'min:10|max:255'
@@ -32,12 +35,14 @@ class DepartmentController extends Controller{
 	}
 
 	public function showUpdateForm(Request $request){
+		if(!Auth::user()->canDo('department.update')) return redirect('/401');
 		$department = Department::find($request->id);
 		if (!$department) return view('errors.404');
 		return view('modules.departments.forms.data-form')->with('department', $department);
 	}
 
 	public function update(Request $request){
+		if(!Auth::user()->canDo('department.update')) return redirect('/401');
 		$department = Department::find($request->id);
 		if (!$department) return view('errors.404');
 		Validator::make($request->input(), [
@@ -55,6 +60,7 @@ class DepartmentController extends Controller{
 	}
 
 	public function indexUsers(Request $request){
+		if(!Auth::user()->canDo('department.list')) return redirect('/401');
 		$department = Department::find($request->id);
 		if (!$department) return view('errors.404');
 

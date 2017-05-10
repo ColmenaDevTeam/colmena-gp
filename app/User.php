@@ -98,9 +98,6 @@ class User extends Authenticatable
 
 		}
 	}
-    public function hasPermission($permission){
-
-    }
 
 	public function getTasksPerRange($start, $end){
         $tasks = $this->tasks()->whereBetween('estimated_date',[$start,$end])->get();
@@ -137,5 +134,19 @@ class User extends Authenticatable
 
 	public static function usersCount(){
 		return self::count();
+	}
+
+	public function getAccessLevel(){
+		return $this->roles()->min('level');
+	}
+
+	public function canDo($permisssionSlug){
+
+		foreach ($this->roles as $role) {
+			if ($role->permissions->contains(Permission::whereSlug($permisssionSlug))) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

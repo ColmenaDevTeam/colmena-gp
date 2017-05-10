@@ -87,7 +87,7 @@ class PermissionSeeder extends Seeder
                 'category' => 'Usuarios',
                 'action' => 'Eliminar',
 				'navigation' => false,
-				'slug' => 'usuarios.delete',
+				'slug' => 'users.delete',
 				'level' => 1,
 			),
 			array(
