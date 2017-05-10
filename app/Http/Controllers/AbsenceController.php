@@ -9,7 +9,7 @@ use App\Task;
 use Carbon\Carbon;
 use Validator;
 use App\Calendar;
-use Auth;
+use \Auth;
 
 class AbsenceController extends Controller
 {

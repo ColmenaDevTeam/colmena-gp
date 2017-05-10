@@ -11,7 +11,7 @@ use App\Absence;
 use Validator;
 use App\TaskLog;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Auth;
+use \Auth;
 
 class TaskController extends Controller{
 	public function index(){

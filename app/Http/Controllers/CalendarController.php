@@ -7,6 +7,7 @@ use App\Calendar;
 use App\Task;
 use Validator;
 use Carbon\Carbon;
+use \Auth;
 
 class CalendarController extends Controller
 {

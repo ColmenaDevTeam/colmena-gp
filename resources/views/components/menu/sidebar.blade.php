@@ -8,7 +8,8 @@
 		<li><a href="/forms"><svg class="glyph stroked pencil"><use xlink:href="#stroked-pencil"></use></svg> Forms</a></li>
 		<li><a href="/panels"><svg class="glyph stroked app-window"><use xlink:href="#stroked-app-window"></use></svg> Alerts &amp; Panels</a></li>
 		<li><a href="/icons"><svg class="glyph stroked star"><use xlink:href="#stroked-star"></use></svg> Icons</a></li>
---}}
+
+
 		<li class="parent ">
 			<a href="#">
 				<span data-toggle="collapse" href="#tareas">
@@ -151,8 +152,32 @@
 				</li>
 			</ul>
 		</li>
+		--}}
+		@foreach (Auth::user()->accessList() as $category => $permissions)
+			<li class="parent">
+				<a href="#">
+					<span data-toggle="collapse" href="#{{strtolower($category)}}">
+						<svg class="glyph stroked chevron-down">
+							<use xlink:href="#stroked-chevron-down">
+							</use>
+						</svg>
+						{{ $category }}
+					</span>
+				</a>
+				<ul class="children collapse" id="{{strtolower($category)}}">
+					@foreach ($permissions as $permission)
+						<li>
+							<a class="" href="{{$permission->url}}">
+								<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> {{ $permission->action }}
+							</a>
+						</li>
+					@endforeach
+				</ul>
+			</li>
+		@endforeach
 		<li role="presentation" class="divider"></li>
 	</ul>
+
 	<div class="text-center">
 		<ol class="breadcrumb">
   			  <li>
@@ -171,12 +196,12 @@
   				  </a>
   			  </li>
   			  <li>
-  				  <a target="_blank" href="{{ env('REPOSITORY_URL') }}/stargazers" data-placement="top" title="Calificar Colmena -SGTH con una estrella">
+  				  <a target="_blank" href="{{ env('REPOSITORY_URL') }}/stargazers" data-placement="top" title="Calificar Colmena-GP con una estrella">
   					  <i class="fa fa-star-half-full"></i>
   				  </a>
   			  </li>
   			  <li>
-  				  <a href="/acerca-de" data-placement="top" title="Acerca De Colmena -SGTH">
+  				  <a href="/acerca-de" data-placement="top" title="Acerca De Colmena-GP">
   					  <i class="fa fa-info-circle"></i>
   				  </a>
   			  </li>

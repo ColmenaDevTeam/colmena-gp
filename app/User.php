@@ -91,6 +91,47 @@ class User extends Authenticatable
 		return $this->hasMany('App\Absence', 'user_id');
 	}
 
+	public function accessList(){
+		$accessList = array();
+		foreach ($this->roles as $role) {
+			foreach ($role->permissions as $permission) {
+				if ($permission->navigation) {
+					if(array_key_exists($permission->category, $accessList)){
+						if (!in_array($permission, $accessList[$permission->category]))
+						$accessList[$permission->category][] = $permission;
+					}else{
+						$accessList[$permission->category] = array();
+						if (!in_array($permission, $accessList[$permission->category]))
+						$accessList[$permission->category][] = $permission;
+					}
+				}
+			}
+		}
+		#dd($accessList);
+		/*$all = collect();
+		foreach ($this->roles as $role) {
+			foreach ($role->permissions as $permission) {
+				if (!$all->contains($permission)) {
+					$all->push($permission);
+				}
+			}
+		}
+
+		foreach ($all as $permission) {
+			if ($permission->navigation) {
+				if(array_key_exists($permission->category, $accessList)){
+					if (!in_array($permission, $accessList[$permission->category]))
+					$accessList[$permission->category][] = $permission;
+				}else{
+					$accessList[$permission->category] = array();
+					if (!in_array($permission, $accessList[$permission->category]))
+					$accessList[$permission->category][] = $permission;
+				}
+			}
+		}*/
+		return $accessList;
+	}
+
 	public function generateRegistrationNotify(){
 		try {
 			$this->notify(new UserRegistration($this));

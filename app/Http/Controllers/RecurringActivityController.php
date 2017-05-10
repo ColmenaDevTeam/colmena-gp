@@ -7,6 +7,7 @@ use App\RecurringActivity;
 use App\Calendar;
 use App\User;
 use Validator;
+use \Auth;
 
 class RecurringActivityController extends Controller
 {

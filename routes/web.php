@@ -33,7 +33,7 @@ Route::get('/widgets', function(){
 });
 
 Route::get('/test', function(){
-	dd(App\Calendar::checkYear());
+	dd(\Auth::user()->accessList());
 });
 /**
  * Error routes

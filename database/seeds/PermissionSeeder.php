@@ -15,7 +15,7 @@ class PermissionSeeder extends Seeder
                 'category' => 'Departamentos',
                 'action' => 'Registrar',
 				'navigation' => true,
-				'slug' => 'departaments.create',
+				'slug' => 'departments.create',
 				'level' => 0,
 			),
 
@@ -23,21 +23,21 @@ class PermissionSeeder extends Seeder
                 'category' => 'Departamentos',
                 'action' => 'Modificar',
 				'navigation' => false,
-				'slug' => 'departaments.update',
+				'slug' => 'departments.update',
 				'level' => 0,
 			),
 			array(
                 'category' => 'Departamentos',
                 'action' => 'Listar',
 				'navigation' => true,
-				'slug' => 'departaments.list',
+				'slug' => 'departments.list',
 				'level' => 0,
 			),
 			array(
                 'category' => 'Departamentos',
                 'action' => 'Eliminar',
 				'navigation' => false,
-				'slug' => 'departaments.delete',
+				'slug' => 'departments.delete',
 				'level' => 0,
 			),
 			array(

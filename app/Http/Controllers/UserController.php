@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\User;
 use Carbon\Carbon;
+use \Auth;
 
 class UserController extends Controller{
 
