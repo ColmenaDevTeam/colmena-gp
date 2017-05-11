@@ -10,7 +10,7 @@ use \Auth;
 
 class DepartmentController extends Controller{
 	public function index(){
-		if(!Auth::user()->canDo('department.list')) return redirect('/401');
+		if(!Auth::user()->canDo('departments.list')) return redirect('/401');
 		return view('modules.departments.list')->with('departments', Department::all());
 	}
 

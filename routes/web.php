@@ -91,16 +91,16 @@ Route::group(['middleware' => ['auth']],function(){
 	 /**
 	  * Recurring Activities routes
 	  */
-	 Route::get('/actividades-recurrentes/registrar', 'RecurringActivityController@showDataForm');
-	 Route::get('/actividades-recurrentes/modificar/{id}', 'RecurringActivityController@showUpdateForm');
-	 Route::post('/actividades-recurrentes/modificar/{id}', 'RecurringActivityController@update');
-	 Route::post('/actividades-recurrentes/registrar', 'RecurringActivityController@register');
-	 Route::get('/actividades-recurrentes/listar', 'RecurringActivityController@index');
-	 Route::get('/actividades-recurrentes', function(){ return redirect('/actividades-recurrentes/listar');});
-	 Route::get('/actividades-recurrentes/{id}/ver', 'RecurringActivityController@view');
-	 Route::post('/actividades-recurrentes/eliminar', 'RecurringActivityController@delete');
-	 Route::post('/actividades-recurrentes/reactivar', 'RecurringActivityController@reactivate');
-	 Route::post('/actividades-recurrentes/desactivar', 'RecurringActivityController@desactivate');
+	 Route::get('/actividadesrecurrentes/registrar', 'RecurringActivityController@showDataForm');
+	 Route::get('/actividadesrecurrentes/modificar/{id}', 'RecurringActivityController@showUpdateForm');
+	 Route::post('/actividadesrecurrentes/modificar/{id}', 'RecurringActivityController@update');
+	 Route::post('/actividadesrecurrentes/registrar', 'RecurringActivityController@register');
+	 Route::get('/actividadesrecurrentes/listar', 'RecurringActivityController@index');
+	 Route::get('/actividadesrecurrentes', function(){ return redirect('/actividadesrecurrentes/listar');});
+	 Route::get('/actividadesrecurrentes/{id}/ver', 'RecurringActivityController@view');
+	 Route::post('/actividadesrecurrentes/eliminar', 'RecurringActivityController@delete');
+	 Route::post('/actividadesrecurrentes/reactivar', 'RecurringActivityController@reactivate');
+	 Route::post('/actividadesrecurrentes/desactivar', 'RecurringActivityController@desactivate');
 
 	/**
 	*Department Routes
@@ -156,8 +156,8 @@ Route::group(['middleware' => ['auth']],function(){
 	*/
 	Route::get('/reportes', 'ReportController@index');
 	Route::post('/reportes/generar', 'ReportController@generate');
-	Route::get('/reportes/cintillo-universitario', 'ReportController@showHeader');
-	Route::post('/reportes/cintillo-universitario', 'ReportController@loadHeader');
+	Route::get('/reportes/cintillo', 'ReportController@showHeader');
+	Route::post('/reportes/cintillo', 'ReportController@loadHeader');
 
 });
 Route::get('/acerca-de', 'HomeController@about');

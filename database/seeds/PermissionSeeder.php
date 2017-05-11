@@ -173,33 +173,40 @@ class PermissionSeeder extends Seeder
 
 	        //Desde la version 0.6.0A
 	        array(
-                'category' => 'Actividades Recurrentes',
+                'category' => 'ActividadesRecurrentes',
                 'action' => 'Registrar',
                 'slug' =>'recurring_activities.create',
                 'navigation' => true,
                 'level' => 1,
             ),
 	        array(
-                'category' => 'Actividades Recurrentes',
+                'category' => 'ActividadesRecurrentes',
                 'action' => 'Modificar',
                 'slug' =>'recurring_activities.update',
                 'navigation' => false,
                 'level' => 1,
             ),
 	        array(
-                'category' => 'Actividades Recurrentes',
+                'category' => 'ActividadesRecurrentes',
                 'action' => 'Listar',
                 'slug' =>'recurring_activities.list',
                 'navigation' => true,
                 'level' => 1,
             ),
 	        array(
-                'category' => 'Actividades Recurrentes',
+                'category' => 'ActividadesRecurrentes',
                 'action' => 'Eliminar',
                 'slug' =>'recurring_activities.delete',
                 'navigation' => false,
                 'level' => 1,
-            )
+            ),
+			array(
+				'category' => 'Reportes',
+				'action' => 'Cintillo',
+				'slug' =>'reportes.cintillo',
+				'navigation' => true,
+				'level' => 1,
+			)
 	    );
 	    DB::table('permissions')->insert($action);
     }
