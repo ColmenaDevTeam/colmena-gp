@@ -158,7 +158,7 @@ class PermissionSeeder extends Seeder
 	        //Desde la version 0.5.0A
 	        array(
                 'category' => 'Calendario',
-                'action' => 'Editar',
+                'action' => 'Actualizar',
                 'slug' =>'calendar.update',
                 'navigation' => true,
                 'level' => 0

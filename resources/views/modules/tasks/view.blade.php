@@ -51,7 +51,7 @@
 									<span class="label label-default">{{$task->estimated_date->format('d/m/Y')}}</span>
 
 									<label for="" style="margin-left: 10pt;">Fecha de entrega: </label>
-									<span class="label label-default">{{$task->deliver_date->format('d/m/Y')}}</span>
+									<span class="label label-default">{{!is_null($task->deliver_date) ? $task->deliver_date->format('d/m/Y') : ''}}</span>
 
 									<label for="" style="margin-left: 10pt;">Estado: </label>
 									<span class="label label-default">{{$task->status}}</span>
