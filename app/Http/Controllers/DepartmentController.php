@@ -28,7 +28,6 @@ class DepartmentController extends Controller{
 
 		$department = new Department();
 		$department->name = $request->name;
-		$department->slug = $request->slug;
 		$department->description = $request->description;
 		$department->save();
 		\Session::push('success' , true);
