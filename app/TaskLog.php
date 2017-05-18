@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class TaskLog extends Model
 {
@@ -22,7 +23,7 @@ class TaskLog extends Model
 		$log = new TaskLog;
 		$log->status = 'Diferida';
 		$log->detail = $reason ? self::ABSENCE_DELAY.$oldDate.self::AFTER_DATE.$newDate : self::CALENDAR_DELAY.$oldDate.self::AFTER_DATE.$newDate;
-		$log->user = env('APP_NAME');
+		$log->user = User::first()->id;
 		$log->task_id = $task_id;
 		$log->save();
 	}
