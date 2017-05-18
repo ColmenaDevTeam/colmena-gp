@@ -35,4 +35,11 @@ class Absence extends Model
 		return self::where('start_date', '<=', date('Y-m-d'))
 					->where('end_date', '>=', date('Y-m-d'))->get();
 	}
+
+	public function isActive(){
+		if ($this->start_date <= Carbon::now() && $this->end_date >= Carbon::now()) {
+			return true;
+		}
+		return false;
+	}
 }

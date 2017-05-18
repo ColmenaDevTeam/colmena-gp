@@ -14,7 +14,7 @@
 		<link href="/css/font-awesome.min.css" rel="stylesheet">
 		<!--Icons-->
 		<script src="/js/lumino.glyphs.js"></script>
-
+		@yield('css')
 		<!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
 		<script src="js/respond.min.js"></script>

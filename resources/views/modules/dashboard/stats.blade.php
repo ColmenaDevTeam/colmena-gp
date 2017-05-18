@@ -8,7 +8,7 @@
 				<div class="col-sm-9 col-lg-7 widget-right">
 					<a href="/tareas/listar">
 						<div class="large">{{ $tasksCount }}</div>
-						<div class="text-muted">Tareas Pendientes</div>
+						<div class="text-muted"><small>Tareas Pendientes</small></div>
 					</a>
 				</div>
 			</div>
@@ -22,7 +22,7 @@
 				</div>
 				<div class="col-sm-9 col-lg-7 widget-right">
 					<div class="large">{{ $absencesCount }}</div>
-					<div class="text-muted">Ausencias Activas</div>
+					<div class="text-muted"><small>Ausencias Activas</small></div>
 				</div>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 				</div>
 				<div class="col-sm-9 col-lg-7 widget-right">
 					<div class="large">{{ $birthdates }}</div>
-					<div class="text-muted">Cumpleañeros (Semana)</div>
+					<div class="text-muted"><small>Cumpleañer@s</small></div>
 				</div>
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 				</div>
 				<div class="col-sm-9 col-lg-7 widget-right">
 					<div class="large">{{ $usersCount }}</div>
-					<div class="text-muted">Usuarios Asignados</div>
+					<div class="text-muted"><small>Usuarios</small></div>
 				</div>
 			</div>
 		</div>

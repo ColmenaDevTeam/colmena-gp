@@ -29,10 +29,10 @@
 						<span class="color"></span>
 					</h3>
 					<p>
-						Un sistema de información que se encargua de la gestión del Talento Humano dentro del
+						Un sistema de información que se encarga de la gestión del Talento Humano dentro del
 						Programa Nacional de Formación en Informática el cual permite la gestión de las tareas asignadas a cada docente de manera
 						computarizada, permitiendo mantener un seguimiento a las tareas de forma expedita y
-						automatizada, mejorando de manera significativa el rendimiento en la cronología de las
+						automatizada, mejorando de manera significativa el rendimiento de la cronología de las
 						asignaciones.
 					</p>
 
@@ -48,10 +48,9 @@
 					<h3><span>Por qué surge Colmena GeekPro</span></h3>
 				</div>
 				<p>
-					Debido al constante desarrollo del Departamento del <span class="highlight">Programa Nacional de
-					Formacion en Informatica (PNF-I)</span> de la Universidad Politécnica Territorial
-					Andrés Eloy Blanco, cada vez se torna más complicada
-					la gestión de los procesos que se llevan a cabo dentro del departamento, como
+					Debido al constante desarrollo de la <span class="highlight">Universidad Politécnica Territorial
+					Andrés Eloy Blanco (UPTAEB)</span>, cada vez se torna más complicada
+					la gestión de los procesos que se llevan a cabo dentro de la institución, como
 					por ejemplo la gerencia de las actividades pendientes por parte de cada comisión
 					o profesor,	además del manejo de las eventualidades (conflictos profesorales,
 					estudiantiles, académicos, educativos, entre otros).
@@ -62,20 +61,21 @@
 					<h3><span>La solución planteada</span></h3>
 				</div>
 				<p>
-					Desarrollar un sistema que permita la gestión del Talento Humano en el Departamento del
-					<span class="highlight">Programa Nacional de Formación en Informática (PNFI)</span> de la Universidad Politécnica Territorial
-					Andrés Eloy Blanco. Para optimizar uno de los procesos mas sensibles de dicho departamento, apuntando a un mejoramiento en los
+					Desarrollar un sistema que permita la gestión del Talento Humano en la
+					<span class="highlight">Universidad Politécnica Territorial
+					Andrés Eloy Blanco</span>. Para optimizar uno de los procesos mas sensibles de dicha institución, apuntando a un mejoramiento en los
 					resultados a obtener, ademas de brindar las herramientas necesarias para hacer un seguimiento claro del personal y de la
 					eficiencia.
 				</p>
 			</div>
 			<div class="col-md-4">
 				<div class="block-heading-two">
-					<h3><span>Acerca del PNF-I</span></h3>
+					<h3><span>Acerca del UPTAEB</span></h3>
 				</div>
 				<p>
-					<span class="highlight">El Programa Nacional de Formación en Informática (PNFI)</span> permite consolidar la
-					formación crítica productiva del profesional en Informática propiciando la formación
+					<span class="highlight">La Universidad Politécnica Territorial
+					Andrés Eloy Blanco</span> permite consolidar la
+					formación crítica productiva de profesionales propiciando la formación
 					humanista, sociopolítica, comprometido con los cambios económicos, sociales, políticos,
 					culturales, tecnológicos del país.
 				</p>
@@ -167,9 +167,9 @@
 				</div>
 				<div class="col-md-3 col-sm-4">
 					<!-- Team Member -->
-					<div class="team-member">
+					<div class="team-member"><br><br>
 						<!-- Image -->
-						<img class="img-responsive img-rounded" src="/img/equipo/konh.jpg" alt="">
+						<img class="img-responsive img-rounded" src="/img/avatar_2x.png" alt="">
 						<!-- Name -->
 						<h4>Rodríguez Noretsys</h4>
 						<a target="_blank" href="https://www.facebook.com/noretsys.rodriguez">

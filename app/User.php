@@ -164,9 +164,26 @@ class User extends Authenticatable
 	public function getUrlAttribute(){
 		return "/usuarios/perfil/".$this->id;
 	}
+	public static function birthdatesCount(){
+		$users = \Auth::user()->department->users;
+		$count = 0;
+		foreach ($users as $user) {
+			if ($user->birthdate->isBirthday()) {
+				$count += 1;
+			}
+		}
+		return $count;
+	}
+
 	public static function birthdates(){
-		return self::where('birthdate', '=', Carbon::now()->subDays(3))
-					->where('birthdate', '=', Carbon::now()->addDays(3))->count();
+		$users = \Auth::user()->department->users;
+		$birthdates = collect();
+		foreach ($users as $user) {
+			if ($user->birthdate->isBirthday()) {
+				$birthdates->push($user);
+			}
+		}
+		return $birthdates;
 	}
 
 	public static function usersCount(){

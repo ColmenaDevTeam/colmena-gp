@@ -7,6 +7,8 @@ use App\Task;
 use App\Absence;
 use App\User;
 use App\Department;
+use \Auth;
+use Carbon\Carbon;
 
 class HomeController extends Controller{
     /**
@@ -15,10 +17,97 @@ class HomeController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function index(){
+		date_default_timezone_set('America/Caracas');
+		$hotToday = [];
+		$pending = [];
+		
+		$birthdayPpl = User::birthdates();
 
+		$tasks = Task::where('user_id', Auth::user()->id)->get();
+		$absences = Absence::where('user_id', Auth::user()->id)->get();
+		if(Auth::user()->canDo('tasks.list'))
+			$tasks = Auth::user()->department->tasks;
+		if(Auth::user()->canDo('absences.list'))
+			$absences = Auth::user()->department->absences;
+		$i = 0;
+		foreach($tasks as $task){
+			if($task->status != 'Cumplida' && $task->status != 'Cancelada'){
+				$task->itemKind = 'tasks';
+				$task->idTag = 'Tarea'.$i;
+				$totalDays = $task->created_at->diffInDays($task->estimated_date);
+				$passedDays = $task->created_at->diffInDays(Carbon::now());
+				$task->percent = 0;
+				if($passedDays > 0 && $totalDays > 0)
+					$task->percent = ($passedDays*100)/$totalDays;
+				//$task->percent = $percent;
+				if($task->estimated_date->isPast() || $task->estimated_date->isToday())
+					$task->percent = 100;
+				if($task->percent > 0 && $task->percent < 40)
+					$task->cssStatus = 'progress-bar-success';
+				elseif($task->percent >= 40 && $task->percent < 80)
+					$task->cssStatus = 'progress-bar-warning';
+				elseif($task->percent >= 80)
+					$task->cssStatus = 'progress-bar-danger';
+				$pending[] = $task;
+				$i++;
+			}
+		}
+		$i = 0;
+		foreach($absences as $absence){
+			$absence->itemKind = 'absences';
+			if($absence->PerRep)
+				$absence->idTag = "Permiso".$i;
+			else
+				$absence->idTag = "Repeposo".$i;
+			#$absence->user = User::findOrFail($absence->user_id);
+
+			#$fechaInicio = Carbon::createFromFormat('Y-m-d', $absence->fecIni, 'America/Caracas');
+			#$fechaFin = Carbon::createFromFormat('Y-m-d', $absence->fecFin, 'America/Caracas');
+			if($absence->start_date->isPast() || $absence->end_date->isToday())
+				continue;
+			$totalDays = $absence->start_date->diffInDays($absence->end_date);
+
+			$passedDays = $absence->start_date->diffInDays(Carbon::now());
+			$percent = 0;
+			if($passedDays > 0 && $totalDays > 0)
+				$percent = ($passedDays*100)/$totalDays;
+			$absence->percent = $percent;
+			if($absence->end_date->isPast() || $absence->end_date->isToday())
+				$absence->percent = 100;
+			//$absence->estadoCss = 'progress-bar-info';
+			$pending[] = $absence;
+			$i++;
+		}
+		foreach($birthdayPpl as $cumpleaniero){
+			$cumpleaniero->itemKind = "birthdates";
+			$cumpleaniero->idTag = "Cumple".$i;
+			$pending[] = $cumpleaniero;
+		}
+		$itemKind = ["tasks", "birthdates", "absences"];
+		$cssClassPerKind['tasks'] = "list-group-item-info";
+		$cssClassPerKind['birthdates'] = "list-group-item-success";
+		$cssClassPerKind['absences'] = "list-group-item-warning";
+
+		foreach($pending as $pen){
+			$fechaHoy = getdate();
+			if($pen->itemKind == 'birthdates'){
+					$hotToday[] = $pen;
+			}
+			elseif($pen->itemKind == 'tasks'){
+				if($pen->estimated_date->isToday())
+					$hotToday[] = $pen;
+			}
+			elseif($pen->itemKind == 'absences'){
+				if($pen->isActive())
+					$hotToday[] = $pen;
+			}
+		}
         return view('modules.dashboard.index')->with(['tasksCount' => Task::countTasks(), 'absencesCount' => Absence::countActiveAbsences(),
-													'birthdates' => User::birthdates(), 'usersCount' => User::usersCount()]);
-    }
+													'birthdates' => User::birthdatesCount(), 'usersCount' => User::usersCount(),
+													'itemKind' => $itemKind, 'hotToday' => $hotToday, 'cssClassPerKind' => $cssClassPerKind
+												]);
+
+	}
 
 	/**
 	 * Show the application 'about us'.

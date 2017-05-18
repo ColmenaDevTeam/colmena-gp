@@ -20,4 +20,12 @@ class Department extends Model
 	public function users(){
 		return $this->hasMany('App\User', 'department_id');
 	}
+
+	public function tasks(){
+		return $this->hasManyThrough('App\Task', 'App\User');
+	}
+
+	public function absences(){
+		return $this->hasManyThrough('App\Absence', 'App\User');
+	}
 }
