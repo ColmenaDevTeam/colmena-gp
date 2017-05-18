@@ -20,7 +20,7 @@ class HomeController extends Controller{
 		date_default_timezone_set('America/Caracas');
 		$hotToday = [];
 		$pending = [];
-		
+
 		$birthdayPpl = User::birthdates();
 
 		$tasks = Task::where('user_id', Auth::user()->id)->get();
@@ -32,7 +32,7 @@ class HomeController extends Controller{
 		$i = 0;
 		foreach($tasks as $task){
 			if($task->status != 'Cumplida' && $task->status != 'Cancelada'){
-				$task->itemKind = 'tasks';
+				$task->itemKind = 'tareas';
 				$task->idTag = 'Tarea'.$i;
 				$totalDays = $task->created_at->diffInDays($task->estimated_date);
 				$passedDays = $task->created_at->diffInDays(Carbon::now());
@@ -54,7 +54,7 @@ class HomeController extends Controller{
 		}
 		$i = 0;
 		foreach($absences as $absence){
-			$absence->itemKind = 'absences';
+			$absence->itemKind = 'ausencias';
 			if($absence->PerRep)
 				$absence->idTag = "Permiso".$i;
 			else
@@ -79,32 +79,33 @@ class HomeController extends Controller{
 			$i++;
 		}
 		foreach($birthdayPpl as $cumpleaniero){
-			$cumpleaniero->itemKind = "birthdates";
+			$cumpleaniero->itemKind = "cumpleanios";
 			$cumpleaniero->idTag = "Cumple".$i;
 			$pending[] = $cumpleaniero;
 		}
-		$itemKind = ["tasks", "birthdates", "absences"];
-		$cssClassPerKind['tasks'] = "list-group-item-info";
-		$cssClassPerKind['birthdates'] = "list-group-item-success";
-		$cssClassPerKind['absences'] = "list-group-item-warning";
+		$itemKinds = ["tareas", "cumpleanios", "ausencias"];
+		$cssClassPerKind['tareas'] = "list-group-item-info";
+		$cssClassPerKind['cumpleanios'] = "list-group-item-success";
+		$cssClassPerKind['ausencias'] = "list-group-item-warning";
 
 		foreach($pending as $pen){
 			$fechaHoy = getdate();
-			if($pen->itemKind == 'birthdates'){
+			if($pen->itemKind == 'cumpleanios'){
 					$hotToday[] = $pen;
 			}
-			elseif($pen->itemKind == 'tasks'){
+			elseif($pen->itemKind == 'tareas'){
 				if($pen->estimated_date->isToday())
 					$hotToday[] = $pen;
 			}
-			elseif($pen->itemKind == 'absences'){
+			elseif($pen->itemKind == 'ausencias'){
 				if($pen->isActive())
 					$hotToday[] = $pen;
 			}
 		}
         return view('modules.dashboard.index')->with(['tasksCount' => Task::countTasks(), 'absencesCount' => Absence::countActiveAbsences(),
 													'birthdates' => User::birthdatesCount(), 'usersCount' => User::usersCount(),
-													'itemKind' => $itemKind, 'hotToday' => $hotToday, 'cssClassPerKind' => $cssClassPerKind
+													'itemKinds' => $itemKinds, 'hotToday' => $hotToday, 'cssClassPerKind' => $cssClassPerKind,
+													'pending' => $pending
 												]);
 
 	}

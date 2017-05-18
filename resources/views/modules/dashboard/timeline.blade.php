@@ -13,13 +13,13 @@
 				<ul id="issues">
 					@foreach($hotToday as $item)
 						<li id="{{$item->idTag}}">
-							@if($item->itemKind == 'birthdates')
+							@if($item->itemKind == 'cumpleanios')
 								<img src="/img/cartelera/cumpleanios.png" width="256" height="256" />
 								<h1>{{$item->fullname}}</h1>
 								<p>
 									Está de cumpleaños el día de hoy
 								</p>
-							@elseif($item->itemKind == 'tasks')
+							@elseif($item->itemKind == 'tareas')
 								<img src="/img/cartelera/tarefas.png" width="256" height="256" />
 								<p>
 									Tarea pendiente por entregar el día de hoy:
@@ -27,7 +27,7 @@
 									Responsable: {{$item->responsible->fullname}}<hr>
 									{{$item->details}}
 								</p>
-							@elseif($item->itemKind == 'absences')
+							@elseif($item->itemKind == 'ausencias')
 								<img src="{{$item->type ? '/img/cartelera/reposos.png' : '/img/cartelera/medical-logo.png'}}" width="256" height="256" />
 								<h1>{{$item->user->fullname}}</h1>
 								<p>

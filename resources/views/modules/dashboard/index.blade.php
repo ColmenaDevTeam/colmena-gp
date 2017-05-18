@@ -14,6 +14,7 @@
 											'absencesCount' => $absencesCount,
 											'birthdates' => $birthdates])
 		@include('modules.dashboard.timeline')
+		{{--@include('modules.dashboard.boxes')--}}
 	</div>	<!--/.main-->
 
 @endsection
