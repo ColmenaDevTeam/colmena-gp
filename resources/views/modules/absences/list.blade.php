@@ -50,7 +50,7 @@
 											<a href="/ausencias/{{$absence->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
 										</td>
 										<td>
-											<a class="btn" id="update" href="/ausencias/editar/{{$absence->id}}">
+											<a class="btn" id="update" href="/ausencias/modificar/{{$absence->id}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>

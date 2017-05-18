@@ -53,7 +53,7 @@
 								<a href="#"  onclick="$('#{{ $activity->active ? 'desactivate' : 'reactivate' }}-form-modal').modal().show(); return false;" class="btn btn-{{ $activity->active ? 'warning' : 'success' }}">
 									<i class="fa fa-check-square-o"></i>{{ $activity->active ? 'Desactivar' : 'Activar' }} Actividad
 								</a>
-								<a class="btn btn-info" id="update" href="/actividades-recurrentes/editar/{{$activity->id}}">
+								<a class="btn btn-info" id="update" href="/actividades-recurrentes/modificar/{{$activity->id}}">
 									<i class="fa fa-pencil"></i>Modificar
 								</a>
 								<a class="btn btn-danger" href="#" onclick="$('#delete-form-modal').modal().show();">

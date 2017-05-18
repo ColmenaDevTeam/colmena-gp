@@ -52,7 +52,13 @@ class TaskController extends Controller{
 			$task->details = $request->details;
 			$task->responsible()->associate($user);
 			$task->save();
-			$task->generateNotification();
+			try {
+				$task->generateNotification();
+
+			} catch (\Exception $e) {
+
+			}
+
 		}
 		\Session::push('success', true);
 		return redirect("tareas/listar")->with(['tasks' => Task::getActiveTask()]);

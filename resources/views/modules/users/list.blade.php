@@ -58,7 +58,7 @@
 											@endif
 										</td>
 										<td >
-											<a class="btn btn-info" id="update" href="/usuarios/editar/{{$user->id}}">
+											<a class="btn btn-info" id="update" href="/usuarios/modificar/{{$user->id}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>

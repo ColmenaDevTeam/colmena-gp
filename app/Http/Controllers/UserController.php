@@ -45,7 +45,14 @@ class UserController extends Controller{
 		$user->gender = $request->gender;
 		$user->department_id = \Auth::user()->department_id;
 		$user->save();
-		$user->generateRegistrationNotify();
+		try {
+			$user->generateRegistrationNotify();
+		} catch (\Exception $e) {
+			#dd("GG");
+			#Colocar Acá el fallback de lo que deba ocurrir cuando
+		}
+
+
 		\Session::push('success' , true);
 		return redirect("usuarios/registrar");
 	}
@@ -136,7 +143,7 @@ class UserController extends Controller{
 		if ($user == null) {
 			return redirect('/404');
 		}
-		if(!Auth::user()->id =! $user->id) return redirect('/401');
+		if(Auth::user()->id =! $user->id) return redirect('/401');
 		Validator::make($request->input(), [
 			'email' => 'email|required',
 			'phone' => 'numeric|required'
@@ -155,7 +162,7 @@ class UserController extends Controller{
 		if ($user == null) {
 			return redirect('/404');
 		}
-		if(!Auth::user()->id =! $user->id) return redirect('/401');
+		if(Auth::user()->id =! $user->id) return redirect('/401');
 		Validator::make($request->input(), [
 			'password' => 'min:6|max:15|confirmed'
 		])->validate();

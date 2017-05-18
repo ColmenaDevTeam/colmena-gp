@@ -43,7 +43,7 @@
 											<a href="/departamento/{{$department->id}}/listado">{{ count($department->users) }}</a>
 										</td>
 										<td>
-											<a class="btn" id="update" href="/departamentos/editar/{{$department->id}}">
+											<a class="btn" id="update" href="/departamentos/modificar/{{$department->id}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>

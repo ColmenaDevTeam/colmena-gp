@@ -39,7 +39,7 @@
 										<td><a href="/roles/ver/{{$role->id}}">{{$role->name}}</a></td>
 										<td>{{$role->level}}</td>
 										<td>
-											<a class="btn" id="update" href="/roles/editar/{{$role->id}}">
+											<a class="btn" id="update" href="/roles/modificar/{{$role->id}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>

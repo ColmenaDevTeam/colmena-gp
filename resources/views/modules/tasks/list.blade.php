@@ -58,7 +58,7 @@
 											<a href="/tareas/{{$task->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
 										</td>
 										<td>
-											<a class="btn btn-warning" id="update" href="/tareas/editar/{{$task->id}}">
+											<a class="btn btn-warning" id="update" href="/tareas/modificar/{{$task->id}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>

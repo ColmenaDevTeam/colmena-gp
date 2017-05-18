@@ -57,7 +57,7 @@
 											<a href="/actividades-recurrentes/{{$activity->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
 										</td>
 										<td>
-											<a class="btn btn-warning" id="update" href="/actividades-recurrentes/editar/{{$activity->id}}">
+											<a class="btn btn-warning" id="update" href="/actividades-recurrentes/modificar/{{$activity->id}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>

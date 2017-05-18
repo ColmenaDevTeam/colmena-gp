@@ -51,7 +51,13 @@ class Task extends Model{
 				$task->estimated_date = $nextDate;
 				$task->status = "Diferida";
 				$task->save();
-				$task->generateCalendarDelayNotification();
+				try {
+					$task->generateCalendarDelayNotification();
+
+				} catch (\Exception $e) {
+
+				}
+
 			}
 		}
 	}
@@ -75,7 +81,13 @@ class Task extends Model{
 		foreach ($tasks as $task) {
 			$task->status = 'Retardada';
 			$task->save();
-			$task->generateDelayedTaskNotification();
+			try {
+				$task->generateDelayedTaskNotification();
+
+			} catch (\Exception $e) {
+
+			}
+
 		}
 	}
 
@@ -98,7 +110,13 @@ class Task extends Model{
 				$task->type  = $activity->task_type ;
 				$task->responsible()->associate($user);
 				$task->save();
-				$task->generateNotification();
+				try {
+					$task->generateNotification();
+
+				} catch (\Exception $e) {
+
+				}
+
 				$activity->last_launch = date('Y-m-d');
 				$active->save();
 				#notifyUser
@@ -107,34 +125,18 @@ class Task extends Model{
 		}
 	}
 	public function generateNotification(){
-		try {
-			$this->responsible->notify(new NewTaskAssignment($this));
-		} catch (Exception $e) {
-
-		}
+		$this->responsible->notify(new NewTaskAssignment($this));
 	}
 
 	public function generateCalendarDelayNotification(){
-		try {
-			$this->responsible->notify(new CalendarTasksDelay($this));
-		} catch (Exception $e) {
-
-		}
+		$this->responsible->notify(new CalendarTasksDelay($this));
 	}
 
 	public function generateAbsenceDelayNotification(){
-		try {
-			$this->responsible->notify(new AbsenceTasksDelay($this));
-		} catch (Exception $e) {
-
-		}
+		$this->responsible->notify(new AbsenceTasksDelay($this));
 	}
 
 	public function generateDelayedTaskNotification(){
-		try {
-			$this->responsible->notify(new DelayedTask($this));
-		} catch (Exception $e) {
-
-		}
+		$this->responsible->notify(new DelayedTask($this));
 	}
 }

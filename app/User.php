@@ -133,11 +133,7 @@ class User extends Authenticatable
 	}
 
 	public function generateRegistrationNotify(){
-		try {
-			$this->notify(new UserRegistration($this));
-		} catch (Exception $e) {
-
-		}
+		$this->notify(new UserRegistration($this));
 	}
 
 	public function getTasksPerRange($start, $end){
