@@ -85,10 +85,14 @@
 						 					<hr>
 											@foreach ($task->taskLogs as $log)
 												<div class="text-center">
-													<span class="label label-default">{{$log->created_at}}</span> Por: <span class="label label-default">{{$log->user}}</span> Estado: <span class="label label-default">{{$log->status}}</span> <br>{{$log->details}}
+													<span class="label label-info">{{$log->created_at}}</span> Por: <span class="label label-primary">{{$log->user}}</span> Estado: <span class="label label-warning">{{$log->status}}</span> <br>{{$log->details}}
 												</div>
 												<div class="text-justify">
-													<p>{{ $log->detail }}</p>
+													<strong>Detalles:</strong><p>{{ $log->detail }}</p>
+												</div>
+												<div class="text-center">
+													Firmado digitalmente por: {{$log->user}} con la llave: <br>
+													RSA-PK:<span class="label label-success">asdasdfqwfc</span>
 												</div>
 												<hr>
 											@endforeach

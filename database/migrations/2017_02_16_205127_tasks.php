@@ -21,7 +21,7 @@ class Tasks extends Migration
             $table->text('details');
             $table->integer('priority');
             $table->integer('complexity');
-            $table->enum('status',['Asignada','Revision','Cumplida','Cancelada','Diferida','Retardada']);
+            $table->enum('status',['Asignada','Revision','Cumplida','Cancelada','Diferida','Retardada'])->default('Asignada');
             $table->enum('type',['Academico-Docente','Administrativas','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion']);
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
