@@ -159,5 +159,16 @@ Route::group(['middleware' => ['auth']],function(){
 	Route::get('/reportes/cintillo', 'ReportController@showHeader');
 	Route::post('/reportes/cintillo', 'ReportController@loadHeader');
 
+
+	/**
+	*Steganography Routes
+	*/
+
+	Route::get('/seguridad/elegir-imagen', 'SteganographyController@showDataForm');
+	Route::post('/seguridad/elegir-imagen', 'SteganographyController@save');
+
+	Route::get('/secureimages/base/{filename}', 'SteganographyController@loadBaseImage')->name('baseimage');
+	Route::get('/secureimages/users/{filename}', 'SteganographyController@loadUserImage')->name('userimage');
+
 });
 Route::get('/acerca-de', 'HomeController@about');
