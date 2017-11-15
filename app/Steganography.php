@@ -6,22 +6,39 @@ use App\User;
 use KzykHys\Steganography\Processor;
 use \Hash;
 use \File;
+use \Response;
 class Steganography
 {
-    const BASE_IMAGE_PATH = '/secureimages/base';
-    const USERS_IMAGE_PATH = '/secureimages/users';
+    const BASE_IMAGE_PATH = '/secureimages/base/';
+    const USERS_IMAGE_PATH = '/secureimages/users/';
 
-    public static function check($request, $user){
-        if (condition) {
-            # code...
+    public static function make($passphrase, $filename, $user_id){
+     
+        $hashed = \Hash::make($passphrase);
+        $processor = new Processor();
+        $image = $processor->encode(self::getFullBasePath().$filename, $hashed);
+        $image->write(self::getFullUsersPath().$user_id.'.png');
+    
+    }
+
+    public static function check($passprase, $user_id){
+        
+        $processor = new Processor();
+        $message = $processor->decode(self::getFullUsersPath().$user_id.'.png');
+        
+        if (\Hash::check($passphrase, $message)) {
+            return true;
+        }else{
+            return false;
         }
+
 	}
 
     public static function getFullBasePath(){
         return storage_path().self::BASE_IMAGE_PATH;
     }
 
-    public static function getFullUserPath(){
+    public static function getFullUsersPath(){
         return storage_path().self::USERS_IMAGE_PATH;
     }
 

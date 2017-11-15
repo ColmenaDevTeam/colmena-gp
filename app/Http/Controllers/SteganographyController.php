@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Steganography;
 use \File;
+use KzykHys\Steganography\Processor;
+use \Hash;
 
 class SteganographyController extends Controller
 {
@@ -23,20 +25,20 @@ class SteganographyController extends Controller
 		return Steganography::getImage($path);
 	}
 
-	/*
-	Route::get('/avatars/{filename}', function ($filename)
-	{
-	    $path = storage_path() . '/avatars/' . $filename;
+	public function save(Request $request){
+		validator($request->all(), [
+			'secureimg' => 'required',
+			'passphrase' => 'required|confirmed'
+			])->validate();
 
-	    if(!File::exists($path)) abort(404);
+		Steganography::make($request->passphrase, $request->secureimg, \Auth::user()->cedula);
 
-	    $file = File::get($path);
-	    $type = File::mimeType($path);
+		return redirect('/')->with(['success' => true]);
+	}
 
-	    $response = Response::make($file, 200);
-	    $response->header("Content-Type", $type);
-	    return $response;
-	})->name('avatar');
-
-	*/
+	public function test(){
+		$processor = new Processor();
+		$message = $processor->decode(Steganography::getFullUsersPath().\Auth::user()->cedula.'.png');
+		dd($message);
+	}
 }
