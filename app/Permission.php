@@ -41,6 +41,6 @@ class Permission extends Model{
 	}
 
 	public function getUrlAttribute(){
-		return '/'.strtolower($this->category).'/'.strtolower($this->action);
+		return url(strtolower($this->category).'/'.strtolower($this->action));
 	}
 }

@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
             <div class="login-panel panel panel-default">
-				<img src="/img/logo/banner.png" alt="colmenena geek-pro edition" class="img img-responsive">
+				<img src="{{url("/img/logo/banner.png")}}" alt="colmenena geek-pro edition" class="img img-responsive">
                 <div class="panel-heading">Ingreso</div>
                 <div class="panel-body">
                     <form role="form" method="POST" action="{{ url('/login') }}">

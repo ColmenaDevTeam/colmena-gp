@@ -7,21 +7,21 @@
 		<meta name="description" content="colmena geek pro edition" />
 		<meta name="author" content="Qsoto" />
         <!-- css -->
-        <link href="/css/bootstrap.min.css" rel="stylesheet" />
-        <link href="/css/styles.css" rel="stylesheet">
-        <link href="/css/super.css" rel="stylesheet" />
+        <link href="{{url("/css/bootstrap.min.css")}}" rel="stylesheet" />
+        <link href="{{url("/css/styles.css")}}" rel="stylesheet">
+        <link href="{{url("/css/super.css")}}" rel="stylesheet" />
 
     </head>
     <body>
 		<div class="container">
 			<div class="pull-right">
-				<a href="/">Volver al inicio</a>
+				<a href="{{ url("/") }}">Volver al inicio</a>
 			</div>
 			@yield('content')
 		</div>
-		<script src="js/jquery-1.11.1.min.js"></script>
-		<script src="/js/bootstrap.min.js"></script>
-		<script src="/js/main.js"></script>
+		<script src="{{url("js/jquery-1.11.1.min.js")}}"></script>
+		<script src="{{url("/js/bootstrap.min.js")}}"></script>
+		<script src="{{url("/js/main.js")}}"></script>
 		<script type="text/javascript">
 			!function ($) {
 			$(document).on("click","ul.nav li.parent > a > span.icon", function(){

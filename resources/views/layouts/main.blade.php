@@ -7,13 +7,13 @@
 		<meta name="description" content="colmena geek-pro edition" />
 		<meta name="author" content="Qsoto" />
 
-		<link href="/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/css/datepicker3.css" rel="stylesheet">
-		<link href="/css/bootstrap-table.css" rel="stylesheet">
-		<link href="/css/styles.css" rel="stylesheet">
-		<link href="/css/font-awesome.min.css" rel="stylesheet">
+		<link href="{{url("/css/bootstrap.min.css")}}" rel="stylesheet">
+		<link href="{{url("/css/datepicker3.css")}}" rel="stylesheet">
+		<link href="{{url("/css/bootstrap-table.css")}}" rel="stylesheet">
+		<link href="{{url("/css/styles.css")}}" rel="stylesheet">
+		<link href="{{url("/css/font-awesome.min.css")}}" rel="stylesheet">
 		<!--Icons-->
-		<script src="/js/lumino.glyphs.js"></script>
+		<script src="{{url("/js/lumino.glyphs.js")}}"></script>
 		@yield('css')
 		<!--[if lt IE 9]>
 		<script src="js/html5shiv.js"></script>
@@ -27,8 +27,8 @@
 			@include("components.menu.sidebar")
 			@yield('content')
 		</div>
-		<script src="/js/jquery-1.11.1.min.js"></script>
-		<script src="/js/bootstrap.min.js"></script>
+		<script src="{{url("/js/jquery-1.11.1.min.js")}}"></script>
+		<script src="{{url("/js/bootstrap.min.js")}}"></script>
 		@yield('js')
 		<script>
 			!function ($) {
