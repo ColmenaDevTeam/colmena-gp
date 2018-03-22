@@ -7,6 +7,7 @@
 		<meta name="description" content="colmena geek pro edition" />
 		<meta name="author" content="Qsoto" />
         <!-- css -->
+        <link rel="shortcut icon" type=”image/png”  href="{{url("favicon.ico")}}">
         <link href="{{url("/css/bootstrap.min.css")}}" rel="stylesheet" />
         <link href="{{url("/css/styles.css")}}" rel="stylesheet">
         <link href="{{url("/css/super.css")}}" rel="stylesheet" />

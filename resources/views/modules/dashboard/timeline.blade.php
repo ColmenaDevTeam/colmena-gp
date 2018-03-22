@@ -14,13 +14,13 @@
 					@foreach($hotToday as $item)
 						<li id="{{$item->idTag}}">
 							@if($item->itemKind == 'cumpleanios')
-								<img src="/img/cartelera/cumpleanios.png" width="256" height="256" />
+								<img src="{{url("/img/cartelera/cumpleanios.png")}}" width="256" height="256" />
 								<h1>{{$item->fullname}}</h1>
 								<p>
 									Está de cumpleaños el día de hoy
 								</p>
 							@elseif($item->itemKind == 'tareas')
-								<img src="/img/cartelera/tarefas.png" width="256" height="256" />
+								<img src="{{url("/img/cartelera/tarefas.png")}}" width="256" height="256" />
 								<p>
 									Tarea pendiente por entregar el día de hoy:
 									<a href="{{--$item->getURL()--}}">{{$item->titulo}}</a><br>
@@ -28,7 +28,7 @@
 									{{$item->details}}
 								</p>
 							@elseif($item->itemKind == 'ausencias')
-								<img src="{{$item->type ? '/img/cartelera/reposos.png' : '/img/cartelera/medical-logo.png'}}" width="256" height="256" />
+								<img src="{{$item->type ? url("/img/cartelera/reposos.png") : url("/img/cartelera/medical-logo.png")}}" width="256" height="256" />
 								<h1>{{$item->user->fullname}}</h1>
 								<p>
 									Está de {{$item->type ? 'Permiso' : 'Reposo'}} hasta: {{$item->end_date}}<br>

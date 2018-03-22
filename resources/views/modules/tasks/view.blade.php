@@ -65,7 +65,7 @@
 						</div><!-- ./col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div class="text-center">
-								<a class="btn btn-warning" id="update" href="/tareas/modificar/{{$task->id}}">
+								<a class="btn btn-warning" id="update" href="{{url("/tareas/modificar/$task->id")}}">
 									<i class="fa fa-pencil"></i>Modificar
 								</a>
 								<a class="btn btn-danger" href="#" onclick="$('#delete-form-modal').modal().show();">

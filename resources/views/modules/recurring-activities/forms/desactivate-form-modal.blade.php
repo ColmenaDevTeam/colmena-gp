@@ -23,7 +23,7 @@
     </div>
   </div>
 </div>
-<form id="desactivate-activity" method="post" action="/actividades-recurrentes/desactivar">
+<form id="desactivate-activity" method="post" action="{{url("/actividades-recurrentes/desactivar")}}">
 	{{ csrf_field() }}
 	<input type="hidden" name="id" value="{{$activity->id}}">
 </form>

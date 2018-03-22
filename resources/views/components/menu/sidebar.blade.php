@@ -1,6 +1,6 @@
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 	<ul class="nav menu">
-		<li class="active"><a href="/"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Cartelera</a></li>
+		<li class="active"><a href="{{url("/")}}"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Cartelera</a></li>
 		@foreach (Auth::user()->accessList() as $category => $permissions)
 			<li class="parent">
 				<a href="#">

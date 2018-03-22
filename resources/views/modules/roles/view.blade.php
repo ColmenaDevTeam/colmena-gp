@@ -68,6 +68,6 @@
 	</div>
 @endsection
 @section('js')
-	<script src="/js/easypiechart.js"></script>
-	<script src="/js/easypiechart-data.js"></script>
+	<script src="{{url("/js/easypiechart.js")}}"></script>
+	<script src="{{url("/js/easypiechart-data.js")}}"></script>
 @endsection

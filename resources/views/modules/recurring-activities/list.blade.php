@@ -4,7 +4,7 @@
 @extends('layouts.main')
 @section('css')
 	{{--<link rel="stylesheet" href="/css/dataTables.bootstrap.min.css">--}}
-	<link href="/css/bootstrap-table.css" rel="stylesheet">
+	<link href="{{url("/css/bootstrap-table.css")}}" rel="stylesheet">
 	<style media="screen">
 		td, th {
 			text-align: center;
@@ -25,7 +25,7 @@
 				<div class="panel-heading">Listado </div>
 				<div class="panel-body">
 					<p class="text-left">
-						<a href="/actividades-recurrentes/registrar" class="btn btn-info">Registrar</a>
+						<a href="{{url("/actividades-recurrentes/registrar")}}" class="btn btn-info">Registrar</a>
 					</p>
 					<table data-toggle="table" data-show-refresh="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 						<thead>
@@ -54,10 +54,10 @@
 										<td>{{$activity->task_type}}</td>
 										<td>{{$activity->active ? 'Si' : 'No'}}</td>
 										<td>
-											<a href="/actividades-recurrentes/{{$activity->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
+											<a href="{{url("/actividades-recurrentes/$activity->id/ver")}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
 										</td>
 										<td>
-											<a class="btn btn-warning" id="update" href="/actividades-recurrentes/modificar/{{$activity->id}}">
+											<a class="btn btn-warning" id="update" href="{{url("/actividades-recurrentes/modificar/$activity->id")}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>
@@ -70,5 +70,5 @@
 		</div>
 @endsection
 @section('js')
-	<script src="/js/bootstrap-table.js"></script>
+	<script src="{{url("/js/bootstrap-table.js")}}"></script>
 @endsection

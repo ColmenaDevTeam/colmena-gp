@@ -54,7 +54,7 @@
 		</div><!-- /.row -->
 		<div class="row">
 			@php $m=0; @endphp
-            <form id="calendar-form" role="form" method="post" name="formularioCalendario" action="/calendario/actualizar">
+            <form id="calendar-form" role="form" method="post" name="formularioCalendario" action="{{url("/calendario/actualizar")}}">
             {!! csrf_field() !!}
                 @php $dmonth="" @endphp
                 @foreach ($dates as $weeks)

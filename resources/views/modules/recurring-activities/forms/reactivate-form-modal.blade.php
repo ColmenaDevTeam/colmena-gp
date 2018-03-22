@@ -23,7 +23,7 @@
     </div>
   </div>
 </div>
-<form id="reactivate-activity" method="post" action="/actividades-recurrentes/reactivar">
+<form id="reactivate-activity" method="post" action="{{url("/actividades-recurrentes/reactivar")}}">
 	{{ csrf_field() }}
 	<input type="hidden" name="id" value="{{$activity->id}}">
 </form>

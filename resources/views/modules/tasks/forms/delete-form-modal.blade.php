@@ -23,7 +23,7 @@
     </div>
   </div>
 </div>
-<form id="deleteTask" method="post" action="/tareas/eliminar">
+<form id="deleteTask" method="post" action="{{url("/tareas/eliminar")}}">
 	{{ csrf_field() }}
 	<input type="hidden" name="task_id" value="{{$task->id}}" name="task_id">
 </form>

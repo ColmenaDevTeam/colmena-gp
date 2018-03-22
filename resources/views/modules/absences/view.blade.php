@@ -13,7 +13,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="list-group">
-					<a href="/usuarios/perfil/{{ $absence->user->id }}" class="list-group-item active text-center" >
+					<a href="{{url("/usuarios/perfil/".$absence->user->id)}}" class="list-group-item active text-center" >
 						<small style="color: white;">ausencia de: </small><h3 style="color: white;">{{$absence->user->fullname}}</h3>
 					</a>
 					<div class="row">
@@ -38,7 +38,7 @@
 						</div><!-- ./col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div class="text-center">
-								<a class="btn btn-warning" id="update" href="/ausencias/modificar/{{$absence->id}}">
+								<a class="btn btn-warning" id="update" href="{{url("/ausencias/modificar/".$absence->id)}}">
 									<i class="fa fa-pencil"></i>Modificar
 								</a>
 								<a class="btn btn-danger" href="#" onclick="$('#delete-form-modal').modal().show();">

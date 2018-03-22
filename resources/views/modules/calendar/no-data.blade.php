@@ -27,7 +27,7 @@
 			</div>
 			<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 '>
 			  <p class="text-center">
-				  <a href="/calendario/actualizar" class="btn btn-success">¡Cargar Datos!</a>
+				  <a href="{{url("/calendario/actualizar")}}" class="btn btn-success">¡Cargar Datos!</a>
 			  </p>
 			</div>
 		</div><!-- -/.row-->

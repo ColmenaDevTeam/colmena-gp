@@ -6,7 +6,7 @@
 				<h4 class="modal-title" id="">Cambio de contraseña</h4>
 			</div>
 			<div class="modal-body">
-				<form id="password-change" method="post" action="/usuarios/actualizar-clave" name="password-change">
+				<form id="password-change" method="post" action="{{url("/usuarios/actualizar-clave")}}" name="password-change">
 					{{ csrf_field() }}
 					<input type="hidden" name="user_id" value="{{ $user->id }}">
 					<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 '>

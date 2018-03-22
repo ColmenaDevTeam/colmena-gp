@@ -40,7 +40,7 @@
 							</div>
 						</div>
 						<div class="perfil-form">
-							<form id="profile-form" method="post" action="/usuarios/actualizar-perfil" name="formPerfil">
+							<form id="profile-form" method="post" action="{{url("/usuarios/actualizar-perfil")}}" name="formPerfil">
 								<div class="row">
 									{{ csrf_field() }}
 									<input type="hidden" name="user_id" value="{{ $user->id }}">
@@ -115,7 +115,7 @@
 	@include('modules.users.forms.password-form-modal')
 @endsection
 @section('js')
-	<script type="text/javascript" src="/js/jquery.inputmask.bundle.min.js"></script>
+	<script type="text/javascript" src="{{url("/js/jquery.inputmask.bundle.min.js")}}"></script>
 	<script type="text/javascript">
 		$(":input").inputmask();
 		or

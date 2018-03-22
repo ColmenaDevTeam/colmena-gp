@@ -4,7 +4,7 @@
 @extends('layouts.main')
 @section('css')
 	{{--<link rel="stylesheet" href="/css/dataTables.bootstrap.min.css">--}}
-	<link href="/css/bootstrap-table.css" rel="stylesheet">
+	<link href="{{url("/css/bootstrap-table.css")}}" rel="stylesheet">
 	<style media="screen">
 		td, th {
 			text-align: center;
@@ -58,7 +58,7 @@
 											@endif
 										</td>
 										<td >
-											<a class="btn btn-info" id="update" href="/usuarios/modificar/{{$user->id}}">
+											<a class="btn btn-info" id="update" href="{{url("/usuarios/modificar/$user->id")}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>
@@ -79,11 +79,11 @@
 				</div>
 			</div>
 		</div><!--/.row-->
-		<form id="desactivateForm" action="/usuarios/desactivar" method="post">
+		<form id="desactivateForm" action="{{url("/usuarios/desactivar")}}" method="post">
 			{{ csrf_field() }}
 			<input type="hidden" name="user_id" id="user_id" value="">
 		</form>
-		<form id="reactivateForm" action="/usuarios/reactivar" method="post">
+		<form id="reactivateForm" action="{{url("/usuarios/reactivar")}}" method="post">
 			{{ csrf_field() }}
 			<input type="hidden" name="re_user_id" id="re_user_id" value="">
 		</form>
@@ -93,7 +93,7 @@
 @endsection
 @section('js')
 	{{--@include('components.datatables.datatable')--}}
-	<script src="/js/bootstrap-table.js"></script>
+	<script src="{{url("/js/bootstrap-table.js")}}"></script>
 	<script type="text/javascript">
 		function showDesactivateForm(id,name){
 			$('#user_id').val(id);

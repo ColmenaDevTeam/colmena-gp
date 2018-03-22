@@ -24,7 +24,7 @@
     </div>
   </div>
 </div>
-<form id="deleteabsence" method="post" action="/ausencias/eliminar">
+<form id="deleteabsence" method="post" action="{{url("/ausencias/eliminar")}}">
 	{{ csrf_field() }}
 	<input type="hidden" name="absence_id" value="{{$absence->id}}" name="absence_id">
 </form>

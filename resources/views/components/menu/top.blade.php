@@ -7,7 +7,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/"><span>Colmena</span>GP Edition</a>
+			<a class="navbar-brand" href="{{url("/")}}"><span>Colmena</span>GP Edition</a>
 			<ul class="user-menu">
 				@if(Auth::check())
 					<li class="dropdown pull-right">

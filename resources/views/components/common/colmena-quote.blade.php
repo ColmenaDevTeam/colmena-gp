@@ -23,5 +23,5 @@
 	</blockquote>
 </div>
 <div class='col-lg-6 col-md-6 col-sm-12 col-xs-12 '>
-	<img class="img img-responsive" src="/img/logo/logo-square500x500.png" alt="Colmena-GP">
+	<img class="img img-responsive" src="{{url("/img/logo/logo-square500x500.png")}}" alt="Colmena-GP">
 </div>

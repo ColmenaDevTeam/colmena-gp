@@ -45,7 +45,7 @@
 				@if (!is_null($header))
 					<div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 '>
 						<h4>Cintillo actual</h4>
-						<img src="{{ $header->fulluri }}" alt="cintillo-universitario" class="img img-responsive">
+						<img src="{{ url($header->fulluri) }}" alt="cintillo-universitario" class="img img-responsive">
 						<hr>
 					</div>
 

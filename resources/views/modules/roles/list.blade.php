@@ -4,7 +4,7 @@
 @extends('layouts.main')
 @section('css')
 	{{--<link rel="stylesheet" href="/css/dataTables.bootstrap.min.css">--}}
-	<link href="/css/bootstrap-table.css" rel="stylesheet">
+	<link href="{{url("/css/bootstrap-table.css")}}" rel="stylesheet">
 	<style media="screen">
 		td, th {
 			text-align: center;
@@ -24,7 +24,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Listado </div>
 				<div class="panel-body">
-					<p class="text-left"><a href="/roles/registrar" class="btn btn-info">Registrar</a></p>
+					<p class="text-left"><a href="{{url("/roles/registrar")}}" class="btn btn-info">Registrar</a></p>
 					<table data-toggle="table" data-show-refres41758498h="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 						<thead>
 								<tr>
@@ -36,10 +36,10 @@
 							<tbody>
 								@foreach($roles as $role)
 									<tr>
-										<td><a href="/roles/ver/{{$role->id}}">{{$role->name}}</a></td>
+										<td><a href="{{url("/roles/ver/$role->id")}}">{{$role->name}}</a></td>
 										<td>{{$role->level}}</td>
 										<td>
-											<a class="btn" id="update" href="/roles/modificar/{{$role->id}}">
+											<a class="btn" id="update" href="{{url("/roles/modificar/$role->id")}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>
@@ -52,5 +52,5 @@
 		</div>
 @endsection
 @section('js')
-	<script src="/js/bootstrap-table.js"></script>
+	<script src="{{url("/js/bootstrap-table.js")}}"></script>
 @endsection

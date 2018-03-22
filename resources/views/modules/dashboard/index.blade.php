@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('css')
-	<link href="/css/styletimeliner.css" rel="stylesheet">
+	<link href="{{url("/css/styletimeliner.css")}}" rel="stylesheet">
 @endsection
 @section('content')
 
@@ -19,7 +19,7 @@
 
 @endsection
 @section('js')
-	<script src="/js/timelinr/jquery.js"></script>
-	<script src="/js/timelinr/jquery.min.js"></script>
-	<script src="/js/jquery.timelinr-0.9.6.js"></script>
+	<script src="{{url("/js/timelinr/jquery.js")}}"></script>
+	<script src="{{url("/js/timelinr/jquery.min.js")}}"></script>
+	<script src="{{url("/js/jquery.timelinr-0.9.6.js")}}"></script>
 @endsection

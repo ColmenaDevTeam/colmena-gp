@@ -6,7 +6,7 @@
         <h4 class="modal-title" id="">Tramitar Tarea</h4>
       </div>
 
-	  <form class="" action="/tareas/tramitar" method="post">
+	  <form class="" action="{{url("/tareas/tramitar")}}" method="post">
 		  {{ csrf_field() }}
 		  <input type="hidden" name="task_id" value="{{ $task->id }}">
 	      <div class="modal-body">

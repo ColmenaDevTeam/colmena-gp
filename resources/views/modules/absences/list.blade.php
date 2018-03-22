@@ -4,7 +4,7 @@
 @extends('layouts.main')
 @section('css')
 	{{--<link rel="stylesheet" href="/css/dataTables.bootstrap.min.css">--}}
-	<link href="/css/bootstrap-table.css" rel="stylesheet">
+	<link href="{{url("/css/bootstrap-table.css")}}" rel="stylesheet">
 	<style media="screen">
 		td, th {
 			text-align: center;
@@ -47,10 +47,10 @@
 										<td>{{$absence->end_date}}</td>
 										<td>{{$absence->details}}</td>
 										<td>
-											<a href="/ausencias/{{$absence->id}}/ver" class="btn btn-info"><i class="fa fa-eye"></i></a>
+											<a href="{{url("/ausencias/$absence->id/ver")}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
 										</td>
 										<td>
-											<a class="btn" id="update" href="/ausencias/modificar/{{$absence->id}}">
+											<a class="btn" id="update" href="{{url("/ausencias/modificar/".$absence->id)}}">
 												<i class="fa fa-pencil" value="Actualizar"></i>
 											</a>
 										</td>
@@ -63,5 +63,5 @@
 		</div>
 @endsection
 @section('js')
-	<script src="/js/bootstrap-table.js"></script>
+	<script src="{{url("/js/bootstrap-table.js")}}"></script>
 @endsection
