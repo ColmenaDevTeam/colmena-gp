@@ -35,10 +35,4 @@ class SteganographyController extends Controller
 
 		return redirect('/')->with(['success' => true]);
 	}
-
-	public function test(){
-		$processor = new Processor();
-		$message = $processor->decode(Steganography::getFullUsersPath().\Auth::user()->cedula.'.png');
-		dd($message);
-	}
 }

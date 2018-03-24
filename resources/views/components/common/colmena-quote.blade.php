@@ -7,7 +7,7 @@
 			Para que algo crezca necesita un método.<br /><br />
 			Observa las flores;  parte una naranja;<br />
 			fijate en la simetría<br />
-			de los arboles y las <a href="/acerca-de"><strong>COLMENAS</strong></a>.<br /><br />
+			de los arboles y las <a href="{{url("/acerca-de")}}"><strong>COLMENAS</strong></a>.<br /><br />
 			En ellos encontrarás dicipilina.<br />
 			La naturaleza conserva lo escencial<br />
 			y deshecha lo superfluo.<br />

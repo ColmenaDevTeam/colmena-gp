@@ -12,14 +12,12 @@ use \Auth;
 class CalendarController extends Controller
 {
 	public function showDataForm(){
-		if(!Auth::user()->canDo('calendar.update')) return redirect('/401');
 		Calendar::checkYear();
 		return view('modules.calendar.forms.data-form')->with(['calendar' => Calendar::getDateArray(),
 																'months' => Calendar::MONTHS,
 																'dates' => Calendar::generateDates()]);
 	}
     public function update(Request $request){
-		if(!Auth::user()->canDo('calendar.update')) return redirect('/401');
 		Validator::make($request->input(), [
 			'dates' => 'required'
 		])->validate();

@@ -15,6 +15,9 @@ class RoleGuard
      */
     public function handle($request, Closure $next)
     {
+        if (!\Auth::user()->canDo(\Request::route()->getName())) {
+            return redirect("/401");
+        }
         return $next($request);
     }
 }

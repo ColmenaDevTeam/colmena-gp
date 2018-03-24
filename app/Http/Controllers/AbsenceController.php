@@ -14,7 +14,6 @@ use \Auth;
 class AbsenceController extends Controller
 {
 	public function index(){
-		if(!Auth::user()->canDo('absences.list')) return redirect('/401');
 		return view('modules.absences.list')->with('absences', Absence::getActiveAbsences());
 	}
 	public function indexAll(){
@@ -22,7 +21,6 @@ class AbsenceController extends Controller
 	}
 
 	public function showDataForm(){
-		if(!Auth::user()->canDo('absences.create')) return redirect('/401');
 		if (!Calendar::checkAvailability()) {
 			return redirect('/calendario/sin-datos');
 		}
@@ -30,7 +28,6 @@ class AbsenceController extends Controller
 	}
 
 	public function register(Request $request){
-		if(!Auth::user()->canDo('absences.create')) return redirect('/401');
 		$user = User::find($request->user_id);
 		if (is_null($user))
 			return redirect('/404');
@@ -58,14 +55,12 @@ class AbsenceController extends Controller
 	}
 
 	public function showUpdateForm(Request $request){
-		if(!Auth::user()->canDo('absences.update')) return redirect('/401');
 		$absence = Absence::find($request->id);
 		if (!$absence) return view('errors.404');
 		return view('modules.absences.forms.data-form')->with(['absence' => $absence, 'users' => User::all()]);
 	}
 
 	public function update(Request $request){
-		if(!Auth::user()->canDo('absences.update')) return redirect('/401');
 		$absence = Absence::find($request->id);
 		$user = User::find($request->user_id);
 		if (!$absence || !$user) return view('errors.404');
@@ -98,7 +93,6 @@ class AbsenceController extends Controller
 	}
 
 	public function delete(Request $request){
-		if(!Auth::user()->canDo('absences.delete')) return redirect('/401');
 		$absence = Absence::find($request->absence_id);
 		if (!$absence) return redirect('/404');
 

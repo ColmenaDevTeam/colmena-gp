@@ -11,6 +11,16 @@ class PermissionSeeder extends Seeder
      */
     public function run(){
 		$action = array(
+            array(
+                'category' => 'Cartelera',
+                'action' => 'Ver',
+                'navigation' => false,
+                'slug' => 'dashboard.view',
+                'level' => 2,
+            ),
+            /**
+            * Departments
+            */
 			array(
                 'category' => 'Departamentos',
                 'action' => 'Registrar',
@@ -18,7 +28,6 @@ class PermissionSeeder extends Seeder
 				'slug' => 'departments.create',
 				'level' => 0,
 			),
-
 			array(
                 'category' => 'Departamentos',
                 'action' => 'Modificar',
@@ -33,6 +42,14 @@ class PermissionSeeder extends Seeder
 				'slug' => 'departments.list',
 				'level' => 0,
 			),
+            array(
+                'category' => 'Departamentos',
+                'action' => 'Listar Usuarios',
+                'navigation' => true,
+                'slug' => 'departments.list_users',
+                'level' => 0,
+            ),
+
 			array(
                 'category' => 'Departamentos',
                 'action' => 'Eliminar',
@@ -40,6 +57,9 @@ class PermissionSeeder extends Seeder
 				'slug' => 'departments.delete',
 				'level' => 0,
 			),
+            /**
+            * Roles
+            */
 			array(
                 'category' => 'Roles',
                 'action' => 'Registrar',
@@ -47,7 +67,6 @@ class PermissionSeeder extends Seeder
 				'slug' => 'roles.create',
 				'level' => 0,
 			),
-
 			array(
                 'category' => 'Roles',
                 'action' => 'Modificar',
@@ -69,6 +88,9 @@ class PermissionSeeder extends Seeder
 				'slug' => 'roles.delete',
 				'level' => 0,
 			),
+            /**
+            * Users
+            */
 			array(
                 'category' => 'Usuarios',
                 'action' => 'Registrar',
@@ -76,6 +98,13 @@ class PermissionSeeder extends Seeder
 				'slug' => 'users.create',
 				'level' => 1,
 			),
+            array(
+                'category' => 'Usuarios',
+                'action' => 'Ver',
+                'navigation' => false,
+                'slug' => 'users.view',
+                'level' => 1,
+            ),
 			array(
                 'category' => 'Usuarios',
                 'action' => 'Modificar',
@@ -97,35 +126,82 @@ class PermissionSeeder extends Seeder
 				'slug' => 'users.list',
 				'level' => 1,
 			),
-
+            array(
+                'category' => 'Usuarios',
+                'action' => 'Activar',
+                'navigation' => false,
+                'slug' => 'users.enable',
+                'level' => 1,
+            ),
+            array(
+                'category' => 'Usuarios',
+                'action' => 'Actualizar datos',
+                'navigation' => false,
+                'slug' => 'users.change_data',
+                'level' => 2,
+            ),
+            array(
+                'category' => 'Usuarios',
+                'action' => 'Actualizar Clave',
+                'navigation' => true,
+                'slug' => 'users.change_password',
+                'level' => 2,
+            ),
+            /**
+            * Tasks
+            */
 	        array(
                 'category' => 'Tareas',
                 'action' => 'Registrar',
                 'slug' => 'tasks.create',
                 'navigation' => true,
-                'level' => 1,
+                'level' => 2,
             ),
 	        array(
                 'category' => 'Tareas',
                 'action' => 'Modificar',
                 'slug' => 'tasks.update',
                 'navigation' => false,
-                'level' => 1,
+                'level' => 2,
             ),
 	        array(
                 'category' => 'Tareas',
                 'action' => 'Listar',
                 'slug' => 'tasks.list',
                 'navigation' => true,
-                'level' => 1,
+                'level' => 2,
             ),
 	        array(
                 'category' => 'Tareas',
                 'action' => 'Borrar',
                 'slug' => 'tasks.delete',
                 'navigation' => false,
-                'level' => 1,
+                'level' => 2,
             ),
+            array(
+                'category' => 'Tareas',
+                'action' => 'Listar Todas',
+                'slug' => 'tasks.list_all',
+                'navigation' => true,
+                'level' => 0,
+            ),
+            array(
+                'category' => 'Tareas',
+                'action' => 'Gestionar',
+                'slug' => 'tasks.transact',
+                'navigation' => false,
+                'level' => 2,
+            ),
+            array(
+                'category' => 'Tareas',
+                'action' => 'Ver',
+                'slug' => 'tasks.view',
+                'navigation' => false,
+                'level' => 2,
+            ),
+            /**
+            * Absences
+            */
 	        array(
                 'category' => 'Ausencias',
                 'action' => 'Eliminar',
@@ -154,8 +230,24 @@ class PermissionSeeder extends Seeder
                 'navigation' => true,
                 'level' => 1,
             ),
+            array(
+                'category' => 'Ausencias',
+                'action' => 'Listar Todas',
+                'slug' =>'absences.list_all',
+                'navigation' => true,
+                'level' => 0,
+            ),
+            array(
+                'category' => 'Ausencias',
+                'action' => 'Ver',
+                'slug' =>'absences.view',
+                'navigation' => false,
+                'level' => 2,
+            ),
 
-	        //Desde la version 0.5.0A
+            /**
+            * Calendar
+            */
 	        array(
                 'category' => 'Calendario',
                 'action' => 'Actualizar',
@@ -171,42 +263,101 @@ class PermissionSeeder extends Seeder
                 'level' => 2,
             ),
 
-	        //Desde la version 0.6.0A
+            /**
+            * Recurrent activities
+            */
 	        array(
                 'category' => 'ActividadesRecurrentes',
                 'action' => 'Registrar',
                 'slug' =>'recurring_activities.create',
                 'navigation' => true,
-                'level' => 1,
+                'level' => 2,
             ),
 	        array(
                 'category' => 'ActividadesRecurrentes',
                 'action' => 'Modificar',
                 'slug' =>'recurring_activities.update',
                 'navigation' => false,
-                'level' => 1,
+                'level' => 2,
             ),
 	        array(
                 'category' => 'ActividadesRecurrentes',
                 'action' => 'Listar',
                 'slug' =>'recurring_activities.list',
                 'navigation' => true,
-                'level' => 1,
+                'level' => 2,
             ),
 	        array(
                 'category' => 'ActividadesRecurrentes',
                 'action' => 'Eliminar',
                 'slug' =>'recurring_activities.delete',
                 'navigation' => false,
+                'level' => 2,
+            ),
+            array(
+                'category' => 'ActividadesRecurrentes',
+                'action' => 'Ver',
+                'slug' =>'recurring_activities.view',
+                'navigation' => false,
+                'level' => 2,
+            ),
+            array(
+                'category' => 'ActividadesRecurrentes',
+                'action' => 'Activar',
+                'slug' =>'recurring_activities.enable',
+                'navigation' => false,
+                'level' => 2,
+            ),
+            array(
+                'category' => 'ActividadesRecurrentes',
+                'action' => 'Ver Todas',
+                'slug' =>'recurring_activities.list_all',
+                'navigation' => true,
                 'level' => 1,
             ),
+
+            /**
+            * Reports
+            */
 			array(
 				'category' => 'Reportes',
-				'action' => 'Cintillo',
-				'slug' =>'reportes.cintillo',
+				'action' => 'Generar',
+				'slug' =>'reports.generate',
 				'navigation' => true,
 				'level' => 1,
-			)
+			),
+
+            /**
+            * Parameters
+            */
+            array(
+                'category' => 'Parametros',
+                'action' => 'Cintillo',
+                'slug' =>'parameters.header',
+                'navigation' => false,
+                'level' => 0,
+            ),
+            array(
+                'category' => 'Parametros',
+                'action' => 'Logo',
+                'slug' =>'parameters.logo',
+                'navigation' => false,
+                'level' => 0,
+            ),
+            array(
+                'category' => 'Parametros',
+                'action' => 'Color',
+                'slug' =>'parameters.color',
+                'navigation' => false,
+                'level' => 0,
+            ),
+            array(
+                'category' => 'Parametros',
+                'action' => 'Parametros Varios',
+                'slug' =>'parameters.parameters',
+                'navigation' => true,
+                'level' => 0,
+            ),
 	    );
 	    DB::table('permissions')->insert($action);
     }

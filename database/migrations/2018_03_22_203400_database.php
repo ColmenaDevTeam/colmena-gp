@@ -50,8 +50,6 @@ class Database extends Migration
             $table->integer('priority');
             $table->integer('complexity');
             $table->enum('type',['Academico-Docente','Administrativas','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion']);
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
         Schema::create('roles', function (Blueprint $table) {
@@ -121,9 +119,10 @@ class Database extends Migration
             $table->increments('id');
             $table->date('workable_date')->unique();
         });
-        Schema::create('report_headers', function (Blueprint $table) {
+        Schema::create('parameters', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('uri');
+            $table->string('header_uri');
+            $table->string('logo_uri');
         });
         Schema::create('commissions', function (Blueprint $table) {
             $table->increments('id');
@@ -164,7 +163,7 @@ class Database extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('meeting_id')->unsigned();
             $table->foreign('meeting_id')->references('id')->on('meetings')->onDelete('cascade');
-            $table->boolean('attendance')->default('false');
+            $table->boolean('attendance')->default();
         });
         Schema::create('users_has_tasks', function (Blueprint $table) {
             $table->increments('id');
@@ -186,25 +185,25 @@ class Database extends Migration
      */
     public function down()
     {
-        if(Schema::hasTable('departments')) Schema::drop('departments');
+        if(Schema::hasTable('users_has_commissions')) Schema::drop('users_has_commissions');
+        if(Schema::hasTable('users_has_meetings')) Schema::drop('users_has_meetings');
+        if(Schema::hasTable('users_has_tasks')) Schema::drop('users_has_tasks');
+        if(Schema::hasTable('users_has_roles')) Schema::drop('users_has_roles');
+        if(Schema::hasTable('roles_has_permissions')) Schema::drop('roles_has_permissions');
+        if(Schema::hasTable('users_has_recurring_activities')) Schema::drop('users_has_recurring_activities');
+        if(Schema::hasTable('notifications')) Schema::drop('notifications');
+        if(Schema::hasTable('absences')) Schema::drop('absences');
         if(Schema::hasTable('users')) Schema::drop('users');
+        if(Schema::hasTable('commissions')) Schema::drop('commissions');
+        if(Schema::hasTable('departments')) Schema::drop('departments');
+        if(Schema::hasTable('permissions')) Schema::drop('permissions');
         if(Schema::hasTable('password_resets')) Schema::drop('password_resets');
         if(Schema::hasTable('tasks')) Schema::drop('tasks');
         if(Schema::hasTable('roles')) Schema::drop('roles');
-        if(Schema::hasTable('users_has_roles')) Schema::drop('users_has_roles');
-        if(Schema::hasTable('permissions')) Schema::drop('permissions');
-        if(Schema::hasTable('roles_has_permissions')) Schema::drop('roles_has_permissions');
-        if(Schema::hasTable('absences')) Schema::drop('absences');
         if(Schema::hasTable('recurring_activities')) Schema::drop('recurring_activities');
-        if(Schema::hasTable('users_has_recurring_activities')) Schema::drop('users_has_recurring_activities');
         if(Schema::hasTable('calendar')) Schema::drop('calendar');
-        if(Schema::hasTable('commissions')) Schema::drop('commissions');
         if(Schema::hasTable('meetings')) Schema::drop('meetings');
-        if(Schema::hasTable('notifications')) Schema::drop('notifications');
-        if(Schema::hasTable('report_headers')) Schema::drop('report_headers');
-        if(Schema::hasTable('user_has_commissions')) Schema::drop('user_has_commissions');
-        if(Schema::hasTable('user_has_meetings')) Schema::drop('user_has_meetings');
-        if(Schema::hasTable('user_has_tasks')) Schema::drop('user_has_tasks');
+        if(Schema::hasTable('parameters')) Schema::drop('parameters');
 
     }
 }

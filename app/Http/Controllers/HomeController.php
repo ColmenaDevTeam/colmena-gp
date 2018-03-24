@@ -22,14 +22,14 @@ class HomeController extends Controller{
 		$pending = [];
 
 		$birthdayPpl = User::birthdates();
-
-		$tasks = Task::where('user_id', Auth::user()->id)->get();
+	#	$tasks = Task::where('user_id', Auth::user()->id)->get();
 		$absences = Absence::where('user_id', Auth::user()->id)->get();
-		if(Auth::user()->canDo('tasks.list'))
-			$tasks = Auth::user()->department->tasks;
+	#	if(Auth::user()->canDo('tasks.list'))
+		#	$tasks = Auth::user()->department->tasks;
 		if(Auth::user()->canDo('absences.list'))
 			$absences = Auth::user()->department->absences;
 		$i = 0;
+        /*
 		foreach($tasks as $task){
 			if($task->status != 'Cumplida' && $task->status != 'Cancelada'){
 				$task->itemKind = 'tareas';
@@ -51,7 +51,8 @@ class HomeController extends Controller{
 				$pending[] = $task;
 				$i++;
 			}
-		}
+		}*/
+        $tasks = null;
 		$i = 0;
 		foreach($absences as $absence){
 			$absence->itemKind = 'ausencias';
@@ -102,7 +103,7 @@ class HomeController extends Controller{
 					$hotToday[] = $pen;
 			}
 		}
-        return view('modules.dashboard.index')->with(['tasksCount' => Task::countTasks(), 'absencesCount' => Absence::countActiveAbsences(),
+        return view('modules.dashboard.index')->with(['tasksCount' => /*Task::countTasks()*/5, 'absencesCount' => Absence::countActiveAbsences(),
 													'birthdates' => User::birthdatesCount(), 'usersCount' => User::usersCount(),
 													'itemKinds' => $itemKinds, 'hotToday' => $hotToday, 'cssClassPerKind' => $cssClassPerKind,
 													'pending' => $pending

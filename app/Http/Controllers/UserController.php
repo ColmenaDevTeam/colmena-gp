@@ -11,16 +11,13 @@ use \Auth;
 class UserController extends Controller{
 
 	public function index(){
-		if(!Auth::user()->canDo('users.list')) return redirect('/401');
 		return view('modules.users.list')->with('users', User::all()->where('cedula', '<>', env('APP_DEV_USERNAME')));
 	}
     public function showDataForm(){
-		if(!Auth::user()->canDo('users.create')) return redirect('/401');
 		return view('modules.users.forms.data-form');
 	}
 
 	public function register(Request $request){
-		if(!Auth::user()->canDo('users.create')) return redirect('/401');
 		$minDate = Carbon::now()->subYear(User::MIN_USER_AGE)->format('d/m/Y');
 		Validator::make($request->input(), [
 			'cedula' => 'numeric|required|unique:users',
@@ -58,14 +55,12 @@ class UserController extends Controller{
 	}
 
 	public function showUpdateForm(Request $request){
-		if(!Auth::user()->canDo('users.update')) return redirect('/401');
 		$user = User::find($request->id);
 		if (!$user) return view('errors.404');
 		return view('modules.users.forms.data-form')->with('user', $user);
 	}
 
 	public function update(Request $request){
-		if(!Auth::user()->canDo('users.update')) return redirect('/401');
 		$user = User::find($request->id);
 		if (!$user) return view('errors/404');
 
@@ -99,7 +94,6 @@ class UserController extends Controller{
 	}
 
 	public function desactivate(Request $request){
-		if(!Auth::user()->canDo('users.delete')) return redirect('/401');
 		$user = User::find($request->user_id);
 		if (!$user) return redirect('/404');
 
@@ -110,7 +104,6 @@ class UserController extends Controller{
 		return redirect("usuarios/listar")->with('users', User::all());
 	}
 	public function reactivate(Request $request){
-		if(!Auth::user()->canDo('users.create')) return redirect('/401');
 		$user = User::find($request->re_user_id);
 		if (!$user) return redirect('/404');
 
@@ -122,7 +115,6 @@ class UserController extends Controller{
 	}
 
 	public function delete(){
-		if(!Auth::user()->canDo('users.delete')) return redirect('/401');
 		return redirect("usuarios/listar")->with('users', User::all());
 	}
 
