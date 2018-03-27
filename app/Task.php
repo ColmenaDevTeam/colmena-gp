@@ -15,15 +15,19 @@ class Task extends Model{
 
 	const DEFAULT_STATUS = 'Asignada';
 
-	protected $dates = ['estimated_date', 'deliver_date'];
+	protected $dates = ['estimated_date'];
 
 	protected $fillable = [
-        'title','estimated_date','deliver_date','details','priority',
-        'complexity', 'type', 'seen', 'status'
+        'title','estimated_date','details','priority',
+        'complexity', 'type'
 	];
 
-    public function responsible(){
-        return $this->belongsTo('App\User', 'user_id');
+    public function responsibles(){
+        return $this->belongsToMany('App\User', 'users_has_tasks', 'task_id', 'user_id');
+    }
+
+	public function creator(){
+        return $this->belongsTo('App\User', 'creator_id');
     }
 
 	public function taskLogs(){

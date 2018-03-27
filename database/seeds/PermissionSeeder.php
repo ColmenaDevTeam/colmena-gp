@@ -45,7 +45,7 @@ class PermissionSeeder extends Seeder
             array(
                 'category' => 'Departamentos',
                 'action' => 'Listar Usuarios',
-                'navigation' => true,
+                'navigation' => false,
                 'slug' => 'departments.list_users',
                 'level' => 0,
             ),
@@ -142,8 +142,8 @@ class PermissionSeeder extends Seeder
             ),
             array(
                 'category' => 'Usuarios',
-                'action' => 'Actualizar Clave',
-                'navigation' => true,
+                'action' => 'Actualizar Contraseña',
+                'navigation' => false,
                 'slug' => 'users.change_password',
                 'level' => 2,
             ),
@@ -180,7 +180,7 @@ class PermissionSeeder extends Seeder
             ),
             array(
                 'category' => 'Tareas',
-                'action' => 'Listar Todas',
+                'action' => 'Ver Todas',
                 'slug' => 'tasks.list_all',
                 'navigation' => true,
                 'level' => 0,
@@ -232,7 +232,7 @@ class PermissionSeeder extends Seeder
             ),
             array(
                 'category' => 'Ausencias',
-                'action' => 'Listar Todas',
+                'action' => 'Ver Todas',
                 'slug' =>'absences.list_all',
                 'navigation' => true,
                 'level' => 0,
@@ -321,11 +321,32 @@ class PermissionSeeder extends Seeder
             */
 			array(
 				'category' => 'Reportes',
-				'action' => 'Generar',
-				'slug' =>'reports.generate',
+				'action' => 'Reportes Generales',
+				'slug' =>'reports.macro_report',
 				'navigation' => true,
-				'level' => 1,
+				'level' => 0,
 			),
+            array(
+                'category' => 'Reportes',
+                'action' => 'Reportes de Departamento',
+                'slug' =>'reports.department_report',
+                'navigation' => true,
+                'level' => 1,
+            ),
+            array(
+                'category' => 'Reportes',
+                'action' => 'Reportes de Comisión',
+                'slug' =>'reports.commission_report',
+                'navigation' => true,
+                'level' => 1,
+            ),
+            array(
+                'category' => 'Reportes',
+                'action' => 'Reportes Individuales',
+                'slug' =>'reports.individual_report',
+                'navigation' => true,
+                'level' => 2,
+            ),
 
             /**
             * Parameters
@@ -353,7 +374,7 @@ class PermissionSeeder extends Seeder
             ),
             array(
                 'category' => 'Parametros',
-                'action' => 'Parametros Varios',
+                'action' => 'Parametrizar Sistema',
                 'slug' =>'parameters.parameters',
                 'navigation' => true,
                 'level' => 0,

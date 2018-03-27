@@ -123,7 +123,16 @@
 								@if (isset($task))
 									<div class="col-xs-1 col-sm-4 col-md-4 col-lg-3">
 										<div class="form-group has-feedback">
-											<label for="user_id">Responsable: {{ $task->responsible->fullname }}</label>
+											<label for="user_id">Listado de responsables:</label>
+											@foreach ($task->responsibles as $user)
+												<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+													<ul>
+														<li>
+															{{$user->fullname}}
+														</li>
+													</ul>
+												</div><!-- /.col-xs-12 col-sm-6 col-md-4 col-lg-4-->
+											@endforeach
 										</div>
 									</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 								@else

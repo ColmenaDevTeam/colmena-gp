@@ -49,6 +49,8 @@ class Database extends Migration
             $table->text('details');
             $table->integer('priority');
             $table->integer('complexity');
+            $table->integer('creator_id')->unsigned();
+            $table->foreign('creator_id')->references('id')->on('users');
             $table->enum('type',['Academico-Docente','Administrativas','Creacion intelectual','Integracion Social','Administrativo-Docente','Produccion']);
             $table->timestamps();
         });
@@ -123,6 +125,9 @@ class Database extends Migration
             $table->increments('id');
             $table->string('header_uri');
             $table->string('logo_uri');
+            $table->integer('max_absence_days')->nullable();
+            $table->string('template_color')->nullable();
+            $table->timestamps();
         });
         Schema::create('commissions', function (Blueprint $table) {
             $table->increments('id');
