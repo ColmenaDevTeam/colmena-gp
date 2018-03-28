@@ -15,7 +15,8 @@ use \Auth;
 
 class TaskController extends Controller{
 	public function index(){
-		return view('modules.tasks.list')->with(['tasks' => Task::getActiveTask()]);
+#		return view('modules.tasks.list')->with(['tasks' => Task::getActiveTask()]);
+		return view('modules.tasks.list')->with(['tasks' => Auth::user()->createdTasks]);
 	}
 
 	public function showDataForm(){
@@ -39,24 +40,26 @@ class TaskController extends Controller{
 			'details' => 'min:10|max:255'
 		])->validate();
 
-		foreach ($request->users as $user) {
-			$task = new task();
-			$task->title = $request->title;
-			$task->priority = $request->priority;
-			$task->complexity = $request->complexity;
-			$task->type = $request->type;
-			$task->estimated_date = Carbon::createFromFormat('Y-m-d',$request->estimated_date);
-			$task->details = $request->details;
-			$task->responsible()->associate($user);
-			$task->save();
-			try {
-				$task->generateNotification();
+		$task = new task();
+		$task->title = $request->title;
+		$task->priority = $request->priority;
+		$task->complexity = $request->complexity;
+		$task->type = $request->type;
+		$task->estimated_date = Carbon::createFromFormat('Y-m-d',$request->estimated_date);
+		$task->details = $request->details;
+		$task->creator_id = Auth::user()->id;
+		$task->save();
+		$task->responsibles()->sync($request->users);
+		/**
+		try {
+			$task->generateNotification();
 
-			} catch (\Exception $e) {
-
-			}
+		} catch (\Exception $e) {
 
 		}
+			// ¡Notificación a base de dato y a mail!
+		*/
+		dd($task);
 		\Session::push('success', true);
 		return redirect("tareas/listar")->with(['tasks' => Task::getActiveTask()]);
 	}

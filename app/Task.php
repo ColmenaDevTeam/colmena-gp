@@ -71,9 +71,9 @@ class Task extends Model{
 					->count();
 	}
 
-	public static function getActiveTask(){
+	/*public static function getActiveTask(){
 		return self::where('status', '<>', 'Cumplida')->where('status', '<>', 'Cancelada')->get();
-	}
+	}*/
 
 	public function getDificultyAttribute(){
 		return $this->priority + $this->complexity;

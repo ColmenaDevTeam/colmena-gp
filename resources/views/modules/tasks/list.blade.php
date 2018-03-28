@@ -32,13 +32,10 @@
 						<thead>
 								<tr>
 									<th data-sortable="true" data-field="title">Titulo</th>
-									<th data-sortable="true" data-field="responsible">Responsable</th>
 									<th data-sortable="true" data-field="type">Tipo de tarea</th>
-									<th data-sortable="true" data-field="status">Estado</th>
 									<th data-sortable="true" data-field="details">Detalles</th>
 									<th data-sortable="true" data-field="dificulty">Dificultad</th>
 									<th data-sortable="true" data-field="estimated_date">Fecha tope</th>
-									<th data-sortable="true" data-field="deliver_date">Fecha de entrega</th>
 									<th>Ver</th>
 									<th>Modificar</th>
 								</tr>
@@ -47,13 +44,10 @@
 								@foreach($tasks as $task)
 									<tr>
 										<td>{{$task->title}}</td>
-										<td>{{$task->responsible->fullname}}</td>
 										<td>{{$task->type}}</td>
-										<td>{{$task->status}}</td>
 										<td>{{$task->details}}</td>
 										<td>{{ $task->dificulty }}</td>
 										<td>{{$task->estimated_date->format('d/m/Y')}}</td>
-										<td>{{$task->deliver_date}}</td>
 										<td>
 											<a href="{{url("/tareas/$task->id/ver")}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
 										</td>
