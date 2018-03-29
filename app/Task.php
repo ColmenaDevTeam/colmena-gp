@@ -11,10 +11,6 @@ use App\Notifications\AbsenceTasksDelay;
 use App\Notifications\DelayedTask;
 
 class Task extends Model{
-	use EnumHelper;
-
-	const DEFAULT_STATUS = 'Asignada';
-
 	protected $dates = ['estimated_date'];
 
 	protected $fillable = [
@@ -70,10 +66,6 @@ class Task extends Model{
 		return self::where('status', '<>', 'Cumplida')->where('status', '<>', 'Cancelada')
 					->count();
 	}
-
-	/*public static function getActiveTask(){
-		return self::where('status', '<>', 'Cumplida')->where('status', '<>', 'Cancelada')->get();
-	}*/
 
 	public function getDificultyAttribute(){
 		return $this->priority + $this->complexity;

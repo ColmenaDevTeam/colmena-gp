@@ -43,7 +43,7 @@
 						</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<div class="list-group">
-								<label for="details">Listado de usuarios</label>
+								<label for="details">Listado de permisos</label>
 								<div class="row">
 									<div class="alert alert-info">
 										<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>

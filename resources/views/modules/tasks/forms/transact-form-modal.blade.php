@@ -15,9 +15,9 @@
 				  <div class="form-group">
 					  <label for="status">Estado de la tarea</label>
 					  <select name="status" id="status" class="form-control" required="">
-						  @for ($i=0; $i < count($statuses); $i++)
+						  {{--@for ($i=0; $i < count($statuses); $i++)
 							  <option value="{{ $statuses[$i] }}" {{ !is_null($log) && $log->status == $statuses[$i] ? 'selected' : '' }}>{{ $statuses[$i] }}</option>
-						  @endfor
+						  @endfor--}}
 					  </select>
 				  </div>
 				  <div class="form-group">

@@ -16,7 +16,7 @@ use \Auth;
 class TaskController extends Controller{
 	public function index(){
 #		return view('modules.tasks.list')->with(['tasks' => Task::getActiveTask()]);
-		return view('modules.tasks.list')->with(['tasks' => Auth::user()->createdTasks]);
+		return view('modules.tasks.list');
 	}
 
 	public function showDataForm(){
@@ -59,9 +59,8 @@ class TaskController extends Controller{
 		}
 			// ¡Notificación a base de dato y a mail!
 		*/
-		dd($task);
 		\Session::push('success', true);
-		return redirect("tareas/listar")->with(['tasks' => Task::getActiveTask()]);
+		return redirect("tareas/listar");
 	}
 
 	public function showUpdateForm(Request $request){
@@ -98,10 +97,8 @@ class TaskController extends Controller{
 		$task->details = $request->details;
 		$task->status = Task::DEFAULT_STATUS;
 		$task->save();
-
-		$tasks = Task::getActiveTask();
 		\Session::push('success', true);
-		return redirect("tareas/listar")->with(['tasks' => $tasks]);
+		return redirect("tareas/listar");
 	}
 
     public function personalList(Request $request){
@@ -109,11 +106,7 @@ class TaskController extends Controller{
     }
     public function view(Request $request){
 		$task = Task::find($request->id);
-		if (!$task) return redirect('/404');
-		if(!Auth::user()->canDo('tasks.create') && Auth::user()->id != $task->responsible->id) return redirect('/401');
-		//verificacion de usuario/rol
-		$task->taskLogs()->paginate(5);
-		return view('modules.tasks.view')->with(['task' => $task, 'statuses' => Task::getEnumValues('status'), 'log' => $task->lastLog()]);
+		return view('modules.tasks.view')->with('task', $task);
     }
 
 	public function transact(Request $request){

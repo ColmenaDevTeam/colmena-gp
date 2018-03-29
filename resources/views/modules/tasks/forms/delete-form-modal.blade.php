@@ -11,14 +11,21 @@
 			  <span class="label label-warning">ATENCIÓN</span><br>
 			  Esta a punto de borrar la tarea:<br>
 			  <strong>{{ $task->title }}</strong><br>
-			  del usuario:&nbsp
-			  <strong>{{ $task->responsible->fullname }}</strong><br>
-			  ¿Desea continuar?
-		  </div>
+			  de el/los usuario(s):&nbsp
+      </div>
+        <ul>
+          @foreach ($task->responsibles as $responsible)
+            <li>{{$responsible->fullname}}</li>
+          @endforeach
+        </ul>
+        <br>
+			  <p class="text-right">
+          ¿Desea continuar?
+        </p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		<a href="#" onclick="$('#deleteTask').submit();" class="btn btn-primary">Continuar</a>
+		<a href="#" onclick="$('#deleteTask').submit();" class="btn btn-danger">Continuar</a>
       </div>
     </div>
   </div>

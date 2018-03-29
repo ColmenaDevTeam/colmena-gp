@@ -24,27 +24,29 @@ class UserSeeder extends Seeder
         'phone'=>$faker->randomNumber(8),
         'birthdate'=>$faker->unique()->date($format = 'Y-m-d', $max = 'now'),
         'gender'=>$faker->boolean(TRUE),
-		'active' => true,
-		'department_id' => 1,
+    		'active' => true,
+    		'department_id' => 1,
         'created_at'=>Carbon::now(),
         'updated_at'=>Carbon::now()
     	]);
-		for ($i=0; $i < 30; $i++) {
-			DB::table('users') -> insert([
-				'cedula'=>$faker->randomNumber(8),
-				'firstname'=>$faker->name,
-				'lastname'=>$faker->name,
-				'user_type'=>'Administrativo',
-				'email'=>$faker->email,
-				'password'=>Hash::make("0000"),
-				'phone'=>$faker->randomNumber(8),
-				'birthdate'=>$faker->unique()->date($format = 'Y-m-d', $max = 'now'),
-				'gender'=>$faker->boolean(),
-				'department_id' => 1,
-				'created_at'=>Carbon::now(),
-				'updated_at'=>Carbon::now()
-			]);
-		}
+      if (env('APP_ENV') == 'local') {
+        for ($i=0; $i < 30; $i++) {
+          DB::table('users') -> insert([
+            'cedula'=>$faker->randomNumber(8),
+            'firstname'=>$faker->name,
+            'lastname'=>$faker->name,
+            'user_type'=>'Administrativo',
+            'email'=>$faker->email,
+            'password'=>Hash::make("0000"),
+            'phone'=>$faker->randomNumber(8),
+            'birthdate'=>$faker->unique()->date($format = 'Y-m-d', $max = 'now'),
+            'gender'=>$faker->boolean(),
+            'department_id' => 1,
+            'created_at'=>Carbon::now(),
+            'updated_at'=>Carbon::now()
+          ]);
+        }
+      }
 
     }
 }

@@ -22,7 +22,7 @@ class Department extends Model
 	}
 
 	public function tasks(){
-		return $this->hasManyThrough('App\Task', 'App\User');
+		return $this->hasManyThrough('App\Task', 'App\User', 'department_id', 'creator_id', 'id', 'id');
 	}
 
 	public function absences(){

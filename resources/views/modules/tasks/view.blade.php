@@ -24,6 +24,17 @@
 		@endif
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="text-right">
+					<a class="btn btn-warning" id="update" href="{{url("/tareas/modificar/$task->id")}}">
+						<i class="fa fa-pencil"></i>Modificar
+					</a>
+					<a class="btn btn-danger" href="#" onclick="$('#delete-form-modal').modal().show();">
+						Eliminar <i class="fa fa-times" value="Eliminar"></i>
+					</a>
+				</div>
+				<hr>
+			</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="list-group">
 					<a href="" class="list-group-item active text-center" onClick="return false;">
 						<h3 style="color: white;">{{$task->title}}
@@ -36,7 +47,9 @@
 									{{$task->details}}
 								</p>
 								<hr>
-								<?php $P_BMA = ['Baja', 'Media', 'Alta']?>
+								@php
+									$P_BMA = ['Baja', 'Media', 'Alta'];
+								@endphp
 								<p class="text-center">
 									<label for="" style="">Prioridad: </label>
 									<span class="label label-default">{{$P_BMA[$task->priority-1]}}</span>
@@ -49,30 +62,31 @@
 
 									<label for="" style="margin-left: 10pt;">Fecha de tope: </label>
 									<span class="label label-default">{{$task->estimated_date->format('d/m/Y')}}</span>
-
-									<label for="" style="margin-left: 10pt;">Fecha de entrega: </label>
-									<span class="label label-default">{{!is_null($task->deliver_date) ? $task->deliver_date->format('d/m/Y') : ''}}</span>
-
-									<label for="" style="margin-left: 10pt;">Estado: </label>
-									<span class="label label-default">{{$task->status}}</span>
 								</p>
+
 								<hr>
+								<h4>Responsables: </h4>
+								@foreach ($task->responsibles as $responsible)
+										<a class="list-group">
+											<a href="#l_{{strtolower(str_replace(' ', '_', $responsible->cedula ))}}" class="list-group-item active" data-toggle="collapse">
+												<h4 style="color:white">{{$responsible->fullname}}</h4>
+											</a>
+											<div class="collapse" id="l_{{strtolower(str_replace(' ', '_', $responsible->cedula ))}}">
+												<p>Fecha de tope:Fecha de tope:Fecha de tope:Fecha de tope:Fecha de tope:</p>
+												{{--@foreach ($perms as $permission)
+													<p class="list-group-item">
+														<input type="checkbox" {{isset($role) && $role->permissions->contains($permission) ? 'checked' : ''  }} id="{{$permission->id}}" name="permissions[]" value="{{$permission->id}}">
+															{{$permission->action}}
+														</input>
+													</p>
+												@endforeach--}}
+											</div>
+										</a>
+								@endforeach
 							</a><!-- ./list-group-item -->
-							<a href="#{{--$task->responsible->getURL()--}}" class="list-group-item active text-center">
-								<span class="label label-default">Responsable:</span><h4 style="color: white;">{{$task->responsible->fullname}}</h4>
-							</a>
 							<hr>
 						</div><!-- ./col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<div class="text-center">
-								<a class="btn btn-warning" id="update" href="{{url("/tareas/modificar/$task->id")}}">
-									<i class="fa fa-pencil"></i>Modificar
-								</a>
-								<a class="btn btn-danger" href="#" onclick="$('#delete-form-modal').modal().show();">
-									Eliminar <i class="fa fa-times" value="Eliminar"></i>
-								</a>
-							</div>
-						</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
+
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 							<hr>
 							<a href="" class="list-group-item active text-center" onClick="return false;">
@@ -83,7 +97,7 @@
 					 				<a href="" class="list-group-item" onClick="return false;">
 					 					<p class="text-center">
 						 					<hr>
-											@foreach ($task->taskLogs as $log)
+											{{--@foreach ($task->taskLogs as $log)
 												<div class="text-center">
 													<span class="label label-info">{{$log->created_at}}</span> Por: <span class="label label-primary">{{$log->user}}</span> Estado: <span class="label label-warning">{{$log->status}}</span> <br>{{$log->details}}
 												</div>
@@ -95,7 +109,7 @@
 													RSA-PK:<span class="label label-success">asdasdfqwfc</span>
 												</div>
 												<hr>
-											@endforeach
+											@endforeach--}}
 										</p>
 									</a>
 								</div> <!-- /.table-responsive-->

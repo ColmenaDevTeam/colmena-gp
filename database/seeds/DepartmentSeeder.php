@@ -18,12 +18,13 @@ class DepartmentSeeder extends Seeder
         'name'=>'Departamento del Programa Nacional de formacion en Informatica',
         'description'=>$faker->text,
     	]);
-
-		for ($i=0; $i < 30; $i++) {
-			DB::table('departments') -> insert([
-			'name'=>$faker->name,
-			'description'=> $faker->text,
-			]);
-		}
+      if (env('APP_ENV') == 'local') {
+        for ($i=0; $i < 30; $i++) {
+          DB::table('departments') -> insert([
+            'name'=>$faker->name,
+            'description'=> $faker->text,
+          ]);
+        }
+      }
     }
 }

@@ -24,42 +24,22 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Listado </div>
 				<div class="panel-body">
-					<p class="text-left">
-						<a href="{{url("/tareas/registrar")}}" class="btn btn-info">Registrar</a>
-						<a href="{{url("/tareas/todas")}}" class="btn btn-info">Ver todas</a>
+					<p class="text-right">
+						@if (\Auth::user()->canDo('tasks.create'))
+							<a href="{{url("/tareas/registrar")}}" class="btn btn-info">Registrar</a>
+						@endif
+						@if (\Auth::user()->canDo('tasks.list_all'))
+							<a href="{{url("/tareas/todas")}}" class="btn btn-info">Ver todas</a>
+						@endif
 					</p>
-					<table data-toggle="table" data-show-refres41758498h="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
-						<thead>
-								<tr>
-									<th data-sortable="true" data-field="title">Titulo</th>
-									<th data-sortable="true" data-field="type">Tipo de tarea</th>
-									<th data-sortable="true" data-field="details">Detalles</th>
-									<th data-sortable="true" data-field="dificulty">Dificultad</th>
-									<th data-sortable="true" data-field="estimated_date">Fecha tope</th>
-									<th>Ver</th>
-									<th>Modificar</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach($tasks as $task)
-									<tr>
-										<td>{{$task->title}}</td>
-										<td>{{$task->type}}</td>
-										<td>{{$task->details}}</td>
-										<td>{{ $task->dificulty }}</td>
-										<td>{{$task->estimated_date->format('d/m/Y')}}</td>
-										<td>
-											<a href="{{url("/tareas/$task->id/ver")}}" class="btn btn-info"><i class="fa fa-eye"></i></a>
-										</td>
-										<td>
-											<a class="btn btn-warning" id="update" href="{{url("/tareas/modificar/$task->id")}}">
-												<i class="fa fa-pencil" value="Actualizar"></i>
-											</a>
-										</td>
-									</tr>
-								@endforeach
-							</tbody>
-						</table>
+					@include('modules.tasks.table-view', ['data' => ['title' => 'Mis Tareas', 'tasks' => \Auth::user()->tasks]])
+
+					@if (\Auth::user()->canDo('tasks.create'))
+						@include('modules.tasks.table-view', ['data' => ['title' => 'Tareas Creadas', 'tasks' => \Auth::user()->createdTasks]])
+					@endif
+					@if (\Auth::user()->canDo('tasks.department_list'))
+						@include('modules.tasks.table-view', ['data' => ['title' => 'Tareas del Departamento', 'tasks' => \Auth::user()->department->tasks]])
+					@endif
 				</div>
 			</div>
 		</div>

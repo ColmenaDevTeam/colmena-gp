@@ -187,6 +187,13 @@ class PermissionSeeder extends Seeder
             ),
             array(
                 'category' => 'Tareas',
+                'action' => 'Ver Tareas de Departamento',
+                'slug' =>'tasks.department_list',
+                'navigation' => false,
+                'level' => 1,
+            ),
+            array(
+                'category' => 'Tareas',
                 'action' => 'Gestionar',
                 'slug' => 'tasks.transact',
                 'navigation' => false,
@@ -236,6 +243,13 @@ class PermissionSeeder extends Seeder
                 'slug' =>'absences.list_all',
                 'navigation' => true,
                 'level' => 0,
+            ),
+            array(
+                'category' => 'Ausencias',
+                'action' => 'Ver Ausencias de Departamento',
+                'slug' =>'absences.department_list',
+                'navigation' => false,
+                'level' => 1,
             ),
             array(
                 'category' => 'Ausencias',
