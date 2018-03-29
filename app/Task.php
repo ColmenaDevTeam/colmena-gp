@@ -9,8 +9,11 @@ use App\Notifications\NewTaskAssignment;
 use App\Notifications\CalendarTasksDelay;
 use App\Notifications\AbsenceTasksDelay;
 use App\Notifications\DelayedTask;
+use App\EnumHelper;
 
 class Task extends Model{
+	use EnumHelper;
+
 	protected $dates = ['estimated_date'];
 
 	protected $fillable = [
@@ -19,20 +22,13 @@ class Task extends Model{
 	];
 
     public function responsibles(){
-        return $this->belongsToMany('App\User', 'users_has_tasks', 'task_id', 'user_id');
+        return $this->belongsToMany('App\User', 'users_has_tasks', 'task_id', 'user_id')->withPivot('deliver_date', 'status', 'details')->withTimestamps();
     }
 
 	public function creator(){
         return $this->belongsTo('App\User', 'creator_id');
     }
 
-	public function taskLogs(){
-		return $this->hasMany('App\TaskLog', 'task_id');
-	}
-
-	public function lastLog(){
-		return $this->taskLogs()->orderBy('created_at', 'desc')->take(1)->first();
-	}
 	public static function getTasksPerDate($date){
 		return self::where('estimated_date', $date)->get();
 	}
@@ -60,11 +56,6 @@ class Task extends Model{
 
 			}
 		}
-	}
-
-	public static function countTasks(){
-		return self::where('status', '<>', 'Cumplida')->where('status', '<>', 'Cancelada')
-					->count();
 	}
 
 	public function getDificultyAttribute(){

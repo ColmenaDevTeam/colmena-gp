@@ -198,12 +198,12 @@ class Database extends Migration
         if(Schema::hasTable('users_has_recurring_activities')) Schema::drop('users_has_recurring_activities');
         if(Schema::hasTable('notifications')) Schema::drop('notifications');
         if(Schema::hasTable('absences')) Schema::drop('absences');
+        if(Schema::hasTable('tasks')) Schema::drop('tasks');
         if(Schema::hasTable('users')) Schema::drop('users');
         if(Schema::hasTable('commissions')) Schema::drop('commissions');
         if(Schema::hasTable('departments')) Schema::drop('departments');
         if(Schema::hasTable('permissions')) Schema::drop('permissions');
         if(Schema::hasTable('password_resets')) Schema::drop('password_resets');
-        if(Schema::hasTable('tasks')) Schema::drop('tasks');
         if(Schema::hasTable('roles')) Schema::drop('roles');
         if(Schema::hasTable('recurring_activities')) Schema::drop('recurring_activities');
         if(Schema::hasTable('calendar')) Schema::drop('calendar');

@@ -42,7 +42,6 @@
 					</a>
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<a href="" class="list-group-item" onClick="return false;">
 								<p class="text-justify">
 									{{$task->details}}
 								</p>
@@ -67,12 +66,16 @@
 								<hr>
 								<h4>Responsables: </h4>
 								@foreach ($task->responsibles as $responsible)
-										<a class="list-group">
+									<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+										<div class="list-group">
 											<a href="#l_{{strtolower(str_replace(' ', '_', $responsible->cedula ))}}" class="list-group-item active" data-toggle="collapse">
-												<h4 style="color:white">{{$responsible->fullname}}</h4>
+												{{$responsible->fullname}}
 											</a>
 											<div class="collapse" id="l_{{strtolower(str_replace(' ', '_', $responsible->cedula ))}}">
 												<p>Fecha de tope:Fecha de tope:Fecha de tope:Fecha de tope:Fecha de tope:</p>
+												<div class="text-center" style="padding: 20px">
+													<a href="#"  onclick="$('#transact-form-modal').modal().show(); return false;" class="btn btn-success">Tramitar Tarea</a>
+												</div>
 												{{--@foreach ($perms as $permission)
 													<p class="list-group-item">
 														<input type="checkbox" {{isset($role) && $role->permissions->contains($permission) ? 'checked' : ''  }} id="{{$permission->id}}" name="permissions[]" value="{{$permission->id}}">
@@ -81,44 +84,11 @@
 													</p>
 												@endforeach--}}
 											</div>
-										</a>
+										</div>
+									</div>
 								@endforeach
-							</a><!-- ./list-group-item -->
 							<hr>
 						</div><!-- ./col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
-
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-							<hr>
-							<a href="" class="list-group-item active text-center" onClick="return false;">
-								<h3 style="color: white;">Seguimiento
-								</h3>
-							</a>
-								<div class="table-responsive">
-					 				<a href="" class="list-group-item" onClick="return false;">
-					 					<p class="text-center">
-						 					<hr>
-											{{--@foreach ($task->taskLogs as $log)
-												<div class="text-center">
-													<span class="label label-info">{{$log->created_at}}</span> Por: <span class="label label-primary">{{$log->user}}</span> Estado: <span class="label label-warning">{{$log->status}}</span> <br>{{$log->details}}
-												</div>
-												<div class="text-justify">
-													<strong>Detalles:</strong><p>{{ $log->detail }}</p>
-												</div>
-												<div class="text-center">
-													Firmado digitalmente por: {{$log->user}} con la llave: <br>
-													RSA-PK:<span class="label label-success">asdasdfqwfc</span>
-												</div>
-												<hr>
-											@endforeach--}}
-										</p>
-									</a>
-								</div> <!-- /.table-responsive-->
-								{{--<div class="pagination"> {{ $task->taskLogs->links() }} </div>--}}
-								<div class="text-center" style="padding: 20px">
-									<a href="#"  onclick="$('#transact-form-modal').modal().show(); return false;" class="btn btn-success">Tramitar Tarea</a>
-								</div>
-							</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
-						</div><!-- -/.row-->
 					</div><!-- -/.row-->
 				</div><!-- -/.list-group-->
 			</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->

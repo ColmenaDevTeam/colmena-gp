@@ -59,10 +59,12 @@
                 @php $dmonth="" @endphp
                 @foreach ($dates as $weeks)
 
-                    <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12 '>
-						<h4>
-							<i class="fa fa-calendar" value=""></i>  {{$months[$m]}}
-						</h4>
+                    <div class='col-lg-6 col-md-6 col-sm-12 col-xs-12 '>
+						<div class="list-group">
+							<a href="#l_{{strtolower(str_replace(' ', '_', $months[$m] ))}}" class="list-group-item active" data-toggle="collapse">
+								<i class="fa fa-calendar" value=""></i>  {{$months[$m]}}
+							</a>
+						<div class="collapse" id="l_{{strtolower(str_replace(' ', '_', $months[$m] ))}}">
                         <div class="table-responsive">
                             <table class="table">
                                 <tr>
@@ -115,6 +117,8 @@
 							</a>
 
 						</div>
+					</div>
+				</div>
                     </div><!-- /.col-lg-12 col-md-12 col-sm-12 col-xs-12 -->
                     @php $m+=1; @endphp
                     @php $dmonth=""; @endphp
@@ -123,6 +127,7 @@
 					<br>
 					<button type="button" class="btn btn-success" onClick="validar()">Actualizar Calendario</button>
 				</div>
+				<hr>
             </form>
 
 		</div>
