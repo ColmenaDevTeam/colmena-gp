@@ -37,8 +37,8 @@
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="list-group">
 					<a href="" class="list-group-item active text-center" onClick="return false;">
-						<h3 style="color: white;">{{$task->title}}
-						</h3>
+						<h4 style="color: white;">{{$task->title}}
+						</h4>
 					</a>
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -72,9 +72,18 @@
 												{{$responsible->fullname}}
 											</a>
 											<div class="collapse" id="l_{{strtolower(str_replace(' ', '_', $responsible->cedula ))}}">
-												<p>Fecha de tope:Fecha de tope:Fecha de tope:Fecha de tope:Fecha de tope:</p>
+												<p>
+													<dl>
+														<dt>Estado actual:</dt>
+														<dd>{{ $responsible->pivot->status }}</dd>
+														<dt>Fecha de entrega:</dt>
+														<dd>{{ $responsible->pivot->deliver_date }}</dd>
+														<dt>Detalle:</dt>
+														<dd>{{ $responsible->pivot->details }}</dd>
+													</dl>
+												</p>
 												<div class="text-center" style="padding: 20px">
-													<a href="#"  onclick="$('#transact-form-modal').modal().show(); return false;" class="btn btn-success">Tramitar Tarea</a>
+													<a href="#"  onclick="$('#transact-form-modal').modal().show(); return false;" class="btn btn-success">Ver</a>
 												</div>
 												{{--@foreach ($perms as $permission)
 													<p class="list-group-item">

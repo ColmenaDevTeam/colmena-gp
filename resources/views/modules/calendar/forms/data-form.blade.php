@@ -103,7 +103,7 @@
                                         @php $dmonth=$dmonth.$week."-" @endphp
                                         <td align="center" >
                                             <a href="#" name="checkWeek" onClick="checkWeek('{{$week}}', '{{$m+1}}');return false;" type="button">
-                                                Marcar semana<i class="fa fa-check" value=""></i>
+                                                Semana<i class="fa fa-check" value=""></i>
                                             </a>
                                         </td>
                                     </tr>
@@ -113,7 +113,7 @@
 						<div class="text-right">
 							<br>
 							<a href="#" id="Checkmonths" onClick="checkMonth('{{$dmonth}}','{{$m+1}}');return false;" type="button">
-								Marcar mes {{$m+1}}<i class="fa fa-check" value=""></i>
+								Mes<i class="fa fa-check" value=""></i>
 							</a>
 
 						</div>
