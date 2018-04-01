@@ -5,7 +5,7 @@ use DB;
 
 trait EnumHelper {
 	public static function getEnumValues($field){
-		$instance = new static;
+		$instance = new static();
 		if (env('DB_CONNECTION') == 'pgsql') {
 			$types = DB::select("
 			select matches[1]

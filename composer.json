@@ -28,7 +28,8 @@
         "files":[
         	"app/Helpers/Menu.php",
             "app/Helpers/Math.php",
-            "app/Helpers/Str.php"
+            "app/Helpers/Str.php",
+            "app/TaskLog.php"
         ]
     },
     "autoload-dev": {

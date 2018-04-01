@@ -42,6 +42,7 @@
 					</a>
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+							<br>
 								<p class="text-justify">
 									{{$task->details}}
 								</p>
@@ -77,21 +78,12 @@
 														<dt>Estado actual:</dt>
 														<dd>{{ $responsible->pivot->status }}</dd>
 														<dt>Fecha de entrega:</dt>
-														<dd>{{ $responsible->pivot->deliver_date }}</dd>
-														<dt>Detalle:</dt>
-														<dd>{{ $responsible->pivot->details }}</dd>
+														<dd>{{ is_null($responsible->pivot->deliver_date) ? 'N/A' : $responsible->pivot->deliver_date}}</dd>
 													</dl>
 												</p>
 												<div class="text-center" style="padding: 20px">
-													<a href="#"  onclick="$('#transact-form-modal').modal().show(); return false;" class="btn btn-success">Ver</a>
+													<a href="#"  onclick="loadTransactions({{ $responsible->pivot->id }}); return false" class="btn btn-success">Ver detalle</a>
 												</div>
-												{{--@foreach ($perms as $permission)
-													<p class="list-group-item">
-														<input type="checkbox" {{isset($role) && $role->permissions->contains($permission) ? 'checked' : ''  }} id="{{$permission->id}}" name="permissions[]" value="{{$permission->id}}">
-															{{$permission->action}}
-														</input>
-													</p>
-												@endforeach--}}
 											</div>
 										</div>
 									</div>
@@ -103,9 +95,9 @@
 			</div><!-- /.col-xs-12 col-sm-12 col-md-12 col-lg-12 -->
 		</div><!-- -/.row-->
 	</div>
-	@include('modules.tasks.forms.transact-form-modal')
+	@include('modules.tasks.forms.transact.modal')
 	@include('modules.tasks.forms.delete-form-modal')
 @endsection
 @section('js')
-
+	@include('modules.tasks.forms.transact.js')
 @endsection

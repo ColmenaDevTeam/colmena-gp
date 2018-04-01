@@ -74,6 +74,7 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 		 Route::get('/todas', 'TaskController@indexAll')->name('tasks.list_all');
 		 Route::get('/', function(){ return redirect('/tareas/listar');})->name('tasks.list');
 		 Route::get('/{id}/ver', 'TaskController@view')->name('tasks.view');
+		 Route::get('/transacciones', 'TaskController@getLogs')->name('tasks.view');
 		 Route::post('/tramitar', 'TaskController@transact')->name('tasks.transact');
 		 Route::post('/eliminar', 'TaskController@delete')->name('tasks.delete');
 	 });

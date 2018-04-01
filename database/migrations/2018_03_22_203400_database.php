@@ -178,7 +178,7 @@ class Database extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('task_id')->unsigned();
             $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
-            $table->text('details')->nullable();
+            $table->json('details')->nullable();
             $table->timestamps();
         });
     }

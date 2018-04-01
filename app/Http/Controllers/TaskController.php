@@ -37,7 +37,7 @@ class TaskController extends Controller{
 			'type' => 'required',
 			'estimated_date' => 'required|date_format:Y-m-d|after:yesterday',#Aqui verificacion de calendario
 			'users' => 'required',
-			'details' => 'min:10|max:255'
+			'details' => 'min:10'
 		])->validate();
 
 		$task = new task();
@@ -86,7 +86,7 @@ class TaskController extends Controller{
 			'complexity' => 'required',
 			'type' => 'required',
 			'estimated_date' => 'required|date_format:Y-m-d|after:yesterday', #Aqui verificacion de calendario
-			'details' => 'min:10|max:255'
+			'details' => 'min:10'
 		])->validate();
 
 		$task->title = $request->title;
@@ -106,30 +106,30 @@ class TaskController extends Controller{
     }
     public function view(Request $request){
 		$task = Task::find($request->id);
-		return view('modules.tasks.view')->with('task', $task);
+		return view('modules.tasks.view')->with(['task' => $task, 'statuses' => TaskLog::getEnumValues('status')]);
     }
 
+	public function getLogs(Request $request){
+		return response(['log_id' => $request->log_id, 'logs' => TaskLog::find($request->log_id)->getIterations()]);
+	}
 	public function transact(Request $request){
-		//verificacion de usuario/rol
-		$task = Task::find($request->task_id);
-		if(!Auth::user()->canDo('tasks.create') && Auth::user()->id != $task->responsible->id) return redirect('/401');
-		if (!$task) return redirect('/404');
-
 		Validator::make($request->input(), [
 			'status' => 'required',
 			'detail' => 'min:10|max:255'
-		])->validate();
-		$task->status = $request->status;
-		if($request->status == "Revision") $task->deliver_date = date('Y-m-d');
-		$task->save();
-		$log = new TaskLog;
-		$log->status = $request->status;
-		$log->detail = $request->detail;
-		$log->user = Auth::user()->fullname;
-		$log->task_id = $task->id;
+			])->validate();
+
+		$log = TaskLog::find($request->task_log_id);
+		$log->setDetails(\Auth::user()->fullname, $request->detail, $log->status, date('Y-m-d h:m'));
+
+		if(\Auth::user()->id === $log->user_id){
+			$log->deliver_date = date('Y-m-d');
+			$log->status = "Revision";
+		}else{
+			$log->status = $request->status;
+		}
 		$log->save();
 		\Session::push('success', true);
-		return \Redirect::back()->with(['task' => $task, 'statuses' => Task::getEnumValues('status'), 'log' => $task->lastLog()]);
+		return \Redirect::back()->with(['task' => Task::find($log->task_id), 'statuses' => TaskLog::getEnumValues('status')]);
 	}
 
 	public function delete(Request $request){

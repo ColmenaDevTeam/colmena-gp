@@ -14,15 +14,15 @@ use App\EnumHelper;
 class Task extends Model{
 	use EnumHelper;
 
-	protected $dates = ['estimated_date'];
-
 	protected $fillable = [
-        'title','estimated_date','details','priority',
-        'complexity', 'type'
+		'title','estimated_date','details','priority',
+		'complexity', 'type'
 	];
 
+	protected $dates = ['estimated_date'];
+
     public function responsibles(){
-        return $this->belongsToMany('App\User', 'users_has_tasks', 'task_id', 'user_id')->withPivot('deliver_date', 'status', 'details')->withTimestamps();
+        return $this->belongsToMany('App\User', 'users_has_tasks', 'task_id', 'user_id')->withPivot('id', 'deliver_date', 'status', 'details')->withTimestamps();
     }
 
 	public function creator(){
