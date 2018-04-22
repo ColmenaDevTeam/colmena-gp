@@ -20,7 +20,7 @@ class MinningController extends Controller
 
 	public function counter(Request $request)
 	{
-		$count = 5000;
+		$count = Minning::countRecords($request->variables);
 
 		return json_encode(['count' => $count]);
 	}	

@@ -31,13 +31,13 @@
 
 							<div class="col-xs-6">
 								<h2>Rango de registros</h2>
-								Desde <input type="number" name="range_min">
-								Hasta <input type="number" name="range_max">
+								Desde <input type="number" name="range_min" min="1" required>
+								Hasta <input type="number" name="range_max" max="" id="range_max" required>
 								<hr>
 							</div>
 							<div class="col-xs-6">
 								<h2>Segmentos</h2>
-								Cantidad de segmentos requeridos <input type="number" name="clusters">
+								Cantidad de segmentos requeridos <input type="number" name="clusters" min="2" required>
 								<hr>
 							</div>
 							<div class="col-xs-12 text-center">
@@ -54,15 +54,14 @@
 	<script type="text/javascript">
 		
 		$(":checkbox").change(function() {
-		    if(this.checked) {
-		    	getCount(getCheckedVariables());
-		    }
+		    getCount(getCheckedVariables());
 		});		
 
 		function getCount(variables){
-			$.get( "contador-de-registros", { "variables[]": variables }, function(total){
-				console.log(total);
-				setCountResult(total);	
+			$.get( "contador-de-registros", { "variables[]": variables }, function(data){
+				var total = jQuery.parseJSON(data);
+				setCountResult(total.count);
+				setMax(total.count);
 			});
 			
 		}
@@ -71,6 +70,10 @@
 			$('#avaliable_records').text(total);
 		}
 
+		function setMax(max){
+			$('#range_max').attr('max', max);
+		}
+		
 		function getCheckedVariables(){
 	        var variables = [];
 	        $('#check-combo input:checked').each(function() {

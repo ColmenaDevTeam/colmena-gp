@@ -31,13 +31,13 @@ class MinningSeeder extends Seeder
        		),
        		array(
        			'name' => 'Fecha de entrega',
-       			'sql_name' => 'users_has_tasks.estimated_date',
+       			'sql_name' => 'users_has_tasks.deliver_date',
        			'sql_table' => 'users_has_tasks',
        			'sql_query' => null
        		),
        		array(
       			'name' => 'Estado de tarea',
-       			'sql_name' => 'users_has_tasks.estimated_date',
+       			'sql_name' => 'users_has_tasks.status',
        			'sql_table' => 'users_has_tasks',
        			'sql_query' => null
        		),
@@ -60,20 +60,14 @@ class MinningSeeder extends Seeder
        			'sql_query' => null
        		),
        		array(
-       			'name' => 'Departamento (id)',
-       			'sql_name' => 'departments.id',
-       			'sql_table' => 'departments',
-       			'sql_query' => 'WHERE users.department_id = departments.id AND users.id = tasks.creator_id = users.id'
-       		),
-       		array(
        			'name' => 'Tipo de ausencia',
-       			'sql_name' => 'abesences.type',
+       			'sql_name' => 'absences.type',
        			'sql_table' => 'absences',
        			'sql_query' => null
        		),
        		array(
        			'name' => 'Tipo de Usuario',
-       			'sql_name' => 'users.type',
+       			'sql_name' => 'users.user_type',
        			'sql_table' => 'users',
        			'sql_query' => null
        		),
