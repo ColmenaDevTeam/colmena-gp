@@ -23,11 +23,21 @@ class Minning {
 	public static function countRecords(array $variables_id){
 		
 		$variables = self::getVariables($variables_id);
-		$crudeQuery = self::prepareQuery($variables);
-		
-		$count = count(DB::select("select" . $crudeQuery['columns'] . "from" . $crudeQuery['tables'] . $crudeQuery['querys']));
+		$rawQuery = self::prepareQuery($variables);
+
+		$count = DB::select("select count(*) as total from (select " . $rawQuery['columns'] . "from" . $rawQuery['tables'] . $rawQuery['querys'] . ") count")[0]->total;
 		return $count;
 	}
+
+	public static function getRecords(array $variables_id){
+		
+		$variables = self::getVariables($variables_id);
+		$rawQuery = self::prepareQuery($variables);
+
+		$records = DB::select("select " . $rawQuery['columns'] . "from" . $rawQuery['tables'] . $rawQuery['querys']);
+		return $records;
+	}
+
 	public static function discretize($collectionObj){
 
 	}

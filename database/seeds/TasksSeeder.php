@@ -18,14 +18,15 @@ class TasksSeeder extends Seeder
 	    $faker = Faker::create();
 	    $tasks_types = ['Academico-Docente','Administrativas','Creacion-Intelectual','Integracion-Social','Administrativo-Docente','Produccion'];
 	    $statuses = ['Asignada','Revision','Cumplida','Cancelada','Diferida','Retardada'];
+	    $dificulty = [1,2,3];
 
-        for ($i=0; $i < 30; $i++) {
+        for ($i=0; $i < 100; $i++) {
           DB::table('tasks') -> insert([
             'title'=>$faker->name,
             'estimated_date' => Carbon::now()->addDays(array_rand([1,2,3,4,5,6])),
             'details'=> $faker->text,
-            'priority'=> array_rand([1,2,3]),
-            'complexity'=> array_rand([1,2,3]),
+            'priority'=> $dificulty[array_rand($dificulty)],
+            'complexity'=> $dificulty[array_rand($dificulty)],
             'creator_id'=> 1,
             'type'=> $tasks_types[array_rand($tasks_types)]
           ]);
