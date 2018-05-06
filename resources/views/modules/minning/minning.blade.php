@@ -19,7 +19,7 @@
 								<h2>Variables</h2>
 								@foreach($variables as $variable)
 									<div class="form-group has-feedback col-xs-4">
-										<input type="checkbox" name="variables" value="{{ $variable->id }}" class=".checkbox"> {{ $variable->name }}
+										<input type="checkbox" name="variables[]" value="{{ $variable->id }}" class=".checkbox"> {{ $variable->name }}
 									</div>										
 								@endforeach
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
@@ -27,6 +27,7 @@
 							<div class="col-xs-12">
 								<h2>Número de registros disponibles: <label id="avaliable_records" class="label label-success">0</label></h2>
 								<hr>
+								<input id="avaliable_records_count" type="hidden" name="count" value="" required>
 							</div>
 
 							<div class="col-xs-6">
@@ -68,6 +69,7 @@
 
 		function setCountResult(total){
 			$('#avaliable_records').text(total);
+			$('#avaliable_records_count').val(total);
 		}
 
 		function setMax(max){

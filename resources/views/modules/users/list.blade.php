@@ -43,7 +43,7 @@
 							<tbody>
 								@foreach($users as $user)
 									<tr>
-										<td ><a href="{{ $user->url }}">{{$user->fullname}}</td></a>
+										<td ><a href="{{ url($user->url) }}">{{$user->fullname}}</td></a>
 										<td >{{$user->cedula}}</td>
 										<td >{{$user->birthdate->format('d/m/Y')}}</td>
 										<td >{{$user->genderString}}</td>

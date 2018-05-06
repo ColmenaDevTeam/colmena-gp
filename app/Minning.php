@@ -8,8 +8,9 @@ use Carbon\Carbon;
 
 class Minning {
 	
+	const MODELS_TABLE = 'data_minning_models';
 	const VARIABLES_TABLE = 'data_minning_variables';
-	const VALUES = 'data_minning_values';
+	const VALUES_TABLE = 'data_minning_values';
 
 	const DIS_TASK_STATUS = array('Asignada' => 1, 'Revision' => 2, 'Cumplida'=> 3, 'Cancelada' => 4, 'Diferida' => 5, 'Retardada' => 6);
 	const DIS_TASK_TYPE = array('Academico-Docente' => 1, 'Administrativas' => 2, 'Creacion-Intelectual' => 3 , 'Integracion Social' => 4, 'Administrativo-Docente' => 5, 'Produccion' => 6);
@@ -29,12 +30,22 @@ class Minning {
 		return $count;
 	}
 
-	public static function getRecords(array $variables_id){
-		
+	public static function generateModel($data){
+		DB::table(self::MODELS_TABLE)->insert([
+			'clusters' => $data['clusters'],
+			'min_selected' => $data['range_min'],
+			'max_selected' => $data['range_max'],
+			'total_avaliable' => $data['count'],
+			'variables' => json_encode($data['variables'])
+		]);
+
+		return ;
+	}
+
+	public static function getRecords(array $variables_id, $min, $max){
 		$variables = self::getVariables($variables_id);
 		$rawQuery = self::prepareQuery($variables);
-
-		$records = DB::select("select " . $rawQuery['columns'] . "from" . $rawQuery['tables'] . $rawQuery['querys']);
+		$records = DB::select("select " . $rawQuery['columns'] . "from" . $rawQuery['tables'] . $rawQuery['querys'] . " LIMIT " . ($max-$min) . " OFFSET " . ($min-1));
 		return $records;
 	}
 
@@ -68,8 +79,8 @@ class Minning {
 		$columns_query = '';
 		for ($i=0; $i < count($columns); $i++) { 
 			$columns_query = ($i == count($columns) - 1) 
-							? $columns_query . ' ' . $columns[$i] . ' '
-							: $columns_query . ' ' . $columns[$i] . ',' ;
+							? $columns_query . ' ' . $columns[$i] . ' as '.str_replace(".","_",$columns[$i]).' '
+							: $columns_query . ' ' . $columns[$i] . ' as '.str_replace(".","_",$columns[$i]).',' ;
 		}
 
 		$sql = "";
@@ -77,6 +88,10 @@ class Minning {
 			$sql = $sql . ' ' . $querys[$i];
 		}
 		return array('tables' => $tables_query, 'columns' => $columns_query, 'querys' => $sql);
+	}
+
+	public function saveValues(){
+
 	}
 
 	public static function clusterize(){
