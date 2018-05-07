@@ -184,6 +184,7 @@ class Database extends Migration
 
         Schema::create('data_minning_models', function (Blueprint $table){
           $table->increments('id');
+          $table->string('name', 30);
           $table->integer('clusters');
           $table->integer('min_selected');
           $table->integer('max_selected');
@@ -196,14 +197,14 @@ class Database extends Migration
           $table->increments('id');
           $table->integer('data_minning_model_id')->unsigned();
           $table->foreign('data_minning_model_id')->references('id')->on('data_minning_models')->onDelete('cascade');
-          $table->json('task_estimated_date')->nullable();
-          $table->json('task_deliver_date')->nullable();
-          $table->json('task_status')->nullable();
-          $table->json('task_type')->nullable();
-          $table->json('task_priority')->nullable();
-          $table->json('task_complexity')->nullable();
-          $table->json('absence_type')->nullable();
-          $table->json('user_type')->nullable();
+          $table->json('tasks_estimated_date')->nullable();
+          $table->json('users_has_tasks_deliver_date')->nullable();
+          $table->json('users_has_tasks_status')->nullable();
+          $table->json('tasks_type')->nullable();
+          $table->json('tasks_priority')->nullable();
+          $table->json('tasks_complexity')->nullable();
+          $table->json('absences_type')->nullable();
+          $table->json('users_user_type')->nullable();
         });
 
         Schema::create('data_minning_variables', function (Blueprint $table){
@@ -243,10 +244,9 @@ class Database extends Migration
         if(Schema::hasTable('calendar')) Schema::drop('calendar');
         if(Schema::hasTable('meetings')) Schema::drop('meetings');
         if(Schema::hasTable('parameters')) Schema::drop('parameters');
-
         
         if(Schema::hasTable('data_minning_variables')) Schema::drop('data_minning_variables');
         if(Schema::hasTable('data_minning_values')) Schema::drop('data_minning_values');
-        if(Schema::hasTable('data_minning_models')) Schema::drop('data_minning_model');
+        if(Schema::hasTable('data_minning_models')) Schema::drop('data_minning_models');
     }
 }

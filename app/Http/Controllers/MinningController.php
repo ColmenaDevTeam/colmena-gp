@@ -15,22 +15,29 @@ class MinningController extends Controller
 	}
 
 	public function process(Request $request){
-
-		#Minning::generateModel($request->all());
+		$model_id = Minning::generateModel($request->all());
 		$records = Minning::getRecords($request->variables, $request->range_min,$request->range_max);
-		#dd($records);
 
+		$arrProccess = [];
+		$attributes = null;
 		foreach ($records as $record) {
-			$attrs = get_object_vars($record);
-	
-			for ($i=0; $i < count($attrs) ; $i++) { 
-				Minning::discretize();
-				Minning::normalize();
-			}	
+			$attributes = array_keys(get_object_vars($record));
+			$row = [];
+			$row['data_minning_model_id'] = $model_id;
+
+			for ($i=0; $i < count($attributes) ; $i++) {
+				$discretized =  Minning::discretize($record->{$attributes[$i]}, $attributes[$i]);
+
+				$data = array($record->{$attributes[$i]}, $discretized);
+				$row[$attributes[$i]] = $data;
+			}
+			$arrProccess[] = $row;
 		}
-		
-		#$count = count(get_object_vars($some_std_class_object));
-		#dd($request->all());
+
+		$arrayToSave = Minning::normalize($arrProccess, $attributes);
+
+		Minning::saveValues($arrayToSave);		
+		dd("guardado");
 		return redirect();
 	}
 

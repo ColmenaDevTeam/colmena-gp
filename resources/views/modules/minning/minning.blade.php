@@ -15,6 +15,11 @@
 					<form class="" method="post">
 						{{ csrf_field() }}
 						<div class="row">
+							<div class="col-xs-12" >
+								<h2>Datos del Modelo</h2>
+								Nombre del modelo: <input type="text" name="name" min="2" max="30" required>
+							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
+						
 							<div class="col-xs-12" id="check-combo">
 								<h2>Variables</h2>
 								@foreach($variables as $variable)
@@ -26,7 +31,6 @@
 							
 							<div class="col-xs-12">
 								<h2>Número de registros disponibles: <label id="avaliable_records" class="label label-success">0</label></h2>
-								<hr>
 								<input id="avaliable_records_count" type="hidden" name="count" value="" required>
 							</div>
 
@@ -40,6 +44,11 @@
 								<h2>Segmentos</h2>
 								Cantidad de segmentos requeridos <input type="number" name="clusters" min="2" required>
 								<hr>
+							</div>
+
+							<div class="col-xs-12 alert alert-danger">
+								<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								<p>Te recordamos, que debido a la complejidad del proceso, este puede tardar en ejecutarse.</p>
 							</div>
 							<div class="col-xs-12 text-center">
 								<button type="submit" name="button" class="btn btn-success">Continuar</button>
