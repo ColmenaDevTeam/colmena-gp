@@ -9,14 +9,14 @@
 							<use xlink:href="#stroked-chevron-down">
 							</use>
 						</svg>
-						{{ $category }}
+						{{str_replace("_", " ",$category)}}
 					</span>
 				</a>
 				<ul class="children collapse" id="{{strtolower($category)}}">
 					@foreach ($permissions as $permission)
 						<li>
-							<a class="" href="{{$permission->url}}">
-								<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> {{ $permission->action }}
+							<a class="" href="{{str_replace("_", "-", $permission->url)}}">
+								<svg class="glyph stroked chevron-right"><use xlink:href="#stroked-chevron-right"></use></svg> {{ str_replace("_", " ",$permission->action) }}
 							</a>
 						</li>
 					@endforeach

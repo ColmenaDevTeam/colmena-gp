@@ -25,8 +25,8 @@
 				<div class="panel-heading">Listado</div>
 				<div class="panel-body">
 					<p class="text-left">
-						<a href="/ausencias/registrar" class="btn btn-info">Registrar</a>
-						<a href="/ausencias/todas" class="btn btn-info">Ver todas</a>
+						<a href="{{url("/ausencias/registrar")}}" class="btn btn-info">Registrar</a>
+						<a href="{{url("/ausencias/todas")}}" class="btn btn-info">Ver todas</a>
 					</p>
 					<table data-toggle="table" data-show-refres41758498h="true" data-show-toggle="true" data-show-columns="true" data-search="true" data-select-item-name="toolbar1" data-pagination="true" data-sort-name="name" data-sort-order="desc">
 						<thead>

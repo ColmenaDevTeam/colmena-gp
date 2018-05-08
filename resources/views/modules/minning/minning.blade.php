@@ -18,6 +18,7 @@
 							<div class="col-xs-12" >
 								<h2>Datos del Modelo</h2>
 								Nombre del modelo: <input type="text" name="name" min="2" max="30" required>
+								Descripción: <input type="text" name="description" min="2" max="30" required>
 							</div><!-- /.col-xs-1 col-sm-4 col-md-4 col-lg-3 -->
 						
 							<div class="col-xs-12" id="check-combo">

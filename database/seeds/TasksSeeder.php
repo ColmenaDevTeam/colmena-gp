@@ -23,7 +23,7 @@ class TasksSeeder extends Seeder
         for ($i=0; $i < 100; $i++) {
           DB::table('tasks') -> insert([
             'title'=>$faker->name,
-            'estimated_date' => Carbon::now()->addDays(array_rand([1,2,3,4,5,6])),
+            'estimated_date' => Carbon::now()->addDays(array_rand([1,2,3,4,5,6,7,8,9])),
             'details'=> $faker->text,
             'priority'=> $dificulty[array_rand($dificulty)],
             'complexity'=> $dificulty[array_rand($dificulty)],
