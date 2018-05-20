@@ -31,6 +31,24 @@ Route::get('/home', function () {
  */
 Route::get('/calendario/sin-datos', 'CalendarController@showNoDataInfo');
 Route::get('/acerca-de', 'HomeController@about');
+Route::get('/tareas/listar', 'TaskController@index')->name('tasks.list');
+Route::get('/usuarios/perfil/{id}', 'UserController@showProfile')->name('users.view');
+Route::post('/usuarios/actualizar-perfil', 'UserController@updateData')/*->middleware('sensitive')*/->name('users.change_data');
+Route::post('/usuarios/actualizar-clave', 'UserController@updatePassword')/*->middleware('sensitive')*/->name('users.change_password');
+Route::get('/calendario/ver', 'CalendarController@show')->name('calendar.see');
+Route::get('/calendario', function(){ return redirect('/calendario/ver');})->name('calendar.see');
+
+/**
+*Steganography Routes
+*/
+
+Route::get('/seguridad/elegir-imagen', 'SteganographyController@showDataForm')->name('users.view');
+Route::post('/seguridad/elegir-imagen', 'SteganographyController@save')->name('users.view');
+
+Route::get('/seguridad/ver-contenido', 'SteganographyController@test')->name('users.view');
+
+Route::get('/secureimages/base/{filename}', 'SteganographyController@loadBaseImage')->name('baseimage');
+Route::get('/secureimages/users/{filename}', 'SteganographyController@loadUserImage')->name('userimage');
 
  /**
   * Auth routes
@@ -70,7 +88,7 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 		 Route::post('/registrar', 'TaskController@register')->name('tasks.create');
 		 Route::get('/modificar/{id}', 'TaskController@showUpdateForm')->name('tasks.update');
 		 Route::post('/modificar/{id}', 'TaskController@update')->name('tasks.update');
-		 Route::get('/listar', 'TaskController@index')->name('tasks.list');
+		 
 		 Route::get('/ver-todas', 'TaskController@indexAll')->name('tasks.list_all');
 		 Route::get('/', function(){ return redirect('/tareas/listar');})->name('tasks.list');
 		 Route::get('/{id}/ver', 'TaskController@view')->name('tasks.view');
@@ -120,9 +138,7 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 		Route::post('/desactivar', 'UserController@desactivate')->name('users.enable');
 		Route::post('/reactivar', 'UserController@reactivate')->name('users.enable');
 		Route::post('/eliminar', 'UserController@delete')->name('users.delete');
-		Route::get('/perfil/{id}', 'UserController@showProfile')->name('users.view');
-		Route::post('/actualizar-perfil', 'UserController@updateData')/*->middleware('sensitive')*/->name('users.change_data');
-		Route::post('/actualizar-clave', 'UserController@updatePassword')/*->middleware('sensitive')*/->name('users.change_password');
+		
 	 });
 	/**
 	*Calendar Routes
@@ -130,8 +146,7 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 	 Route::group(['prefix' => '/calendario'], function(){
 		Route::get('/actualizar', 'CalendarController@showDataForm')->name('calendar.update');
 		Route::post('/actualizar', 'CalendarController@update')->name('calendar.update');
-		Route::get('/ver', 'CalendarController@show')->name('calendar.see');
-		Route::get('/', function(){ return redirect('/calendario/ver');})->name('calendar.see');
+
 	 });
 
 	/**
@@ -171,19 +186,6 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 
 		Route::get('/clasificar-datos', 'MinningController@clasifier')->name('minning.evaluate');
 	 });
-
-
-	/**
-	*Steganography Routes
-	*/
-
-	Route::get('/seguridad/elegir-imagen', 'SteganographyController@showDataForm')->name('users.view');
-	Route::post('/seguridad/elegir-imagen', 'SteganographyController@save')->name('users.view');
-
-	Route::get('/seguridad/ver-contenido', 'SteganographyController@test')->name('users.view');
-
-	Route::get('/secureimages/base/{filename}', 'SteganographyController@loadBaseImage')->name('baseimage');
-	Route::get('/secureimages/users/{filename}', 'SteganographyController@loadUserImage')->name('userimage');
 });
 
 /**
