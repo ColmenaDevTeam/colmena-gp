@@ -95,7 +95,6 @@ class TaskController extends Controller{
 		$task->type = $request->type;
 		$task->estimated_date = Carbon::createFromFormat('Y-m-d',$request->estimated_date);
 		$task->details = $request->details;
-		$task->status = Task::DEFAULT_STATUS;
 		$task->save();
 		\Session::push('success', true);
 		return redirect("tareas/listar");
@@ -142,6 +141,6 @@ class TaskController extends Controller{
 	}
 
 	public function indexAll(){
-		return view("modules.tasks.list")->with(['tasks' => Task::all()]);
+		return view("modules.tasks.list")->with(['tasks' => Task::all(), 'all' => true]);
 	}
 }

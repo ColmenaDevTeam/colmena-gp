@@ -32,13 +32,19 @@
 							<a href="{{url("/tareas/todas")}}" class="btn btn-info">Ver todas</a>
 						@endif
 					</p>
-					@include('modules.tasks.table-view', ['data' => ['title' => 'Mis Tareas', 'tasks' => \Auth::user()->tasks]])
+					@if (!isset($all))
+						@if (\Auth::user()->tasks->count())
+							@include('modules.tasks.table-view', ['data' => ['title' => 'Mis Tareas', 'tasks' => \Auth::user()->tasks]])
+						@endif
+						@if (\Auth::user()->canDo('tasks.create') && count(\Auth::user()->createdTasks))
+							@include('modules.tasks.table-view', ['data' => ['title' => 'Tareas Creadas', 'tasks' => \Auth::user()->createdTasks]])
+						@endif
 
-					@if (\Auth::user()->canDo('tasks.create'))
-						@include('modules.tasks.table-view', ['data' => ['title' => 'Tareas Creadas', 'tasks' => \Auth::user()->createdTasks]])
-					@endif
-					@if (\Auth::user()->canDo('tasks.department_list'))
-						@include('modules.tasks.table-view', ['data' => ['title' => 'Tareas del Departamento', 'tasks' => \Auth::user()->department->tasks]])
+						@if (\Auth::user()->canDo('tasks.department_list') && count(\Auth::user()->department->tasks))
+							@include('modules.tasks.table-view', ['data' => ['title' => 'Tareas del Departamento', 'tasks' => \Auth::user()->department->tasks]])
+						@endif
+					@else
+						@include('modules.tasks.table-view', ['data' => ['title' => 'Todas las Tareas', 'tasks' => $tasks]])
 					@endif
 				</div>
 			</div>

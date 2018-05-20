@@ -71,7 +71,7 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 		 Route::get('/modificar/{id}', 'TaskController@showUpdateForm')->name('tasks.update');
 		 Route::post('/modificar/{id}', 'TaskController@update')->name('tasks.update');
 		 Route::get('/listar', 'TaskController@index')->name('tasks.list');
-		 Route::get('/todas', 'TaskController@indexAll')->name('tasks.list_all');
+		 Route::get('/ver-todas', 'TaskController@indexAll')->name('tasks.list_all');
 		 Route::get('/', function(){ return redirect('/tareas/listar');})->name('tasks.list');
 		 Route::get('/{id}/ver', 'TaskController@view')->name('tasks.view');
 		 Route::get('/transacciones', 'TaskController@getLogs')->name('tasks.view');
@@ -121,8 +121,8 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 		Route::post('/reactivar', 'UserController@reactivate')->name('users.enable');
 		Route::post('/eliminar', 'UserController@delete')->name('users.delete');
 		Route::get('/perfil/{id}', 'UserController@showProfile')->name('users.view');
-		Route::post('/actualizar-perfil', 'UserController@updateData')->middleware('sensitive')->name('users.change_data');
-		Route::post('/actualizar-clave', 'UserController@updatePassword')->middleware('sensitive')->name('users.change_password');
+		Route::post('/actualizar-perfil', 'UserController@updateData')/*->middleware('sensitive')*/->name('users.change_data');
+		Route::post('/actualizar-clave', 'UserController@updatePassword')/*->middleware('sensitive')*/->name('users.change_password');
 	 });
 	/**
 	*Calendar Routes
@@ -130,8 +130,8 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 	 Route::group(['prefix' => '/calendario'], function(){
 		Route::get('/actualizar', 'CalendarController@showDataForm')->name('calendar.update');
 		Route::post('/actualizar', 'CalendarController@update')->name('calendar.update');
-		Route::get('/ver', 'CalendarController@show')->name('calendar.view');
-		Route::get('/', function(){ return redirect('/calendario/ver');})->name('calendar.view');
+		Route::get('/ver', 'CalendarController@show')->name('calendar.see');
+		Route::get('/', function(){ return redirect('/calendario/ver');})->name('calendar.see');
 	 });
 
 	/**
@@ -168,6 +168,8 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 		Route::get('/preprocesado/{id}', 'MinningController@showModel')->name('minning.minning');
 		Route::post('/explorar', 'MinningController@process')->name('minning.minning');
 		Route::get('/contador-de-registros', 'MinningController@counter')->name('minning.minning');
+
+		Route::get('/clasificar-datos', 'MinningController@clasifier')->name('minning.evaluate');
 	 });
 
 
@@ -175,10 +177,10 @@ Route::group(['middleware' => ['auth', 'rbac']],function(){
 	*Steganography Routes
 	*/
 
-	Route::get('/seguridad/elegir-imagen', 'SteganographyController@showDataForm');
-	Route::post('/seguridad/elegir-imagen', 'SteganographyController@save');
+	Route::get('/seguridad/elegir-imagen', 'SteganographyController@showDataForm')->name('users.view');
+	Route::post('/seguridad/elegir-imagen', 'SteganographyController@save')->name('users.view');
 
-	Route::get('/seguridad/ver-contenido', 'SteganographyController@test');
+	Route::get('/seguridad/ver-contenido', 'SteganographyController@test')->name('users.view');
 
 	Route::get('/secureimages/base/{filename}', 'SteganographyController@loadBaseImage')->name('baseimage');
 	Route::get('/secureimages/users/{filename}', 'SteganographyController@loadUserImage')->name('userimage');

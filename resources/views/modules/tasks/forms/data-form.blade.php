@@ -125,7 +125,7 @@
 										<div class="form-group has-feedback">
 											<label for="user_id">Listado de responsables:</label>
 											@foreach ($task->responsibles as $user)
-												<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+												<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 													<ul>
 														<li>
 															{{$user->fullname}}
@@ -140,7 +140,7 @@
 										<label for="details">Listado de usuarios</label>
 										<div class="row">
 											@foreach ($users as $user)
-												<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+												<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 													<p class="list-group-item">
 														<input type="checkbox" style=""id="{{$user->id}}" name="users[]" value="{{$user->id}}" class="pull-left">
 															{{$user->fullname}}

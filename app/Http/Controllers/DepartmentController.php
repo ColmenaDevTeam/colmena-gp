@@ -47,7 +47,6 @@ class DepartmentController extends Controller{
 		])->validate();
 
 		$department->name = $request->name;
-		$department->slug = $request->slug;
 		$department->description = $request->description;
 		$department->save();
 		$departments = Department::all();

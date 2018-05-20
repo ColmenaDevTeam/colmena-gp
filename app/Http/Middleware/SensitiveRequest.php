@@ -16,7 +16,7 @@ class SensitiveRequest
      */
     public function handle($request, Closure $next)
     {
-        if (!Steganography::check($request, Auth()->user)) {
+        if (!Steganography::check($request, Auth()->user()->cedula)) {
             return redirect('/guayando');
         }
         return $next($request);

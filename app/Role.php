@@ -17,7 +17,7 @@ class Role extends Model{
 		return $this->belongsToMany('App\Permission', 'roles_has_permissions', 'role_id', 'permission_id');
 	}
 	public function users(){
-		return $this->belongsToMany('App\Role', 'users_has_roles', 'role_id', 'user_id');
+		return $this->belongsToMany('App\User', 'users_has_roles', 'role_id', 'user_id');
 	}
 	public function scopeLevelFilter($query){
 		return $query->where('level','>=' ,\Auth::user()->getAccessLevel());

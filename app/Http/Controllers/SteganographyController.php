@@ -33,6 +33,6 @@ class SteganographyController extends Controller
 
 		Steganography::make($request->passphrase, $request->secureimg, \Auth::user()->cedula);
 
-		return redirect('/')->with(['success' => true]);
+		return redirect('/usuarios/perfil/'.\Auth::user()->id)->with(['success' => true]);
 	}
 }

@@ -180,7 +180,7 @@ class PermissionSeeder extends Seeder
             ),
             array(
                 'category' => 'Tareas',
-                'action' => 'Ver Todas',
+                'action' => 'Ver_Todas',
                 'slug' => 'tasks.list_all',
                 'navigation' => true,
                 'level' => 0,
@@ -279,7 +279,7 @@ class PermissionSeeder extends Seeder
 
             /**
             * Recurrent activities
-            */
+            
 	        array(
                 'category' => 'Actividades_Recurrentes',
                 'action' => 'Registrar',
@@ -329,7 +329,7 @@ class PermissionSeeder extends Seeder
                 'navigation' => true,
                 'level' => 1,
             ),
-
+            */
             /**
             * Reports
             */
@@ -395,12 +395,37 @@ class PermissionSeeder extends Seeder
             ),
 
             /*
+             * Steganography
+            */
+            array(
+                'category' => 'Esteganografia',
+                'action' => 'baseimage',
+                'slug' => 'baseimage',
+                'navigation' => false,
+                'level' => 0,
+            ),
+            array(
+                'category' => 'Esteganografia',
+                'action' => 'userimage',
+                'slug' => 'userimage',
+                'navigation' => false,
+                'level' => 0,
+            ),
+
+            /*
              * Data Minning
             */
             array(
                 'category' => 'Segmentacion_de_Datos',
-                'action' => 'Explorar',
-                'slug' => 'minning.minning',
+                'action' => 'Generar_Modelo',
+                'slug' => 'minning.generate',
+                'navigation' => true,
+                'level' => 0,
+            ),
+            array(
+                'category' => 'Segmentacion_de_Datos',
+                'action' => 'Clasificar_Datos',
+                'slug' => 'minning.evaluate',
                 'navigation' => true,
                 'level' => 0,
             ),

@@ -92,6 +92,10 @@
 											<input required type="tel" class="form-control" data-inputmask="'mask' : '99999999999'" id="phone" name="phone" autocomplete="off" value={{$user->phone}}>
 										</div>
 									</div>
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+										<a href="{{url("/seguridad/elegir-imagen")}}">Selecciona tu imagen y tu frase de seguridad</a>
+										<hr>
+									</div>
 								</div><!-- /.row -->
 								<div class="row">
 									<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

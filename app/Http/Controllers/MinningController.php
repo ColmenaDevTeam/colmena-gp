@@ -61,4 +61,8 @@ class MinningController extends Controller
 		return redirect("/segmentacion-de-datos/explorar");	
 		
 	}
+
+	public function clasifier(){
+		abort("401");
+	}
 }

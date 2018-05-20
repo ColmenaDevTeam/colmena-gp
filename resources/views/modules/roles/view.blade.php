@@ -49,13 +49,27 @@
 			</div>
         </div>
 		<div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <h2>
+                        Usuarios con el rol
+                    </h2>
+                    <ul>
+                        @foreach ($role->users as $user)
+                            <li>{{$user->fullname}}</li>
+                        @endforeach
+                    </ul>
+            </div>
+            <hr>
+		</div><!-- -/.row-->
+		<div class="row">
+			<h2>Permisos del rol</h2>
             @foreach ($role->permissionsByCategory() as $key => $permissions)
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="list-group">
                         <a href="#l_{{strtolower(str_replace(' ', '_', $key ))}}" class="list-group-item active" data-toggle="collapse">
                             {{$key}}
                         </a>
-                        <div class="collapse in" id="l_{{strtolower(str_replace(' ', '_', $key ))}}">
+                        <div class="collapse" id="l_{{strtolower(str_replace(' ', '_', $key ))}}">
                             @foreach ($permissions as $permission)
                                 <a href="#" class="list-group-item" onclick="return false;">{{$permission->action}}</a>
                             @endforeach
